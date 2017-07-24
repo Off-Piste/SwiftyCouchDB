@@ -7,3 +7,4 @@ before_install:
     - ./install_swiftlint.sh
 script:
   - swiftlint
+sudo: required
