@@ -1,0 +1,9 @@
+branches:
+  only:
+    - master
+    - develop
+    - /^issue.*$/
+before_install:
+    - ./install_swiftlint.sh
+script:
+  - swiftlint
