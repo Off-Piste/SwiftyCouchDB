@@ -5,6 +5,6 @@ branches:
     - develop
     - /^issue.*$/
 before_install:
-    - ./install_swiftlint.sh
+    - brew update && brew install swiftlint
 script:
   - swiftlint
