@@ -4,8 +4,9 @@ SwiftyCouchDB is a warpper for the current [Kitura CouchDB client](https://githu
 
 let says you need to change the img links for a specific product the old way would be as such
 ```swift
+let docID: String = ...
 let newLinks: Dictionary<String, Any> = ...
-database.retrieve(id, callback: { (json, error) in
+database.retrieve(docID, callback: { (json, error) in
     if let document = json, error == nil {
         document["data"]["metadata"]["links"].dictionaryObject = newLinks
 
@@ -29,8 +30,11 @@ database.retrieve(id, callback: { (json, error) in
 Now let see the new way
 
 ```swift
+let docID: String = ...
 let newLinks: Dictionary<String, Any> = ...
-let ref = DatabaseManager(...).referenceForFile(id)
-ref.child("data").child["metadata"].child("links")
+let ref = DatabaseManager(...).referenceForFile(docID)
+ref.child("data").child("metadata").child("links")
 ref.update(newLinks)
 ```
+
+> NOTE: The inspiration comes from the way firebase database systems works, it is currently the cleanest way to work with JSON database
