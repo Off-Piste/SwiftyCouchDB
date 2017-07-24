@@ -31,6 +31,17 @@ public struct DatabaseSnapshot {
 
     internal var originalJSON: JSON
 
+    init(id: String, rev: String, json: JSON) {
+        self.init(id: id, rev: rev, json: json, originalJSON: json)
+    }
+
+    init(id: String, rev: String, json: JSON, originalJSON: JSON) {
+        self.id = id
+        self.rev = rev
+        self.json = json
+        self.originalJSON = originalJSON
+    }
+
 }
 
 public typealias CouchDBSnapshot = (DatabaseSnapshot?, Error?) -> Void

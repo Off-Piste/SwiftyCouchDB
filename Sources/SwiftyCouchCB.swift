@@ -123,6 +123,48 @@ public struct DatabaseReference {
     }
 }
 
+// MARK: - File Creation
+public extension DatabaseReference {
+
+    public func createFile(callback: @escaping CouchDBSnapshot) {
+        self.createFile(nil, withJSON: ["data": [:]], callback: callback)
+    }
+
+    public func createFile(_ name: String, callback: @escaping CouchDBSnapshot) {
+        self.createFile(name, withJSON: ["data": [:]], callback: callback)
+    }
+
+    public func createFile(withJSON json: JSON, callback: @escaping CouchDBSnapshot) {
+        self.createFile(nil, withJSON: json, callback: callback)
+    }
+
+    public func createFile(
+        _ name: String?,
+        withJSON json: JSON,
+        callback: @escaping CouchDBSnapshot
+        )
+    {
+        var document = json
+        if name != nil {
+            document["_id"].string = name!
+        } else if self.file?.name != nil {
+            document["_id"].string = self.file?.name
+        } else {
+            Log.info("No name has been set so the file will be created with a default id")
+        }
+
+        self.database.create(document) { (id, rev, json, error) in
+            if let error = error {
+                callback(nil, error)
+            } else {
+                let snapshot = DatabaseSnapshot(id: id!, rev: rev!, json: json!)
+                callback(snapshot, nil)
+            }
+        }
+    }
+
+}
+
 // MARK: - Mutating Methods
 public extension DatabaseReference {
 
