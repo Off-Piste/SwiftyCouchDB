@@ -12,31 +12,35 @@ import CouchDB
 
 public struct DatabaseReference<Manager: DBManager> {
 
-    internal var db: Database
+    fileprivate var db: Database
 
-    internal var design: String
+    fileprivate var design: String?
 
-    internal var file: String?
+    fileprivate var file: String?
 
-    internal var _children: [JSONSubscriptType] = []
+    fileprivate var children: [JSONSubscriptType] = []
 
-    public var root: DatabaseReference {
-        var root = DatabaseReference(ref: self)
-        root._children.removeAll()
-        return root
+    public var child: JSONSubscriptType? {
+        return children.last
     }
 
     public var parent: DatabaseReference? {
         var parent = DatabaseReference(ref: self)
-        if parent._children.isEmpty {
+        if parent.children.isEmpty {
             return nil
         } else {
-            parent._children.removeLast()
+            parent.children.removeLast()
             return parent
         }
     }
 
-    init(db: Database, design: String) {
+    public var root: DatabaseReference {
+        var root = DatabaseReference(ref: self)
+        root.children.removeAll()
+        return root
+    }
+
+    init(db: Database, design: String?) {
         self.db = db
         self.design = design
     }
@@ -45,12 +49,33 @@ public struct DatabaseReference<Manager: DBManager> {
         self.db = ref.db
         self.design = ref.design
         self.file = ref.file
-        self._children = ref._children
+        self.children = ref.children
+    }
+}
+
+extension DatabaseReference {
+
+    subscript(child aChild: JSONSubscriptType) -> DatabaseReference {
+        mutating get {
+            return self.child(aChild)
+        }
+    }
+
+    public mutating func design(_ aDesign: String) {
+        self.design = aDesign
     }
 
     public mutating func file(_ aFile: String) {
         self.file = aFile
     }
+
+    public mutating func child(_ aChild: JSONSubscriptType) -> DatabaseReference {
+        self.children.append(aChild)
+        return self
+    }
+}
+
+extension DatabaseReference where Manager == CouchDatabase {
 }
 
 extension DatabaseReference where Manager == CouchAuth {

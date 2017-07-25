@@ -19,3 +19,11 @@ public struct ConnectionPropertiesManager {
         fatalError("Should never be called")
     }
 }
+
+func createError(_ reason: String, code: Int = 100) -> Error {
+    return NSError(
+        domain: "SwiftyCouchDB",
+        code: code,
+        userInfo: [NSLocalizedDescriptionKey: reason]
+    )
+}
