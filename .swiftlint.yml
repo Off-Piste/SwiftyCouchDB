@@ -38,4 +38,4 @@ identifier_name:
     - err
     - db
     - _children
-reporter: "emoji" # reporter type (xcode, json, csv, checkstyle, junit, html, emoji)
+reporter: "xcode" # reporter type (xcode, json, csv, checkstyle, junit, html, emoji)
