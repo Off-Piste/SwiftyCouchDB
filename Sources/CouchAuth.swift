@@ -36,5 +36,4 @@ struct CouchAuth: DBManager {
         self.database = client.usersDatabase()
         self.design = design
     }
-    
 }

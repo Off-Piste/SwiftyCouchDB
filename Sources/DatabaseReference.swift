@@ -51,5 +51,10 @@ public struct DatabaseReference<Manager: DBManager> {
     public mutating func file(_ aFile: String) {
         self.file = aFile
     }
-    
+}
+
+extension DatabaseReference where Manager == CouchAuth {
+
+    func createUser() {
+    }
 }

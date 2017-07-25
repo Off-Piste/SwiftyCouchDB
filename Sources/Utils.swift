@@ -15,6 +15,7 @@ public struct ConnectionPropertiesManager {
     /// <#Description#>
     public static var connectionProperties: ConnectionProperties?
 
-    private init() { }
-    
+    private init() {
+        fatalError("Should never be called")
+    }
 }

@@ -1,8 +1,3 @@
-// import Foundation
-// import LoggerAPI
-// @_exported import SwiftyJSON
-// @_exported import CouchDB
-//
 // public struct ____DatabaseReference {
 //
 //     internal var client: CouchDBClient
@@ -63,7 +58,7 @@
 //
 //     public func retreive(callback: @escaping (DatabaseSnapshot?, Error?) -> Void) {
 //         if self.file == nil {
-//             let msg = "The Database file has not been set, if you are querying the data set please use `queryByView:`"
+//             let msg = "The Database file has not been set, if you are querying the data set please use `queryByView:`
 //             callback(nil, createError(msg))
 //             return
 //         }
@@ -118,8 +113,6 @@
 //         }
 //     }
 // }
-//
-// // MARK: - File Creation
 // public extension __DatabaseReference {
 //
 //     public func createFile(callback: @escaping CouchDBSnapshot) {
@@ -169,7 +162,6 @@
 //     }
 //
 // }
-//
 // public extension __DatabaseReference {
 //
 //     public func createUser(
@@ -247,8 +239,6 @@
 //         return nil
 //     }
 // }
-//
-// // MARK: - Mutating Methods
 // public extension __DatabaseReference {
 //
 //     public mutating func file(_ aFile: String) {
@@ -326,8 +316,6 @@
 //         }
 //     }
 // }
-//
-// // MARK: - Client Methods
 // public extension __DatabaseReference {
 //
 //     public func exists(callback: @escaping (Bool, NSError?) -> Void) {
@@ -343,7 +331,6 @@
 //     }
 //
 // }
-//
 // extension __DatabaseReference : CustomStringConvertible {
 //
 //     public var description: String {
@@ -359,8 +346,6 @@
 //     }
 //
 // }
-//
-// // MARK: - Private JSON methods
 // fileprivate extension __DatabaseReference {
 //
 //     func removeValue(inJSON json: inout JSON) throws {

@@ -37,5 +37,4 @@ struct CouchDatabase : DBManager {
         self.database = db
         self.design = design
     }
-    
 }
