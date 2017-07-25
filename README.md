@@ -1,40 +1,44 @@
 # SwiftyCouchDB
 
-SwiftyCouchDB is a warpper for the current [Kitura CouchDB client](https://github.com/IBM-Swift/Kitura-CouchDB), allowing you to work with your JSON database easier.
+SwiftyCouchDB is a wrapper for the current [Kitura CouchDB client](https://github.com/IBM-Swift/Kitura-CouchDB).
 
-let says you need to change the img links for a specific product the old way would be as such
+## How to use?
+
+The idea was to keep things as simple as possible, so firstly you want to set up your connection properties.
+
 ```swift
-let docID: String = ...
-let newLinks: Dictionary<String, Any> = ...
-database.retrieve(docID, callback: { (json, error) in
-    if let document = json, error == nil {
-        document["data"]["metadata"]["links"].dictionaryObject = newLinks
+ConnectionPropertiesManager.connectionProperties = ConnectionProperties(
+    host: host, // 127.0.0.1
+    port: post, // 5984
+    secured: secured, // false
+    username: username, // nil
+    password: password // nil
+)
+```
 
-        guard let rev = document["_rev"].string else {
-            return
-        }
+This is the global `ConnectionProperties` for your CouchDB.
 
-        self.database.update(id, rev: rev, document: document, callback: {(_, _, err) in
-            if let error = err {
-                /* handle error */
-            } else {
-                /* fulfilled request */
-            }
-        })
+To create your new database.
+
+```swift
+let db = try! CouchDatabase(name: "prodcts")
+db.create { error in
+    if let error = error {
+        /* Handle error */
     } else {
-        /* handle error */
+        /* Work with database */
     }
-})
+}
 ```
 
-Now let see the new way
+Oh no, we have spelt out database name wrong, how would we delete our database?
 
 ```swift
-let docID: String = ...
-let newLinks: Dictionary<String, Any> = ...
-let ref = DatabaseManager(...).referenceForFile(docID)
-ref.child("data").child("metadata").child("links")
-ref.update(newLinks)
+db.delete { error in
+    if let error = error {
+        /* Handle error */
+    } else {
+        /* Create new Database */
+    }
+}
 ```
-
-> NOTE: The inspiration comes from the way firebase database systems works, it is currently the cleanest way to work with JSON database
