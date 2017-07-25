@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "SwiftyCouchCB",
+    name: "SwiftyCouchDB",
     dependencies: [
         .Package(
             url: "https://github.com/IBM-Swift/Kitura-CouchDB.git",
