@@ -4,7 +4,9 @@ branches:
     - master
     - develop
     - /^issue.*$/
+    - /\s*([\d.]+)/
 before_install:
-    - brew update && brew install swiftlint
+    - brew update
+    - brew list swiftlint || brew install swiftlint
 script:
   - swiftlint
