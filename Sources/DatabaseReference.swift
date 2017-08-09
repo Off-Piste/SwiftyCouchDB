@@ -2,84 +2,116 @@
 //  DatabaseReference.swift
 //  SwiftyCouchDB
 //
-//  Created by Harry Wright on 25.07.17.
+//  Created by Harry Wright on 08.08.17.
 //
 //
 
 import Foundation
+import LoggerAPI
 import SwiftyJSON
-import CouchDB
 
-public struct DatabaseReference<Manager: DBManager> {
+public struct DatabaseReference {
 
-    fileprivate var db: Database
+    fileprivate var __file: String?
 
-    fileprivate var design: String?
+    fileprivate var __design: String?
 
-    fileprivate var file: String?
+    internal /* fileprivate */ var database: Database
 
-    fileprivate var children: [JSONSubscriptType] = []
+    fileprivate var __children: [JSONSubscriptType] = {
+        var seq: [JSONSubscriptType] = []; return seq
+    }()
 
-    public var child: JSONSubscriptType? {
-        return children.last
+    internal /* fileprivate */ var _child: JSONSubscriptType? {
+        return __children.last
+    }
+
+    internal var __childrenCount: Int {
+        return self.__children.count
     }
 
     public var parent: DatabaseReference? {
-        var parent = DatabaseReference(ref: self)
-        if parent.children.isEmpty {
+        var parent = self
+        if parent.__children.isEmpty {
             return nil
         } else {
-            parent.children.removeLast()
+            parent.__children.removeLast()
             return parent
         }
     }
 
     public var root: DatabaseReference {
-        var root = DatabaseReference(ref: self)
-        root.children.removeAll()
+        var root = self
+        root.__children.removeAll()
         return root
     }
 
-    init(db: Database, design: String?) {
-        self.db = db
-        self.design = design
+    public init(_ database: Database) {
+        self.database = database
+    }
+
+    public init(_ database: Database, file: String?, design: String?) {
+        self.database = database
+        self.__file = file
+        self.__design = design
     }
 
     init(ref: DatabaseReference) {
-        self.db = ref.db
-        self.design = ref.design
-        self.file = ref.file
-        self.children = ref.children
+        self.database = ref.database
+        self.__file = ref.__file
+        self.__design = ref.__design
+        self.__children = ref.__children
     }
+
+    subscript(_ children: JSONSubscriptType...) -> DatabaseReference {
+        mutating get {
+            self.__children.append(contentsOf: children)
+            return self
+        }
+    }
+
+    public mutating func children(_ children: JSONSubscriptType...) -> DatabaseReference {
+        self.__children.append(contentsOf: children)
+        return self
+    }
+
+    public mutating func file(_ aFile: String) -> DatabaseReference {
+        self.__file = aFile
+        return self
+    }
+
+}
+
+extension DatabaseReference: Hashable {
+
+    /// Returns a Boolean value indicating whether two values are equal.
+    ///
+    /// Equality is the inverse of inequality. For any values `a` and `b`,
+    /// `a == b` implies that `a != b` is `false`.
+    ///
+    /// - Parameters:
+    ///   - lhs: A value to compare.
+    ///   - rhs: Another value to compare.
+    public static func == (lhs: DatabaseReference, rhs: DatabaseReference) -> Bool {
+        return lhs.__children == rhs.__children &&
+            lhs.database == rhs.database &&
+            lhs.__file == rhs.__file &&
+            lhs.__design == rhs.__design
+    }
+
+    public var hashValue: Int {
+        return self.__file?.hashValue ?? self.database.hashValue
+    }
+
 }
 
 extension DatabaseReference {
 
-    subscript(child aChild: JSONSubscriptType) -> DatabaseReference {
-        mutating get {
-            return self.child(aChild)
+    public func create(_ object: DatabaseObject, callback: (DatabaseObject?, Error?) -> Void) {
+        if !self.__children.isEmpty {
+            Log.info("The children will be ignored when creating a new document for the object: \(object)")
+        } else {
+            callback(object, nil)
         }
-    }
-
-    public mutating func design(_ aDesign: String) {
-        self.design = aDesign
-    }
-
-    public mutating func file(_ aFile: String) {
-        self.file = aFile
-    }
-
-    public mutating func child(_ aChild: JSONSubscriptType) -> DatabaseReference {
-        self.children.append(aChild)
-        return self
-    }
-}
-
-extension DatabaseReference where Manager == CouchDatabase {
-}
-
-extension DatabaseReference where Manager == CouchAuth {
-
-    func createUser() {
     }
 }

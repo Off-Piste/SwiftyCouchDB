@@ -3,64 +3,81 @@ import XCTest
 
 class IntitalisationTests: XCTestCase {
 
+    var database: Database!
+
+    override func setUp() {
+        print(">> Setting Up")
+
+        Utils.connectionProperties = .default
+
+        self.database = try! Database("todolist")
+    }
+
+    override func tearDown() {
+        print(">> Finished")
+        
+        Utils.connectionProperties = nil
+    }
+
+    func testCallbackDelete() {
+        Utils.connectionProperties = .default
+        
+        self.database.create { (database, error) in
+            if let error = error {
+                XCTFail(for: error)
+            } else {
+                database.delete(callback: { (error) in
+                    if let error = error {
+                        XCTFail(for: error)
+                    }
+                })
+            }
+        }
+    }
+
+    func testDoesNotExists() {
+        Utils.connectionProperties = .default
+
+        self.database.exists { (error) in
+            if let error = error {
+                XCTFail(for: error)
+            } else {
+                XCTFail("Database should not exist")
+            }
+        }
+    }
+
+
     func testThrowingInitalisation() {
         // Needs to be nil to throw the error
-        ConnectionPropertiesManager.connectionProperties = nil
+        Utils.connectionProperties = nil
 
-        XCTAssertThrowsError(try CouchAuth())
-        XCTAssertThrowsError(try CouchDatabase(name: "users", design: "users"))
+        XCTAssertThrowsError(try Database("dbname"))
+        XCTAssertThrowsError(try UserDatabase())
+
+        Utils.connectionProperties = .default
     }
 
     func testValidInitalisation() {
-        ConnectionPropertiesManager
-            .connectionProperties = ConnectionProperties(
-                host: "127.0.0.1",
-                port: 5984,
-                secured: false
-        )
+        Utils.connectionProperties = .default
 
-        XCTAssertNoThrow(try CouchAuth())
-        XCTAssertNoThrow(try CouchDatabase(name: "users", design: "users"))
+        XCTAssertNoThrow(try Database("dbname"))
+        XCTAssertNoThrow(try UserDatabase())
 
-        ConnectionPropertiesManager.connectionProperties = nil
+        Utils.connectionProperties = nil
     }
 
-    func testCreatingAndDeletingDatabase() {
-        ConnectionPropertiesManager
-            .connectionProperties = ConnectionProperties(
-                host: "127.0.0.1",
-                port: 5984,
-                secured: false
-        )
+    func testDatabaseInit() {
+        Utils.connectionProperties = .default
 
-        let client = CouchDBClient(connectionProperties: ConnectionProperties(
-            host: "127.0.0.1",
-            port: 5984,
-            secured: false
-            )
-        )
+        XCTAssertNoThrow(try Database { try UserDatabase() })
+        XCTAssertNoThrow(try Database(database: try UserDatabase()))
 
-        let db = try! CouchDatabase(name: "test")
-        db.create(callback: { (error) in
-            if let error = error {
-                XCTFail("Creating DB Error: \(error._code), reason: \(error.localizedDescription)")
-            }
+        let db1 = try! UserDatabase()
+        let db2 = try! Database(database: db1)
+        XCTAssertEqual(db1, db2)
 
-            print(">> Successful DB creation")
-
-            db.delete(callback: { (error) in
-                if let error = error {
-                    XCTFail("Creating DB Error: \(error._code), reason: \(error.localizedDescription)")
-                }
-
-                print(">> Successful DB deletion")
-            })
-        })
+        Utils.connectionProperties = nil
     }
 
-    static var allTests = [
-        ("testThrowingInitalisation", testThrowingInitalisation),
-        ("testCreatingAndDeletingDatabase", testCreatingAndDeletingDatabase),
-        ("testValidInitalisation", testValidInitalisation)
-    ]
 }

@@ -7,7 +7,7 @@ SwiftyCouchDB is a wrapper for the current [Kitura CouchDB client](https://githu
 The idea was to keep things as simple as possible, so firstly you want to set up your connection properties.
 
 ```swift
-ConnectionPropertiesManager.connectionProperties = ConnectionProperties(
+Utils.connectionProperties = ConnectionProperties(
     host: host, // 127.0.0.1
     port: post, // 5984
     secured: secured, // false
@@ -16,29 +16,16 @@ ConnectionPropertiesManager.connectionProperties = ConnectionProperties(
 )
 ```
 
-This is the global `ConnectionProperties` for your CouchDB.
+> NOTE: If working with a local database and no username and password, `ConnectionProperties.default` will suffice
 
-To create your new database.
-
-```swift
-let db = try! CouchDatabase(name: "prodcts")
-db.create { error in
-    if let error = error {
-        /* Handle error */
-    } else {
-        /* Work with database */
-    }
-}
-```
-
-Oh no, we have spelt out database name wrong, how would we delete our database?
+To create a database this is quick and simple.
 
 ```swift
-db.delete { error in
+try! Database("products").create { (database, error) -> Void in
     if let error = error {
-        /* Handle error */
+        /* handle error */
     } else {
-        /* Create new Database */
+        /* work with the database */
     }
 }
 ```
