@@ -9,5 +9,6 @@ before_install:
     - brew update
     - brew list swiftlint || brew install swiftlint
 script:
+    - xcodebuild -version
     - brew upgrade swiftlint
     - swiftlint
