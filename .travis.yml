@@ -9,4 +9,5 @@ before_install:
     - brew update
     - brew list swiftlint || brew install swiftlint
 script:
-  - swiftlint
+    - brew upgrade swiftlint
+    - swiftlint
