@@ -1,4 +1,5 @@
 language: objective-c
+osx_image: xcode8.3
 branches:
   only:
     - master
@@ -7,8 +8,5 @@ branches:
     - /\s*([\d.]+)/
 before_install:
     - brew update
-    - brew list swiftlint || brew install swiftlint
 script:
-    - xcodebuild -version
-    - brew upgrade swiftlint
-    - swiftlint
+    - ./install_swiftlint.sh
