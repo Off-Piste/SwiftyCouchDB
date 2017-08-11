@@ -39,11 +39,7 @@ class IntitalisationTests: XCTestCase {
         Utils.connectionProperties = .default
 
         self.database.exists { (error) in
-            if let error = error {
-                XCTFail(for: error)
-            } else {
-                XCTFail("Database should not exist")
-            }
+            if error == nil { XCTFail("Database should not exist") }
         }
     }
 
