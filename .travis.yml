@@ -7,14 +7,15 @@ branches:
     - /^issue.*$/
     - /\s*([\d.]+)/
 matrix:
-    include:
-        - script: ./install_swiftlint.sh swiftlint
-        env: JOB=swiftlint
-        - script: /install_swiftlint.sh test-server
-        env: JOB=test-server
-        before_install:
-            - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
-            - gem install xcpretty-travis-formatter --no-rdoc --no-ri --no-document --quiet
+  include:
+    - script:
+      # workaround
+      - ./install_swiftlint.sh swiftlint
+      env: JOB=swiftlint
+      before_install: brew update
+    - script: /install_swiftlint.sh test-server
+      env: JOB=test-server
+      before_install: gem install xcpretty --no-rdoc --no-ri --no-document --quiet;  gem install xcpretty-travis-formatter --no-rdoc --no-ri --no-document --quiet
 # before_install:
 #     - brew update
 # script:
