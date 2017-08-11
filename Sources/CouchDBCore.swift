@@ -9,7 +9,6 @@
 import Foundation
 import KituraNet
 @_exported import SwiftyJSON
-@_exported import MiniPromiseKit
 
 enum HTTPMethod: String {
     case get = "GET"

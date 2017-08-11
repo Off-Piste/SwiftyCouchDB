@@ -9,9 +9,6 @@
 import Foundation
 import LoggerAPI
 
-class User: DatabaseObject { }
-let human = User()
-
 public struct Utils {
 
     public static var connectionProperties: ConnectionProperties? = .default
@@ -58,6 +55,7 @@ public struct ConnectionProperties {
 
 extension ConnectionProperties {
 
+    /// <#Description#>
     public static var `default`: ConnectionProperties {
         return ConnectionProperties(host: "127.0.0.1", port: 5984, secured: false)
     }

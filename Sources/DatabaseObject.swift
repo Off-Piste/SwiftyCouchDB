@@ -21,3 +21,17 @@ extension DatabaseObject {
     open func nonDataProperties() -> [String] { return [] }
     
 }
+
+public final class User: DatabaseObject {
+
+    dynamic var id: String = ""
+
+    dynamic var roles: [String] = []
+
+    dynamic var password: String = ""
+
+    dynamic var username: String = ""
+
+    dynamic var email: String = ""
+
+}

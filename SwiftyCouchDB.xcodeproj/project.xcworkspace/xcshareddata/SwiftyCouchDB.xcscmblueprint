@@ -1,0 +1,93 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "4C248E0CED5E063494B033DC3A77FBAD43084D57",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "92AF87893551AD3F2DEE78BEF3E924B9C5659E09" : 9223372036854775807,
+    "40635794C1929E96A4709153927459486D34FA7B" : 9223372036854775807,
+    "D0725CAC6FF2D66F2C83C2C48DC12106D42DAA64" : 9223372036854775807,
+    "95438028B10BBB846574013D29F154A00556A9D1" : 9223372036854775807,
+    "1A6ECED8CDE8ABEF932257DC949CF5ADF69EE23B" : 9223372036854775807,
+    "77528AA6C8B451D66547916CA3CB970C85CBD7B4" : 9223372036854775807,
+    "5F415FE5B1A6A489A13E7907BF4842C23F213A35" : 9223372036854775807,
+    "4C248E0CED5E063494B033DC3A77FBAD43084D57" : 9223372036854775807,
+    "43C021D2F0E746BBB29CA4E06229F111196D4871" : 9223372036854775807,
+    "85E996FB125657C20E42A299A76F925867A7A6E4" : 9223372036854775807,
+    "C861FC00CEE0F6A6BE81FCFF6785FAA78C58EBB3" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "E69D3442-54F1-482E-B18E-7903803B3221",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "92AF87893551AD3F2DEE78BEF3E924B9C5659E09" : "SwiftyCouchCB\/.build\/checkouts\/HeliumLogger.git-2106793442615829935\/",
+    "40635794C1929E96A4709153927459486D34FA7B" : "SwiftyCouchCB\/.build\/checkouts\/Kitura-net.git--7410958935072501107\/",
+    "D0725CAC6FF2D66F2C83C2C48DC12106D42DAA64" : "SwiftyCouchCB\/.build\/checkouts\/Quick.git-2733117082000052066\/",
+    "95438028B10BBB846574013D29F154A00556A9D1" : "SwiftyCouchCB\/.build\/checkouts\/Nimble.git-1225162792785459507\/",
+    "1A6ECED8CDE8ABEF932257DC949CF5ADF69EE23B" : "SwiftyCouchCB\/.build\/checkouts\/miniPromiseKit--2300971575253605313\/",
+    "77528AA6C8B451D66547916CA3CB970C85CBD7B4" : "SwiftyCouchCB\/.build\/checkouts\/BlueSSLService.git--6577639804771281610\/",
+    "5F415FE5B1A6A489A13E7907BF4842C23F213A35" : "SwiftyCouchCB\/.build\/checkouts\/Kitura-CouchDB.git--5564966604146993984\/",
+    "4C248E0CED5E063494B033DC3A77FBAD43084D57" : "SwiftyCouchCB\/",
+    "43C021D2F0E746BBB29CA4E06229F111196D4871" : "SwiftyCouchCB\/.build\/checkouts\/BlueSocket.git-3162807777605905816\/",
+    "85E996FB125657C20E42A299A76F925867A7A6E4" : "SwiftyCouchCB\/.build\/checkouts\/LoggerAPI.git--6449715459278086880\/",
+    "C861FC00CEE0F6A6BE81FCFF6785FAA78C58EBB3" : "SwiftyCouchCB\/.build\/checkouts\/SwiftyJSON.git--6955445084174387031\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "SwiftyCouchDB",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "SwiftyCouchDB.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/harrywright\/Frameworks\/Off%20Piste\/Cocoapod\/SwiftyCouchCB\/.build\/repositories\/miniPromiseKit--2300971575253605313",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1A6ECED8CDE8ABEF932257DC949CF5ADF69EE23B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/harrywright\/Frameworks\/Off%20Piste\/Cocoapod\/SwiftyCouchCB\/.build\/repositories\/Kitura-net.git--7410958935072501107",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "40635794C1929E96A4709153927459486D34FA7B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/harrywright\/Frameworks\/Off%20Piste\/Cocoapod\/SwiftyCouchCB\/.build\/repositories\/BlueSocket.git-3162807777605905816",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "43C021D2F0E746BBB29CA4E06229F111196D4871"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:Off-Piste\/SwiftyCouchDB.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4C248E0CED5E063494B033DC3A77FBAD43084D57"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/harrywright\/Frameworks\/Off%20Piste\/Cocoapod\/SwiftyCouchCB\/.build\/repositories\/Kitura-CouchDB.git--5564966604146993984",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5F415FE5B1A6A489A13E7907BF4842C23F213A35"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/harrywright\/Frameworks\/Off%20Piste\/Cocoapod\/SwiftyCouchCB\/.build\/repositories\/BlueSSLService.git--6577639804771281610",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "77528AA6C8B451D66547916CA3CB970C85CBD7B4"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/harrywright\/Frameworks\/Off%20Piste\/Cocoapod\/SwiftyCouchCB\/.build\/repositories\/LoggerAPI.git--6449715459278086880",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "85E996FB125657C20E42A299A76F925867A7A6E4"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/harrywright\/Frameworks\/Off%20Piste\/Cocoapod\/SwiftyCouchCB\/.build\/repositories\/HeliumLogger.git-2106793442615829935",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "92AF87893551AD3F2DEE78BEF3E924B9C5659E09"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/harrywright\/Frameworks\/Off%20Piste\/Cocoapod\/SwiftyCouchCB\/.build\/repositories\/Nimble.git-1225162792785459507",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "95438028B10BBB846574013D29F154A00556A9D1"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/harrywright\/Frameworks\/Off%20Piste\/Cocoapod\/SwiftyCouchCB\/.build\/repositories\/SwiftyJSON.git--6955445084174387031",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C861FC00CEE0F6A6BE81FCFF6785FAA78C58EBB3"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/harrywright\/Frameworks\/Off%20Piste\/Cocoapod\/SwiftyCouchCB\/.build\/repositories\/Quick.git-2733117082000052066",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D0725CAC6FF2D66F2C83C2C48DC12106D42DAA64"
+    }
+  ]
+}

@@ -80,4 +80,26 @@ class IntitalisationTests: XCTestCase {
         Utils.connectionProperties = nil
     }
 
+    func testProperties() {
+        let user: DatabaseObject = User()
+        let type1 = CouchDBPropertyType(for: user)
+        XCTAssertEqual(type1.rawValue, 6)
+
+        let array: Array<DatabaseObject> = []
+        let type2 = CouchDBPropertyType(for: array)
+        XCTAssertEqual(type2.rawValue, 3)
+
+        let dict: Dictionary<DatabaseObject, String> = [:]
+        let type3 = CouchDBPropertyType(for: dict)
+        XCTAssertEqual(type3.rawValue, 4)
+
+        let type4: PropertyType = 5
+        XCTAssertEqual(type4.rawValue, 5)
+
+        let property1: CouchDBProperty<Int> = CouchDBProperty(key: "age", value: 55, parentObject: user, isOptional: false)
+        let property2: CouchDBProperty<Int> = CouchDBProperty(key: "age", value: 22, parentObject: user, isOptional: false)
+        XCTAssertNotEqual(property1, property2)
+    }
+
+
 }
