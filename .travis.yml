@@ -12,21 +12,16 @@ matrix:
       os: osx
       osx_image: xcode8.3
       env: JOB=swiftlint
-      before_install: brew update
-    - script: ./install_swiftlint.sh run-tests
+      before_install: brew update; ./install_swiftlint.sh before-swiftlint
+    - script: ./install_swiftlint.sh tests-macos
       os: osx
       osx_image: xcode8.3
-      env: JOB=run-tests XCODE=8.3
-      before_install: ./install_swiftlint.sh pre-build-mac
-    - script: ./install_swiftlint.sh build-docs
-      os: osx
-      osx_image: xcode8.3
-      env: JOB=build-docs XCODE=8.3
-      before_install: ./install_swiftlint.sh pre-build-mac
+      env: JOB=tests-macos
+      before_install: ./install_swiftlint.sh before-tests-macos
     - script: ./install_swiftlint.sh jazzy
       os: osx
       osx_image: xcode8.3
-      env: JOB=Jazzy XCODE=8.3
+      env: JOB=Jazzy
       before_install: gem install jazzy; ./install_swiftlint.sh pre-build-mac
     # - script: ./install_swiftlint.sh test-server
     #   os: osx
