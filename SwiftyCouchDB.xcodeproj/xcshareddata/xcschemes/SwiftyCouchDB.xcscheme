@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_116"
+               BlueprintIdentifier = "OBJ_119"
                BuildableName = "LoggerAPI.framework"
                BlueprintName = "LoggerAPI"
                ReferencedContainer = "container:SwiftyCouchDB.xcodeproj">
@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_123"
+               BlueprintIdentifier = "OBJ_126"
                BuildableName = "HeliumLogger.framework"
                BlueprintName = "HeliumLogger"
                ReferencedContainer = "container:SwiftyCouchDB.xcodeproj">
@@ -42,7 +42,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_133"
+               BlueprintIdentifier = "OBJ_136"
                BuildableName = "Socket.framework"
                BlueprintName = "Socket"
                ReferencedContainer = "container:SwiftyCouchDB.xcodeproj">
@@ -56,7 +56,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_142"
+               BlueprintIdentifier = "OBJ_145"
                BuildableName = "SSLService.framework"
                BlueprintName = "SSLService"
                ReferencedContainer = "container:SwiftyCouchDB.xcodeproj">
@@ -70,7 +70,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_151"
+               BlueprintIdentifier = "OBJ_154"
                BuildableName = "KituraNet.framework"
                BlueprintName = "KituraNet"
                ReferencedContainer = "container:SwiftyCouchDB.xcodeproj">
@@ -84,7 +84,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_200"
+               BlueprintIdentifier = "OBJ_203"
                BuildableName = "CHTTPParser.framework"
                BlueprintName = "CHTTPParser"
                ReferencedContainer = "container:SwiftyCouchDB.xcodeproj">
@@ -98,7 +98,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_215"
+               BlueprintIdentifier = "OBJ_218"
                BuildableName = "SwiftyJSON.framework"
                BlueprintName = "SwiftyJSON"
                ReferencedContainer = "container:SwiftyCouchDB.xcodeproj">
@@ -112,7 +112,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_223"
+               BlueprintIdentifier = "OBJ_226"
                BuildableName = "CouchDB.framework"
                BlueprintName = "CouchDB"
                ReferencedContainer = "container:SwiftyCouchDB.xcodeproj">
@@ -126,7 +126,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_248"
+               BlueprintIdentifier = "OBJ_251"
                BuildableName = "CouchDBSample"
                BlueprintName = "CouchDBSample"
                ReferencedContainer = "container:SwiftyCouchDB.xcodeproj">
@@ -140,7 +140,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_271"
+               BlueprintIdentifier = "OBJ_274"
                BuildableName = "MiniPromiseKit.framework"
                BlueprintName = "MiniPromiseKit"
                ReferencedContainer = "container:SwiftyCouchDB.xcodeproj">
@@ -154,7 +154,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_281"
+               BlueprintIdentifier = "OBJ_284"
                BuildableName = "SwiftyCouchDB.framework"
                BlueprintName = "SwiftyCouchDB"
                ReferencedContainer = "container:SwiftyCouchDB.xcodeproj">
@@ -172,7 +172,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_314"
+               BlueprintIdentifier = "OBJ_320"
                BuildableName = "SwiftyCouchDBTests.xctest"
                BlueprintName = "SwiftyCouchDBTests"
                ReferencedContainer = "container:SwiftyCouchDB.xcodeproj">
@@ -195,7 +195,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "OBJ_116"
+            BlueprintIdentifier = "OBJ_119"
             BuildableName = "LoggerAPI.framework"
             BlueprintName = "LoggerAPI"
             ReferencedContainer = "container:SwiftyCouchDB.xcodeproj">

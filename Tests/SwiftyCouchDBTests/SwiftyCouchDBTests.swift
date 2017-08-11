@@ -39,11 +39,7 @@ class IntitalisationTests: XCTestCase {
         Utils.connectionProperties = .default
 
         self.database.exists { (error) in
-            if let error = error {
-                XCTFail(for: error)
-            } else {
-                XCTFail("Database should not exist")
-            }
+            if error == nil { XCTFail("Database should not exist") }
         }
     }
 
@@ -100,6 +96,5 @@ class IntitalisationTests: XCTestCase {
         let property2: CouchDBProperty<Int> = CouchDBProperty(key: "age", value: 22, parentObject: user, isOptional: false)
         XCTAssertNotEqual(property1, property2)
     }
-
 
 }

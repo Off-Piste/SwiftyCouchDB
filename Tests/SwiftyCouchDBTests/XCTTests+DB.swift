@@ -14,9 +14,9 @@ func XCTFail(for error: Error, file: StaticString = #file, line: UInt = #line) {
     // so don't fail the test due to it, as some times the tests will
     // just be for the remaining code and i press all tests to save me
     // time
-    if error._code == 0 {
-        return
-    }
+//    if error._code == 0 {
+//        return
+//    }
 
     XCTFail("Reason: \(error.localizedDescription), code: \(error._code)", file: file, line: line)
 }
