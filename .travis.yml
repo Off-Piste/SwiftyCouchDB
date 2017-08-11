@@ -21,7 +21,7 @@ matrix:
       osx_image: xcode8.3
       env: JOB=tests-macos
       # sudo: required
-      before_install: ./install_swiftlint.sh before-tests-macos
+      before_install: brew install couchdb; ./install_swiftlint.sh before-tests-macos
     - script: ./install_swiftlint.sh jazzy
       os: osx
       osx_image: xcode8.3
