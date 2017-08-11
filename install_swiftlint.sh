@@ -32,6 +32,18 @@ function runTests {
     xcodebuild clean build test -project $source_root/SwiftyCouchDB.xcodeproj -scheme SwiftyCouchDBTests | xcpretty -f `xcpretty-travis-formatter`
 }
 
+function downloadHelperCode {
+  gem install xcpretty --no-rdoc --no-ri --no-document --quiet;  gem install xcpretty-travis-formatter --no-rdoc --no-ri --no-document --quiet
+}
+
+function createXcode {
+    echo "Building Swift"
+    swift build
+
+    echo "Generating Package"
+    swift package generate-xcodeproj
+}
+
 case $1 in
     swiftlint)
         downloadSwiftlint
@@ -40,4 +52,8 @@ case $1 in
     test-server)
         runTests
         ;;
+    pre-build)
+      downloadHelperCode
+      createXcode
+      ;;
 esac

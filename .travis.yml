@@ -15,7 +15,7 @@ matrix:
       before_install: brew update
     - script: ./install_swiftlint.sh test-server
       env: JOB=test-server
-      before_install: gem install xcpretty --no-rdoc --no-ri --no-document --quiet;  gem install xcpretty-travis-formatter --no-rdoc --no-ri --no-document --quiet
+      before_install: ./install_swiftlint.sh pre-build
 # before_install:
 #     - brew update
 # script:
