@@ -8,16 +8,26 @@ branches:
 matrix:
   include:
     - script:
-      # workaround
       - ./install_swiftlint.sh swiftlint
+      os: osx
       osx_image: xcode8.3
       env: JOB=swiftlint
       before_install: brew update
-    - script: ./install_swiftlint.sh test-server
+    - script: ./install_swiftlint.sh run-tests
       os: osx
       osx_image: xcode8.3
-      env: JOB=test-server XCODE=8.3
+      env: JOB=run-tests XCODE=8.3
       before_install: ./install_swiftlint.sh pre-build-mac
+    - script: ./install_swiftlint.sh build-docs
+      os: osx
+      osx_image: xcode8.3
+      env: JOB=build-docs XCODE=8.3
+      before_install: ./install_swiftlint.sh pre-build-mac
+    - script: ./install_swiftlint.sh jazzy
+      os: osx
+      osx_image: xcode8.3
+      env: JOB=Jazzy XCODE=8.3
+      before_install: gem install jazzy; ./install_swiftlint.sh pre-build-mac
     # - script: ./install_swiftlint.sh test-server
     #   os: osx
     #   osx_image: xcode9
