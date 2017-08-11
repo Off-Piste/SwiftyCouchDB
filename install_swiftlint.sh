@@ -25,11 +25,10 @@ function runSwiftlint {
 }
 
 function runTests {
-  XCPRETTY_PARAMS="-f `xcpretty-travis-formatter`"
   XCODE_TESTS_PARAMS="-project $source_root/SwiftyCouchDB.xcodeproj -scheme SwiftyCouchDBTests"
 
   echo "Running Tests"
-  xcode "xcodebuild clean build test $XCODE_TESTS_PARAMS | xcpretty $XCPRETTY_PARAMS"
+  xcode "xcodebuild clean build test $XCODE_TESTS_PARAMS | xcpretty -f `xcpretty-travis-formatter`"
 }
 
 function downloadHelperCode {

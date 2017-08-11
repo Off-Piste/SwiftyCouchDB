@@ -101,5 +101,4 @@ class IntitalisationTests: XCTestCase {
         XCTAssertNotEqual(property1, property2)
     }
 
-
 }

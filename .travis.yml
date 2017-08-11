@@ -23,10 +23,10 @@ matrix:
     #   osx_image: xcode9
     #   env: JOB=test-server XCODE=9
     #   before_install: ./install_swiftlint.sh pre-build
-    - script: ./install_swiftlint.sh test-server
-      os: linux
-      env: JOB=test-server
-      before_install: ./install_swiftlint.sh pre-build-linux
+    # - script: ./install_swiftlint.sh test-server
+    #   os: linux
+    #   env: JOB=test-server
+    #   before_install: ./install_swiftlint.sh pre-build-linux
 # before_install:
 #     - brew update
 # script:
