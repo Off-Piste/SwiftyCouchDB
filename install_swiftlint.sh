@@ -58,7 +58,7 @@ function _swiftlint {
 function run_tests {
   brew outdated couchdb || brew upgrade couchdb
   brew services start couchdb
-  
+
   XCODE_TESTS_PARAMS="-project $source_root/SwiftyCouchDB.xcodeproj -scheme SwiftyCouchDBTests"
 
   echo "Running Tests"
@@ -67,11 +67,12 @@ function run_tests {
 
 function _jazzy {
   gem install jazzy
+  jazzy -x -project,SwiftyCouchDB.xcodeproj,-scheme,SwiftyCouchDB --hide-documentation-coverage
 
   ls
-
-  jazzy -x -project,SwiftyCouchDB.xcodeproj,-scheme,SwiftyCouchDB --hide-documentation-coverage
-  rm -R ./build
+  if [-d ./build]; then
+    rm -R ./build
+  fi
 }
 
 #######################################
