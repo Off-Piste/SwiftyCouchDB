@@ -63,6 +63,10 @@ function run_tests {
 }
 
 function _jazzy {
+  gem install jazzy
+
+  ls
+
   jazzy -x -project,SwiftyCouchDB.xcodeproj,-scheme,SwiftyCouchDB --hide-documentation-coverage
   rm -R ./build
 }

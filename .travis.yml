@@ -12,7 +12,9 @@ matrix:
       os: osx
       osx_image: xcode8.3
       env: JOB=swiftlint
-      before_install: brew update; ./install_swiftlint.sh before-swiftlint
+      before_install:
+        - brew update
+        - ./install_swiftlint.sh before-swiftlint
     - script: ./install_swiftlint.sh tests-macos
       os: osx
       osx_image: xcode8.3
@@ -22,7 +24,7 @@ matrix:
       os: osx
       osx_image: xcode8.3
       env: JOB=Jazzy
-      before_install: gem install jazzy; ./install_swiftlint.sh pre-build-mac
+      before_install: ./install_swiftlint.sh pre-build-mac
     # - script: ./install_swiftlint.sh test-server
     #   os: osx
     #   osx_image: xcode9
