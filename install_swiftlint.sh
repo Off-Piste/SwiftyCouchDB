@@ -56,6 +56,9 @@ function _swiftlint {
 }
 
 function run_tests {
+  brew outdated couchdb || brew upgrade couchdb
+  brew services start couchdb
+  
   XCODE_TESTS_PARAMS="-project $source_root/SwiftyCouchDB.xcodeproj -scheme SwiftyCouchDBTests"
 
   echo "Running Tests"

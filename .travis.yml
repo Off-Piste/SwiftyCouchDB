@@ -16,10 +16,11 @@ matrix:
         - brew update
         - ./install_swiftlint.sh before-swiftlint
     - script: ./install_swiftlint.sh tests-macos
-      services: couchdb
+      # services: couchdb
       os: osx
       osx_image: xcode8.3
       env: JOB=tests-macos
+      # sudo: required
       before_install: ./install_swiftlint.sh before-tests-macos
     - script: ./install_swiftlint.sh jazzy
       os: osx
