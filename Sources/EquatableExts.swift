@@ -10,6 +10,7 @@ import Foundation
 import SwiftyJSON
 
 extension Optional where Wrapped: Equatable {
+
     /// Returns a Boolean value indicating whether two values are equal.
     ///
     /// Equality is the inverse of inequality. For any values `a` and `b`,
@@ -27,6 +28,14 @@ extension Optional where Wrapped: Equatable {
     }
 }
 
+/// Returns a Boolean value indicating whether two values are equal.
+///
+/// Equality is the inverse of inequality. For any values `a` and `b`,
+/// `a == b` implies that `a != b` is `false`.
+///
+/// - Parameters:
+///   - lhs: A value to compare.
+///   - rhs: Another value to compare.
 public func == (lhs: JSONSubscriptType, rhs: JSONSubscriptType) -> Bool {
     switch (lhs.jsonKey, rhs.jsonKey) {
     case let (.index(index1), .index(index2)): return index1 == index2
@@ -35,6 +44,14 @@ public func == (lhs: JSONSubscriptType, rhs: JSONSubscriptType) -> Bool {
     }
 }
 
+/// Returns a Boolean value indicating whether two values are equal.
+///
+/// Equality is the inverse of inequality. For any values `a` and `b`,
+/// `a == b` implies that `a != b` is `false`.
+///
+/// - Parameters:
+///   - lhs: A value to compare.
+///   - rhs: Another value to compare.
 public func == (lhs: JSONSubscriptType?, rhs: JSONSubscriptType?) -> Bool {
     switch (lhs, rhs) {
     case let (.some(W1), .some(W2)): return W1 == W2
@@ -43,21 +60,14 @@ public func == (lhs: JSONSubscriptType?, rhs: JSONSubscriptType?) -> Bool {
     }
 }
 
+/// Returns a Boolean value indicating whether two values are equal.
+///
+/// Equality is the inverse of inequality. For any values `a` and `b`,
+/// `a == b` implies that `a != b` is `false`.
+///
+/// - Parameters:
+///   - lhs: A value to compare.
+///   - rhs: Another value to compare.
 public func == (lhs: [JSONSubscriptType], rhs: [JSONSubscriptType]) -> Bool {
     return (lhs as NSArray).isEqual(to: rhs)
 }
-
-//extension Array : Equatable {
-//
-//    /// Returns a Boolean value indicating whether two values are equal.
-//    ///
-//    /// Equality is the inverse of inequality. For any values `a` and `b`,
-//    /// `a == b` implies that `a != b` is `false`.
-//    ///
-//    /// - Parameters:
-//    ///   - lhs: A value to compare.
-//    ///   - rhs: Another value to compare.
-//    public static func == (lhs: Array, rhs: Array) -> Bool {
-//        return (lhs as NSArray).isEqual(to: rhs)
-//    }
-//}

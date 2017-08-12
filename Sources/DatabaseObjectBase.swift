@@ -8,11 +8,14 @@
 
 import Foundation
 
+/** */
 open class DatabaseObjectBase: NSObject {
 
-    open var database: Database?
+    /// <#Description#>
+    final public var database: Database?
 
-    open override var className: String {
+    /// <#Description#>
+    final public override var className: String {
         return NSStringFromClass(type(of: self)).components(separatedBy: ".").last ?? "nil"
     }
 

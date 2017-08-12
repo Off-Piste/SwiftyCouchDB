@@ -9,12 +9,15 @@
 import Foundation
 import LoggerAPI
 
+/** */
 public struct Utils {
 
+    /** */
     public static var connectionProperties: ConnectionProperties? = .default
 
 }
 
+/** */
 public struct ConnectionProperties {
 
     /// Hostname or IP address to the CouchDB server
@@ -32,6 +35,14 @@ public struct ConnectionProperties {
     /// CouchDB admin password
     internal let password: String?
 
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - host: <#host description#>
+    ///   - port: <#port description#>
+    ///   - secured: <#secured description#>
+    ///   - username: <#username description#>
+    ///   - password: <#password description#>
     public init(
         host: String,
         port: Int16,

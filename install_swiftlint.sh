@@ -25,10 +25,16 @@ function xcode {
 #             Helper Code             #
 #######################################
 
-function pre_xcode {
+# Placed outside pre_xcode as this won't run on my system but is fine on travis
+function pre_xcode_gem {
   gem install xcpretty --no-rdoc --no-ri --no-document --quiet
   gem install xcpretty-travis-formatter --no-rdoc --no-ri --no-document --quiet
 
+  brew outdated couchdb || brew upgrade couchdb
+  brew services start couchdb
+}
+
+function pre_xcode {
   echo "Building Swift"
   swift build
 
@@ -56,9 +62,6 @@ function _swiftlint {
 }
 
 function run_tests {
-  brew outdated couchdb || brew upgrade couchdb
-  brew services start couchdb
-
   XCODE_TESTS_PARAMS="-project $source_root/SwiftyCouchDB.xcodeproj -scheme SwiftyCouchDBTests"
 
   echo "Running Tests"
@@ -66,10 +69,8 @@ function run_tests {
 }
 
 function _jazzy {
-  gem install jazzy
   jazzy -x -project,SwiftyCouchDB.xcodeproj,-scheme,SwiftyCouchDB --hide-documentation-coverage
 
-  ls
   if [-d ./build]; then
     rm -R ./build
   fi
@@ -83,6 +84,7 @@ case $1 in
     swiftlint) _swiftlint ;;
     tests-macos) run_tests ;;
     jazzy) _jazzy ;;
+    before-tests-script) pre_xcode_gem ;;
     before-tests-macos) pre_xcode ;;
     before-swiftlint) build_for_swiftlint ;;
     *) usage ;;

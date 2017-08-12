@@ -62,46 +62,16 @@
             <a href="../Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Extensions/Array.html">Array</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/Bool.html">Bool</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/CouchDBProperty.html">CouchDBProperty</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/Dictionary.html">Dictionary</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/Double.html">Double</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/Float.html">Float</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/Int.html">Int</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/NSNull.html">NSNull</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/NSNumber.html">NSNumber</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/NSString.html">NSString</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Extensions/Optional.html">Optional</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/String.html">String</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
             <a href="../Functions.html">Functions</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F13SwiftyCouchDBoi2eeFTGSaP10SwiftyJSON17JSONSubscriptType__GSaPS1____Sb">==(_:_:)</a>
+              </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:F13SwiftyCouchDBoi2eeFTGSqP10SwiftyJSON17JSONSubscriptType__GSqPS1____Sb">==(_:_:)</a>
               </li>
@@ -111,18 +81,16 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="../Protocols.html">Protocols</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="../Protocols/JSONAbleProperty.html">JSONAbleProperty</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
             <a href="../Structs.html">Structs</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Structs/ConnectionProperties.html">ConnectionProperties</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DatabaseObjectProperty.html">DatabaseObjectProperty</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DatabaseObjectScheme.html">DatabaseObjectScheme</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/DatabaseReference.html">DatabaseReference</a>
@@ -138,7 +106,13 @@
         <section>
           <section class="section">
             <h1>PropertyType</h1>
-            <p>Undocumented</p>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">PropertyType</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                </div>
+              </div>
+            <p>The object type for the property</p>
 
           </section>
           <section class="section task-group-section">
@@ -157,8 +131,15 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">number</span> <span class="o">=</span> <span class="mi">0</span></code></pre>
 
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -180,8 +161,15 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">string</span> <span class="o">=</span> <span class="mi">1</span></code></pre>
 
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -203,8 +191,15 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">bool</span> <span class="o">=</span> <span class="mi">2</span></code></pre>
 
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -226,8 +221,15 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">array</span> <span class="o">=</span> <span class="mi">3</span></code></pre>
 
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -249,8 +251,15 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">dictionary</span> <span class="o">=</span> <span class="mi">4</span></code></pre>
 
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -272,8 +281,15 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">null</span> <span class="o">=</span> <span class="mi">5</span></code></pre>
 
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -295,8 +311,15 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">object</span> <span class="o">=</span> <span class="mi">6</span></code></pre>
 
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -318,8 +341,15 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">unknown</span> <span class="o">=</span> <span class="mi">7</span></code></pre>
 
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -331,9 +361,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FPs27ExpressibleByIntegerLiteralcFT14integerLiteralwx18IntegerLiteralType_x"></a>
+                    <a name="/s:FO13SwiftyCouchDB12PropertyTypecFT14integerLiteralSi_S0_"></a>
                     <a name="//apple_ref/swift/Method/init(integerLiteral:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FPs27ExpressibleByIntegerLiteralcFT14integerLiteralwx18IntegerLiteralType_x">init(integerLiteral:)</a>
+                    <a class="token" href="#/s:FO13SwiftyCouchDB12PropertyTypecFT14integerLiteralSi_S0_">init(integerLiteral:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -341,13 +371,23 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Creates an instance initialized to the specified integer value.</p>
+
+<p>Do not call this initializer directly. Instead, initialize a variable or
+constant using an integer literal. For example:</p>
+
+<pre class="highlight plaintext"><code>let x = 23
+</code></pre>
+
+<p>In this example, the assignment to the <code>x</code> constant calls this integer
+literal initializer behind the scenes.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">integerLiteral</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">IntegerLiteralType</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">integerLiteral</span> <span class="nv">value</span><span class="p">:</span> <span class="kt"><a href="../Enums/PropertyType.html#/s:O13SwiftyCouchDB12PropertyType18IntegerLiteralType">IntegerLiteralType</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -374,12 +414,42 @@
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:O13SwiftyCouchDB12PropertyType18IntegerLiteralType"></a>
+                    <a name="//apple_ref/swift/Alias/IntegerLiteralType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:O13SwiftyCouchDB12PropertyType18IntegerLiteralType">IntegerLiteralType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A type that represents an integer literal.</p>
+
+<p>The standard library integer and floating-point types are all valid types
+for <code>IntegerLiteralType</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">IntegerLiteralType</span> <span class="o">=</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-08-11)</p>
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-08-12)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.5</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

@@ -10,7 +10,7 @@ import Foundation
 import KituraNet
 @_exported import SwiftyJSON
 
-enum HTTPMethod: String {
+internal enum HTTPMethod: String {
     case get = "GET"
     case put = "PUT"
     case delete = "DELETE"

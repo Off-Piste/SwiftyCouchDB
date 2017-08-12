@@ -8,21 +8,53 @@
 
 import Foundation
 
+/// The object type for the property
 public enum PropertyType: Int {
+
+    /** */
     case number = 0
+
+    /** */
     case string = 1
+
+    /** */
     case bool = 2
+
+    /** */
     case array = 3
+
+    /** */
     case dictionary = 4
+
+    /** */
     case null = 5
+
+    /** */
     case object = 6
+
+    /** */
     case unknown = 7
 }
 
 extension PropertyType: ExpressibleByIntegerLiteral {
 
+    /// A type that represents an integer literal.
+    ///
+    /// The standard library integer and floating-point types are all valid types
+    /// for `IntegerLiteralType`.
     public typealias IntegerLiteralType = Int
 
+    /// Creates an instance initialized to the specified integer value.
+    ///
+    /// Do not call this initializer directly. Instead, initialize a variable or
+    /// constant using an integer literal. For example:
+    ///
+    ///     let x = 23
+    ///
+    /// In this example, the assignment to the `x` constant calls this integer
+    /// literal initializer behind the scenes.
+    ///
+    /// - Parameter value: The value to create.
     public init(integerLiteral value: IntegerLiteralType) {
         if value > 7 {
             preconditionFailure("Value is too high")
@@ -55,10 +87,13 @@ func CouchDBPropertyType(for object: Any) -> PropertyType {
 
 public struct DatabaseObjectProperty {
 
+    /// <#Description#>
     public var key: String
 
+    /// <#Description#>
     public var value: Any
 
+    /// <#Description#>
     public var isOptional: Bool
 
     internal var parent: DatabaseObject
@@ -84,16 +119,29 @@ public struct DatabaseObjectProperty {
 
 extension DatabaseObjectProperty: Hashable {
 
+    /// <#Description#>
     public var type: PropertyType {
         return CouchDBPropertyType(for: self.value)
     }
 
+    /// Returns a Boolean value indicating whether two values are equal.
+    ///
+    /// Equality is the inverse of inequality. For any values `a` and `b`,
+    /// `a == b` implies that `a != b` is `false`.
+    ///
+    /// - Parameters:
+    ///   - lhs: A value to compare.
+    ///   - rhs: Another value to compare.
     public static func == (lhs: DatabaseObjectProperty, rhs: DatabaseObjectProperty) -> Bool {
         return lhs.key == rhs.key &&
             lhs.type.rawValue == rhs.type.rawValue &&
             lhs.value == rhs.value
     }
 
+    /// The hash value.
+    ///
+    /// Hash values are not guaranteed to be equal across different executions of
+    /// your program. Do not save hash values to use during a future execution.
     public var hashValue: Int {
         return self.key.hashValue ^ self.parent.hashValue ^ self.type.hashValue
     }

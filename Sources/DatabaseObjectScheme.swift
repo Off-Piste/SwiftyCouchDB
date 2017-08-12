@@ -8,14 +8,19 @@
 
 import Foundation
 
+/** */
 public struct DatabaseObjectScheme: Hashable {
 
+    /// <#Description#>
     public var id: DatabaseObjectProperty
 
+    /// <#Description#>
     public var type: DatabaseObjectProperty
 
+    /// <#Description#>
     public var properties: [DatabaseObjectProperty]
 
+    /// <#Description#>
     public var className: String
 
     internal init(
