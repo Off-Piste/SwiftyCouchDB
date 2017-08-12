@@ -19,8 +19,13 @@ public class Database {
     /// <#Description#>
     fileprivate var requestManager: RequestManager
 
+    /// <#Description#>
     public lazy var reference: DatabaseReference = DatabaseReference(self)
 
+    /// <#Description#>
+    ///
+    /// - Parameter file: <#file description#>
+    /// - Returns: <#return value description#>
     public func reference(for file: String) -> DatabaseReference {
         return self.reference.file(file)
     }
@@ -41,7 +46,10 @@ public class Database {
         self.requestManager = rm
     }
 
-    // FIXME: Init fails in tests
+    /// <#Description#>
+    ///
+    /// - Parameter database: <#database description#>
+    /// - Throws: <#throws value description#>
     public convenience init<D: Database>(database: @autoclosure () throws -> D) throws {
         try self.init(database: { () -> D in try database() })
     }

@@ -1,7 +1,7 @@
 import XCTest
 @testable import SwiftyCouchDB
 
-class IntitalisationTests: XCTestCase {
+class DatabaseTests: XCTestCase {
 
     var database: Database!
 
@@ -19,7 +19,7 @@ class IntitalisationTests: XCTestCase {
         Utils.connectionProperties = nil
     }
 
-    func testCallbackDelete() {
+    func test__Database__Creation_And_Deletion__Should_Pass() {
         Utils.connectionProperties = .default
         
         self.database.create { (database, error) in
@@ -35,7 +35,7 @@ class IntitalisationTests: XCTestCase {
         }
     }
 
-    func testDoesNotExists() {
+    func test__Database__Invalid_Exists__Should_Pass() {
         Utils.connectionProperties = .default
 
         self.database.exists { (error) in
@@ -44,8 +44,7 @@ class IntitalisationTests: XCTestCase {
     }
 
 
-    func testThrowingInitalisation() {
-        // Needs to be nil to throw the error
+    func test__Database__Invalid_Initalisation__Should_Throw() {
         Utils.connectionProperties = nil
 
         XCTAssertThrowsError(try Database("dbname"))
@@ -54,7 +53,7 @@ class IntitalisationTests: XCTestCase {
         Utils.connectionProperties = .default
     }
 
-    func testValidInitalisation() {
+    func test__Database__Valid_Initalisation__Should_Not_Throw() {
         Utils.connectionProperties = .default
 
         XCTAssertNoThrow(try Database("dbname"))
@@ -63,7 +62,7 @@ class IntitalisationTests: XCTestCase {
         Utils.connectionProperties = nil
     }
 
-    func testDatabaseInit() {
+    func test__Database__Convenience_Init__Should_Not_Throw() {
         Utils.connectionProperties = .default
 
         XCTAssertNoThrow(try Database { try UserDatabase() })
@@ -74,27 +73,6 @@ class IntitalisationTests: XCTestCase {
         XCTAssertEqual(db1, db2)
 
         Utils.connectionProperties = nil
-    }
-
-    func testProperties() {
-        let user: DatabaseObject = User()
-        let type1 = CouchDBPropertyType(for: user)
-        XCTAssertEqual(type1.rawValue, 6)
-
-        let array: Array<DatabaseObject> = []
-        let type2 = CouchDBPropertyType(for: array)
-        XCTAssertEqual(type2.rawValue, 3)
-
-        let dict: Dictionary<DatabaseObject, String> = [:]
-        let type3 = CouchDBPropertyType(for: dict)
-        XCTAssertEqual(type3.rawValue, 4)
-
-        let type4: PropertyType = 5
-        XCTAssertEqual(type4.rawValue, 5)
-
-        let property1: CouchDBProperty<Int> = CouchDBProperty(key: "age", value: 55, parentObject: user, isOptional: false)
-        let property2: CouchDBProperty<Int> = CouchDBProperty(key: "age", value: 22, parentObject: user, isOptional: false)
-        XCTAssertNotEqual(property1, property2)
     }
 
 }

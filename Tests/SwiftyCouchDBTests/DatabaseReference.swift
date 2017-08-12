@@ -29,7 +29,7 @@ class DatabaseReferenceTests: XCTestCase {
         super.tearDown()
     }
     
-    func test_Normal_ForReferenceCreation() {
+    func test__Database_Reference__Initalisation__Should_Pass() {
         Utils.connectionProperties = .default
 
         let db = try! Database("todolist")
@@ -40,7 +40,7 @@ class DatabaseReferenceTests: XCTestCase {
         XCTAssertEqual(ref1, ref2)
     }
 
-    func test_Normal_ForParent() {
+    func test__Database_Reference__Parent__Should_Pass() {
         Utils.connectionProperties = .default
 
         let db = try! Database("todolist")
@@ -71,7 +71,7 @@ class DatabaseReferenceTests: XCTestCase {
         Utils.connectionProperties = nil
     }
 
-    func test_Normal_ForDatabaseChildren() {
+    func test__Database_Reference__Children__Should_Pass() {
         Utils.connectionProperties = .default
 
         let db1 = try! UserDatabase()
@@ -100,7 +100,7 @@ class DatabaseReferenceTests: XCTestCase {
         Utils.connectionProperties = nil
     }
     
-    func test_Performance_ForObjectCreation() {
+    func test__Database_Reference__Performance__Object_Creation() {
         // This is an example of a performance test case.
         self.measure {
             Utils.connectionProperties = .default

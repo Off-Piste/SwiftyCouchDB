@@ -43,17 +43,21 @@ public func == (lhs: JSONSubscriptType?, rhs: JSONSubscriptType?) -> Bool {
     }
 }
 
-extension Array : Equatable {
-
-    /// Returns a Boolean value indicating whether two values are equal.
-    ///
-    /// Equality is the inverse of inequality. For any values `a` and `b`,
-    /// `a == b` implies that `a != b` is `false`.
-    ///
-    /// - Parameters:
-    ///   - lhs: A value to compare.
-    ///   - rhs: Another value to compare.
-    public static func == (lhs: Array, rhs: Array) -> Bool {
-        return (lhs as NSArray).isEqual(to: rhs)
-    }
+public func == (lhs: [JSONSubscriptType], rhs: [JSONSubscriptType]) -> Bool {
+    return (lhs as NSArray).isEqual(to: rhs)
 }
+
+//extension Array : Equatable {
+//
+//    /// Returns a Boolean value indicating whether two values are equal.
+//    ///
+//    /// Equality is the inverse of inequality. For any values `a` and `b`,
+//    /// `a == b` implies that `a != b` is `false`.
+//    ///
+//    /// - Parameters:
+//    ///   - lhs: A value to compare.
+//    ///   - rhs: Another value to compare.
+//    public static func == (lhs: Array, rhs: Array) -> Bool {
+//        return (lhs as NSArray).isEqual(to: rhs)
+//    }
+//}
