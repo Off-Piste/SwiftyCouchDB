@@ -5,6 +5,7 @@ disabled_rules: # rule identifiers to exclude from running
   - large_tuple
   - function_body_length
   - identifier_name
+  - opening_brace
 opt_in_rules:
   - empty_count
 included:
