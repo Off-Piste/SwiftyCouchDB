@@ -91,7 +91,7 @@
 		OBJ_282 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* Result.swift */; };
 		OBJ_289 /* ConnectionProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_8 /* ConnectionProperties.swift */; };
 		OBJ_290 /* CouchDBCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* CouchDBCore.swift */; };
-		OBJ_291 /* CouchDBProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* CouchDBProperty.swift */; };
+		OBJ_291 /* DatabaseObjectProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* DatabaseObjectProperty.swift */; };
 		OBJ_292 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Database.swift */; };
 		OBJ_293 /* DatabaseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* DatabaseObject.swift */; };
 		OBJ_294 /* DatabaseObjectBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* DatabaseObjectBase.swift */; };
@@ -431,7 +431,7 @@
 /* Begin PBXFileReference section */
 		C856E9CA1F3EF2180064FB8E /* ConnectionProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionProperties.swift; sourceTree = "<group>"; };
 		C86278531F3F173C00E89BAF /* DatabaseObjectScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseObjectScheme.swift; sourceTree = "<group>"; };
-		OBJ_10 /* CouchDBProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouchDBProperty.swift; sourceTree = "<group>"; };
+		OBJ_10 /* DatabaseObjectProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseObjectProperty.swift; sourceTree = "<group>"; };
 		OBJ_101 /* HeliumLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeliumLogger.swift; sourceTree = "<group>"; };
 		OBJ_102 /* HeliumStreamLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeliumStreamLogger.swift; sourceTree = "<group>"; };
 		OBJ_105 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -654,20 +654,12 @@
 		C89EE4FF1F3EFAD800C4882D /* Object */ = {
 			isa = PBXGroup;
 			children = (
-				C89EE5001F3EFAE200C4882D /* Properties */,
+				OBJ_10 /* DatabaseObjectProperty.swift */,
 				OBJ_12 /* DatabaseObject.swift */,
 				OBJ_13 /* DatabaseObjectBase.swift */,
 				OBJ_14 /* DatabaseObjectScheme.swift */,
 			);
 			name = Object;
-			sourceTree = "<group>";
-		};
-		C89EE5001F3EFAE200C4882D /* Properties */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_10 /* CouchDBProperty.swift */,
-			);
-			name = Properties;
 			sourceTree = "<group>";
 		};
 		C89EE5031F3F03F900C4882D /* Utils */ = {
@@ -1177,6 +1169,7 @@
 			buildPhases = (
 				OBJ_288 /* Sources */,
 				OBJ_301 /* Frameworks */,
+				C872111E1F40646F003C07E0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1261,6 +1254,19 @@
 
 /* Begin PBXShellScriptBuildPhase section */
 		C872111D1F405495003C07E0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
+		};
+		C872111E1F40646F003C07E0 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1417,7 +1423,7 @@
 			files = (
 				OBJ_289 /* ConnectionProperties.swift in Sources */,
 				OBJ_290 /* CouchDBCore.swift in Sources */,
-				OBJ_291 /* CouchDBProperty.swift in Sources */,
+				OBJ_291 /* DatabaseObjectProperty.swift in Sources */,
 				OBJ_292 /* Database.swift in Sources */,
 				OBJ_293 /* DatabaseObject.swift in Sources */,
 				OBJ_294 /* DatabaseObjectBase.swift in Sources */,

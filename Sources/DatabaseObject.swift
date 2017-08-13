@@ -155,4 +155,8 @@ public final class User: DatabaseObject {
     /// <#Description#>
     dynamic var email: String = ""
 
+    public override var database: Database? {
+        return try? Database("_user")
+    }
+
 }

@@ -17,7 +17,7 @@ public class Database {
     public var name: String
 
     /// <#Description#>
-    fileprivate var requestManager: RequestManager
+    internal var requestManager: RequestManager
 
     /// <#Description#>
     public lazy var reference: DatabaseReference = DatabaseReference(self)

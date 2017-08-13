@@ -17,6 +17,10 @@ class TodoItem: DatabaseObject {
 
     dynamic var datestamp: TimeInterval = 0
 
+    override var database: Database? {
+        return try? Database("todolist")
+    }
+
 }
 
 class DatabaseReferenceTests: XCTestCase {
@@ -29,7 +33,7 @@ class DatabaseReferenceTests: XCTestCase {
         super.tearDown()
     }
     
-    func test__Database_Reference__Initalisation__Should_Pass() {
+    func test__database_reference__initalisation__should_pass() {
         Utils.connectionProperties = .default
 
         let db = try! Database("todolist")
@@ -40,7 +44,7 @@ class DatabaseReferenceTests: XCTestCase {
         XCTAssertEqual(ref1, ref2)
     }
 
-    func test__Database_Reference__Parent__Should_Pass() {
+    func test__database_reference__parent__should_pass() {
         Utils.connectionProperties = .default
 
         let db = try! Database("todolist")
@@ -71,7 +75,7 @@ class DatabaseReferenceTests: XCTestCase {
         Utils.connectionProperties = nil
     }
 
-    func test__Database_Reference__Children__Should_Pass() {
+    func test__database_reference__children__should_pass() {
         Utils.connectionProperties = .default
 
         let db1 = try! UserDatabase()
@@ -100,23 +104,99 @@ class DatabaseReferenceTests: XCTestCase {
         Utils.connectionProperties = nil
     }
     
-    func test__Database_Reference__Performance__Object_Creation() {
-        // This is an example of a performance test case.
-        self.measure {
-            Utils.connectionProperties = .default
+    func test__database_reference__object_creation__should_pass() {
+        Utils.connectionProperties = .default
 
-            let exp = self.expectation(description: #function)
+        let exp = self.expectation(description: #function)
 
-            let newItem = TodoItem()
-            newItem.datestamp = Date().timeIntervalSince1970
-            newItem.id = UUID().uuidString
+        let newItem = TodoItem()
+        newItem.datestamp = Date().timeIntervalSince1970
+        newItem.id = UUID().uuidString
 
-            try! Database("todolist").reference.create(newItem, callback: { (obj, error) in
+        try! Database("todolist").create { db, error in
+            if let error = error {
+                XCTFail(for: error)
                 exp.fulfill()
-            })
-
-            self.waitForExpectations(timeout: 40, handler: nil)
+            } else {
+                db.reference.create(for: newItem, with: { (snapshot, error) in
+                    if let error = error {
+                        XCTFail(for: error)
+                        exp.fulfill()
+                    } else {
+                        db.delete(callback: { (error) in
+                            if let error = error {
+                                XCTFail(for: error)
+                                exp.fulfill()
+                            } else {
+                                exp.fulfill()
+                            }
+                        })
+                    }
+                })
+            }
         }
+
+        self.waitForExpectations(timeout: 40, handler: nil)
+    }
+
+    func test__database_reference__object_json_creation__should_pass() {
+        Utils.connectionProperties = .default
+
+        let exp = self.expectation(description: #function)
+
+        let json: JSON = [
+            "_id" : UUID().uuidString,
+            "type" : "tester",
+            "data" : ["name" : "harry"]
+        ]
+
+        try! Database("todolist").create { db, error in
+            if let error = error { XCTFail(for: error); exp.fulfill(); return }
+            db.reference.create(json, callback: { (snapshot, error) in
+                XCTAssertNotNil(snapshot)
+
+                db.delete(callback: { (error) in
+                    if let error = error {
+                        XCTFail(for: error)
+                        exp.fulfill()
+                    } else {
+                        exp.fulfill()
+                    }
+                })
+            })
+        }
+
+        self.waitForExpectations(timeout: 40, handler: nil)
+        Utils.connectionProperties = nil
+    }
+
+    func test__database_reference__invalid_object_creation__should_be_nil() {
+        Utils.connectionProperties = .default
+        let exp = self.expectation(description: #function)
+
+        let newItem = TodoItem()
+        newItem.datestamp = Date().timeIntervalSince1970
+        newItem.id = UUID().uuidString
+
+        try! Database("todolist").create(callback: { (db, error) in
+            if let error = error { XCTFail(for: error); exp.fulfill(); return }
+
+            db.reference(for: "list_1").create(for: newItem, with: { (snapshot, error) in
+                XCTAssertNotNil(error)
+
+                db.delete(callback: { (error) in
+                    if let error = error {
+                        XCTFail(for: error)
+                        exp.fulfill()
+                    } else {
+                        exp.fulfill()
+                    }
+                })
+            })
+        })
+
+        self.waitForExpectations(timeout: 40, handler: nil)
+        Utils.connectionProperties = nil
     }
     
 }

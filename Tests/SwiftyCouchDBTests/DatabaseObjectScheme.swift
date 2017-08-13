@@ -69,8 +69,12 @@ class DatabaseObjectSchemeTests: XCTestCase {
         user.username = "harrytwright"
         user.roles.append("Admin")
 
+        let password = "1234567890".data(using: .utf8)!.base64EncodedString()
         let json = DatabaseObjectUtil.DBObjectJSON(from: try! user.scheme())
         XCTAssertEqual(json["data"].count, 4)
-        XCTAssertEqual(json["data"]["email"].stringValue,"haroldtomwright@gmail.com")
+        XCTAssertEqual(json["data"]["email"].stringValue, "haroldtomwright@gmail.com")
+        XCTAssertEqual(json["data"]["roles"].count, 1)
+        XCTAssertEqual(json["data"]["password"].stringValue, password)
+
     }
 }

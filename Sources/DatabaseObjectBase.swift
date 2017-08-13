@@ -12,7 +12,9 @@ import Foundation
 open class DatabaseObjectBase: NSObject {
 
     /// <#Description#>
-    final public var database: Database?
+    open var database: Database? {
+        return try? Database(className.lowercased())
+    }
 
     /// <#Description#>
     final public override var className: String {
