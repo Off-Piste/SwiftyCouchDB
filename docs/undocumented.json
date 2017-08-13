@@ -9,7 +9,7 @@
     },
     {
       "file": "/Users/harrywright/Frameworks/Off Piste/Cocoapod/SwiftyCouchCB/Sources/CouchDBProperty.swift",
-      "line": 88,
+      "line": 89,
       "symbol": "DatabaseObjectProperty",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
