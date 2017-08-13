@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import LoggerAPI
 
 /// The object type for the property
 public enum PropertyType: Int {
@@ -70,9 +71,9 @@ func CouchDBPropertyType(for object: Any) -> PropertyType {
         return .number
     } else if object is String || object is NSString {
         return .string
-    } else if object is [Any] {
+    } else if object is [Any] || object is NSArray {
         return .array
-    } else if object is [AnyHashable: Any] {
+    } else if object is [AnyHashable: Any] || object is NSDictionary {
         return .dictionary
     } else if object is Bool || object is ObjCBool {
         return .bool
@@ -97,6 +98,10 @@ public struct DatabaseObjectProperty {
     public var isOptional: Bool
 
     internal var parent: DatabaseObject
+
+    internal var touple: (key: String, value: Any) {
+        return (key: self.key, value: self.value)
+    }
 
     internal init(
         key: String,
@@ -147,6 +152,34 @@ extension DatabaseObjectProperty: Hashable {
     }
 }
 
+extension Array where Element == DatabaseObjectProperty {
+
+    func toDictionary() -> [String : Any] {
+        var dict: [String : Any] = [:]
+        let localSelf = self.map { $0.touple }
+        for touple in localSelf {
+            if let object =  touple.value as? DatabaseObject {
+                do {
+                    let scheme = try object.scheme()
+                    let className = object.className
+                    let internalDict = ["_id": scheme.id.value]
+                    dict.updateValue(internalDict, forKey: className)
+                } catch {
+                    Log.error("Invalid Scheme for: \(object.className), reason: " + error.localizedDescription)
+                    continue
+                }
+            } else if let arr = touple.value as? [DatabaseObject] {
+                let newArr = arr.nestedObjectDictionary()
+                dict.updateValue(newArr, forKey: touple.key)
+            } else {
+                dict.updateValue(touple.value, forKey: touple.key)
+            }
+        }
+
+        return dict
+    }
+}
+
 private func == (lhs: Any?, rhs: Any?) -> Bool {
     switch (lhs, rhs) {
     case let (.some(W1), .some(W2)): return W1 == W2
@@ -186,4 +219,3 @@ private func == (lhs: Any, rhs: Any) -> Bool {
 private func != (lhs: Any, rhs: Any) -> Bool {
     return !(lhs == rhs)
 }
-

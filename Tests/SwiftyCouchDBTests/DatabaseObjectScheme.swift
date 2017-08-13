@@ -46,12 +46,12 @@ class DatabaseObjectSchemeTests: XCTestCase {
         XCTAssertEqual((scheme.id.value as! String), user.id)
     }
 
-    func test_valid_scheme__equatable__should_pass() {
+    func test__valid_scheme__equatable__should_pass() {
         let user = User()
         user.id = UUID().uuidString
 
         var scheme = try! DatabaseObjectUtil.DBObjectScheme(for: user)
-        var scheme2 = try! DatabaseObjectUtil.DBObjectScheme(for: user)
+        let scheme2 = try! DatabaseObjectUtil.DBObjectScheme(for: user)
 
         XCTAssertEqual(scheme, scheme2)
 
@@ -59,5 +59,18 @@ class DatabaseObjectSchemeTests: XCTestCase {
         scheme = try! DatabaseObjectUtil.DBObjectScheme(for: user)
 
         XCTAssertNotEqual(scheme, scheme2)
+    }
+
+    func test__valid_scheme__json() {
+        let user = User()
+        user.id = UUID().uuidString
+        user.email = "haroldtomwright@gmail.com"
+        user.password = "1234567890".data(using: .utf8)!.base64EncodedString()
+        user.username = "harrytwright"
+        user.roles.append("Admin")
+
+        let json = DatabaseObjectUtil.DBObjectJSON(from: try! user.scheme())
+        XCTAssertEqual(json["data"].count, 4)
+        XCTAssertEqual(json["data"]["email"].stringValue,"haroldtomwright@gmail.com")
     }
 }

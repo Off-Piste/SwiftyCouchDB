@@ -450,7 +450,7 @@
 		OBJ_118 /* SwiftyCouchDBTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = SwiftyCouchDBTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_12 /* DatabaseObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseObject.swift; sourceTree = "<group>"; };
 		OBJ_13 /* DatabaseObjectBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseObjectBase.swift; sourceTree = "<group>"; };
-		OBJ_14 /* DatabaseObjectScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseObjectScheme.swift; sourceTree = "<group>"; };
+		OBJ_14 /* DatabaseObjectScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DatabaseObjectScheme.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		OBJ_15 /* DatabaseReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseReference.swift; sourceTree = "<group>"; };
 		OBJ_16 /* EquatableExts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EquatableExts.swift; path = Sources/EquatableExts.swift; sourceTree = "<group>"; };
 		OBJ_17 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Error.swift; path = Sources/Error.swift; sourceTree = "<group>"; };
@@ -502,7 +502,7 @@
 		OBJ_76 /* ParseResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseResults.swift; sourceTree = "<group>"; };
 		OBJ_77 /* URLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLParser.swift; sourceTree = "<group>"; };
 		OBJ_79 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
-		OBJ_8 /* ConnectionProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConnectionProperties.swift; path = Sources/ConnectionProperties.swift; sourceTree = "<group>"; };
+		OBJ_8 /* ConnectionProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = ConnectionProperties.swift; path = Sources/ConnectionProperties.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		OBJ_80 /* ServerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerDelegate.swift; sourceTree = "<group>"; };
 		OBJ_81 /* ServerLifecycleListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerLifecycleListener.swift; sourceTree = "<group>"; };
 		OBJ_82 /* ServerMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerMonitor.swift; sourceTree = "<group>"; };
@@ -511,7 +511,7 @@
 		OBJ_86 /* utils.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = utils.c; sourceTree = "<group>"; };
 		OBJ_88 /* CHTTPParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHTTPParser.h; sourceTree = "<group>"; };
 		OBJ_89 /* http_parser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = http_parser.h; sourceTree = "<group>"; };
-		OBJ_9 /* CouchDBCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CouchDBCore.swift; path = Sources/CouchDBCore.swift; sourceTree = "<group>"; };
+		OBJ_9 /* CouchDBCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = CouchDBCore.swift; path = Sources/CouchDBCore.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		OBJ_90 /* utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
 		OBJ_91 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = "/Users/harrywright/Frameworks/Off Piste/Cocoapod/SwiftyCouchCB/SwiftyCouchDB.xcodeproj/GeneratedModuleMap/CHTTPParser/module.modulemap"; sourceTree = "<group>"; };
 		OBJ_93 /* SSLService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSLService.swift; sourceTree = "<group>"; };
@@ -1202,6 +1202,7 @@
 			buildPhases = (
 				OBJ_324 /* Sources */,
 				OBJ_328 /* Frameworks */,
+				C872111D1F405495003C07E0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1259,6 +1260,19 @@
 /* End PBXProject section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		C872111D1F405495003C07E0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = swiftlint;
+		};
 		OBJ_207 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 0;

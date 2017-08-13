@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 /** */
 public struct DatabaseObjectScheme: Hashable {
@@ -44,7 +45,7 @@ public struct DatabaseObjectScheme: Hashable {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func ==(lhs: DatabaseObjectScheme, rhs: DatabaseObjectScheme) -> Bool {
+    public static func == (lhs: DatabaseObjectScheme, rhs: DatabaseObjectScheme) -> Bool {
         return lhs.id == rhs.id &&
             lhs.type == rhs.type &&
             lhs.properties == rhs.properties
@@ -77,12 +78,11 @@ func isOptional<T>(_ any: T) -> Bool {
 }
 
 extension Array where Element == DatabaseObjectProperty {
+
     func property(for key: String) -> DatabaseObjectProperty? {
-        for object in self {
-            if object.key == key {
-                if object.type == .null { return nil }
-                return object
-            }
+        for object in self where object.key == key {
+            if object.type == .null { return nil }
+            return object
         }
 
         return nil
@@ -90,19 +90,19 @@ extension Array where Element == DatabaseObjectProperty {
 }
 
 precedencegroup BooleanPrecedence { associativity: left }
-infix operator ^^ : BooleanPrecedence
+infix operator !& : BooleanPrecedence
 
-func ^^(lhs: Bool, rhs: Bool) -> Bool {
-    return lhs != rhs
+func !& (lhs: Bool, rhs: Bool) -> Bool {
+    return !(lhs && rhs)
 }
 
 internal struct DatabaseObjectUtil {
 
-    static func DBProperties(for object: DatabaseObject) -> Array<DatabaseObjectProperty> {
-        return Mirror(reflecting: object).children.filter {
+    static func DBProperties(for object: DatabaseObject) throws -> [DatabaseObjectProperty] {
+        return try Mirror(reflecting: object).children.filter {
             $0.label != nil || CouchDBPropertyType(for: $0.value) != .unknown
             }.map {
-                try! DatabaseObjectProperty(
+                try DatabaseObjectProperty(
                     key: $0.label!,
                     value: $0.value,
                     isOptional: isOptional($0.value),
@@ -112,7 +112,7 @@ internal struct DatabaseObjectUtil {
     }
 
     static func DBObjectScheme(for object: DatabaseObject) throws -> DatabaseObjectScheme {
-        let fullProperties = DBProperties(for: object)
+        let fullProperties = try DBProperties(for: object)
         let properties = fullProperties.filter {
             if ($0.key == "type") || ($0.key == "id") { return false } else { return true }
         }
@@ -127,14 +127,27 @@ internal struct DatabaseObjectUtil {
         return DatabaseObjectScheme(id, type: type, properties: properties, object: object)
     }
 
-    static func validate(id: DatabaseObjectProperty, type: DatabaseObjectProperty) throws {
-        if !(id.type == .string) && !(type.type == .string) {
+    static private func validate(id: DatabaseObjectProperty, type: DatabaseObjectProperty) throws{
+        guard let id = id.value as? String, let type = type.value as? String else {
             throw SwiftError("ID and Type must be string", -201)
         }
 
-        if ((id.value as! String).isEmpty ^^ (type.value as! String).isEmpty) ||
-            ((id.value as! String).isEmpty && (type.value as! String).isEmpty) {
+        if !id.isEmpty !& !type.isEmpty {
             throw SwiftError("ID and Type must have a value and not be nil", -202)
         }
+    }
+
+    static func DBObjectJSON(
+        from scheme: DatabaseObjectScheme
+        ) -> JSON
+    {
+        let dataDictionary = scheme.properties.toDictionary()
+        let returnDict = [
+            "_id": scheme.id.value,
+            "type": scheme.type.value,
+            "data" : dataDictionary
+        ]
+
+        return JSON(returnDict)
     }
 }

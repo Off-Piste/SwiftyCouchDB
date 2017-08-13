@@ -17,13 +17,13 @@ public struct DatabaseReference {
 
     fileprivate var __design: String?
 
-    internal /* fileprivate */ var database: Database
+    internal var database: Database
 
-    fileprivate var __children: [JSONSubscriptType] = {
+    internal var __children: [JSONSubscriptType] = {
         var seq: [JSONSubscriptType] = []; return seq
     }()
 
-    internal /* fileprivate */ var _child: JSONSubscriptType? {
+    internal var __child: JSONSubscriptType? {
         return __children.last
     }
 
@@ -133,6 +133,19 @@ extension DatabaseReference: Hashable {
 }
 
 extension DatabaseReference {
+
+    internal /* @testable */ func create(
+        for object: DatabaseObject,
+        with callback: (JSON?, Error?
+        ) -> Void)
+    {
+        do {
+            let scheme = try object.scheme()
+            callback(DatabaseObjectUtil.DBObjectJSON(from: scheme), nil)
+        } catch {
+            callback(nil, error)
+        }
+    }
 
     /// <#Description#>
     ///

@@ -47,23 +47,23 @@ class DatabaseReferenceTests: XCTestCase {
         let ref = db.reference["data", "owner", "address", "postcode"]
 
         XCTAssertEqual(ref.__childrenCount, 4)
-        XCTAssertEqual(ref._child, "postcode")
+        XCTAssertEqual(ref.__child, "postcode")
 
         let ref1 = ref.parent
         XCTAssertEqual(ref1?.__childrenCount, 3)
-        XCTAssertEqual(ref1?._child, "address")
+        XCTAssertEqual(ref1?.__child, "address")
 
         let ref2 = ref1?.parent
         XCTAssertEqual(ref2?.__childrenCount, 2)
-        XCTAssertEqual(ref2?._child, "owner")
+        XCTAssertEqual(ref2?.__child, "owner")
 
         let ref3 = ref2?.parent
         XCTAssertEqual(ref3?.__childrenCount, 1)
-        XCTAssertEqual(ref3?._child, "data")
+        XCTAssertEqual(ref3?.__child, "data")
 
         let ref4 = ref3?.parent
         XCTAssertEqual(ref4?.__childrenCount, 0)
-        XCTAssertEqual(ref4?._child, nil)
+        XCTAssertEqual(ref4?.__child, nil)
 
         let ref5 = ref4?.parent
         XCTAssertEqual(ref5, nil)
@@ -79,23 +79,23 @@ class DatabaseReferenceTests: XCTestCase {
         var ref1 = db1.reference
         var ref2 = db2.reference
 
-        let child1 = ref1.children("type")._child
-        let child2 = ref2.children("type")._child
+        let child1 = ref1.children("type").__child
+        let child2 = ref2.children("type").__child
         XCTAssertEqual(child1, child2)
 
-        let child3 = ref1.children("worker")._child
+        let child3 = ref1.children("worker").__child
         XCTAssertEqual(child3, "worker")
         XCTAssertNotEqual(child1, child3)
 
         let ref2Count = ref1["ants", "bees", "elephants"].__childrenCount
-        let lastChild = ref1._child
+        let lastChild = ref1.__child
         XCTAssertEqual(ref2Count, 5)
         XCTAssertEqual(lastChild, "elephants")
 
         ref1 = ref1.root
         ref2 = ref1.root
-        XCTAssertEqual(ref1._child, nil)
-        XCTAssertEqual(ref2._child, nil)
+        XCTAssertEqual(ref1.__child, nil)
+        XCTAssertEqual(ref2.__child, nil)
 
         Utils.connectionProperties = nil
     }
