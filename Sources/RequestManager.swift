@@ -14,6 +14,34 @@ struct RequestManager {
 
     var _core: CouchDBCore
 
+    func allDatabases(callback: @escaping (JSON?, Swift.Error?) -> Void) {
+        let options = CouchDBCore.Utils.prepareRequest(
+            for: _core.connectionProperties,
+            method: .get,
+            path: "_all_dbs",
+            hasBody: false
+        )
+
+        let request = HTTP.request(options) { response in
+            if let response = response {
+                if response.statusCode == HTTPStatusCode.OK {
+                    do {
+                        let json = try CouchDBCore.Utils.getBodyAsJSON(for: response)
+                        callback(json, nil)
+                    } catch {
+                        callback(nil, Database.Error.invalidJSON)
+                    }
+                } else {
+                    callback(nil, Database.Error.databaseDoesntExist)
+                }
+            } else {
+                callback(nil, Database.Error.internalError)
+            }
+        }
+
+        request.end()
+    }
+
     func exists(_ db: Database, callback: @escaping (Swift.Error?) -> Void) {
         let options = CouchDBCore.Utils.prepareRequest(
             for: _core.connectionProperties,
@@ -110,7 +138,29 @@ struct RequestManager {
         } else {
             callback(nil, nil, nil, DError.invalidJSON)
         }
+    }
 
+    func delete(_ id: String, in db: Database, callback: @escaping (Swift.Error?) -> Void) {
+        let escapedName = HTTP.escape(url: db.name)
+        let requestOptions = CouchDBCore.Utils.prepareRequest(
+            for: _core.connectionProperties,
+            method: .delete,
+            path: "/\(escapedName)/\(HTTP.escape(url: id))",
+            hasBody: false
+        )
+
+        let req = HTTP.request(requestOptions) { response in
+            if let response = response {
+                if (response.statusCode != .OK && response.statusCode != .accepted) {
+                    callback(Database.Error.invalidStatusCode(response.statusCode))
+                } else {
+                    callback(nil)
+                }
+            } else {
+                callback(Database.Error.internalError)
+            }
+        }
+        req.end()
     }
 
     func delete(_ db: Database, callback: @escaping (Swift.Error?) -> Void) {

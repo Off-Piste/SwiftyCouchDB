@@ -12,6 +12,9 @@ import Foundation
 open class DatabaseObjectBase: NSObject {
 
     /// <#Description#>
+    final internal var revision: String?
+
+    /// <#Description#>
     open var database: Database? {
         return try? Database(className.lowercased())
     }

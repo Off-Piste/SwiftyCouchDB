@@ -654,10 +654,10 @@
 		C89EE4FF1F3EFAD800C4882D /* Object */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_10 /* DatabaseObjectProperty.swift */,
 				OBJ_12 /* DatabaseObject.swift */,
 				OBJ_13 /* DatabaseObjectBase.swift */,
 				OBJ_14 /* DatabaseObjectScheme.swift */,
+				OBJ_10 /* DatabaseObjectProperty.swift */,
 			);
 			name = Object;
 			sourceTree = "<group>";

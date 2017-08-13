@@ -197,6 +197,48 @@ extension DatabaseReference: Hashable {
 
 }
 
+// MARK: - Deleting Document
+extension DatabaseReference {
+
+    /// <#Description#>
+    ///
+    /// - Parameter callback: <#callback description#>
+    public func delete(callback: @escaping (Error?) -> Void) {
+        if let aFile = self.__file {
+            self.database.requestManager.delete(aFile, in: self.database, callback: callback)
+        } else {
+            let error = SwiftError("The file is not set, cannot delete nothing", -401)
+            callback(error)
+        }
+    }
+
+    public func delete<Object: DatabaseObject>(_ object: Object, callback: @escaping (Error?) -> Void) {
+        do {
+            let scheme = try object.scheme()
+
+            if let aFile = self.__file, let id = scheme.id.value as? String {
+                if aFile != id {
+                    let message = "This reference is set for [\(aFile)], " +
+                                  "but the id of the object is [\(id)] " +
+                                  "if you are deleting a document please use " +
+                                  "`database.reference(for:)`"
+
+                    let error = SwiftError(message, -200)
+                    callback(error)
+                } else {
+                     self.database.requestManager.delete(id, in: self.database, callback: callback)
+                }
+            } else {
+                let error = SwiftError("The file is not set, cannot delete nothing", -401)
+                callback(error)
+            }
+        } catch {
+            callback(error)
+        }
+    }
+
+}
+
 // MARK: - Creating Documents
 extension DatabaseReference {
 

@@ -68,6 +68,30 @@ public class Database {
         }
     }
 
+    public static func allDatabases(callback: @escaping ([Database], Swift.Error?) -> Void) {
+        guard let cp = Utils.connectionProperties else {
+            callback([], Database.Error.nilConnectionProperties)
+            return
+        }
+
+        let core = CouchDBCore(connectionProperties: cp)
+        let rm = RequestManager(_core: core)
+
+        rm.allDatabases { (json, error) in
+            if let error = error {
+                callback([], error)
+            } else {
+                if let jsonArr = json!.arrayObject {
+                    let dbArr = jsonArr.map { try? Database("\($0)") }.flatMap { $0 }
+                    callback(dbArr, nil)
+                } else {
+                    callback([], Database.Error.invalidJSON)
+                }
+            }
+
+        }
+    }
+
     /// <#Description#>
     ///
     /// - Parameter callback: <#callback description#>

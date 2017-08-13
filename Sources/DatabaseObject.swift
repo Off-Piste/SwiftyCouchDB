@@ -120,6 +120,7 @@ extension DatabaseObject {
 }
 
 extension Array where Element == DatabaseObject {
+
     func nestedObjectDictionary() -> [[String : Any]] {
         var arr: [[String : Any]] = []
         let schemes = self.map { try? $0.scheme() }.flatMap { $0 }
@@ -130,6 +131,7 @@ extension Array where Element == DatabaseObject {
 
         return arr
     }
+    
 }
 
 // MARK: - User
