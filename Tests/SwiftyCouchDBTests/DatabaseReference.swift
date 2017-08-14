@@ -42,6 +42,21 @@ class DatabaseReferenceTests: XCTestCase {
         let ref2 = DatabaseReference(db) // internal method not used by public
 
         XCTAssertEqual(ref1, ref2)
+
+        Utils.connectionProperties = nil
+    }
+
+    func test_database_reference__initalisation__should_not_throw() {
+        Utils.connectionProperties = .default
+
+        let item = TodoItem()
+        item.id = UUID().uuidString
+        item.datestamp = Date().timeIntervalSince1970
+
+        let db = try! Database("todolist")
+        XCTAssertNoThrow(try db.reference(for: item))
+
+        Utils.connectionProperties = nil
     }
 
     func test__database_reference__parent__should_pass() {
@@ -101,101 +116,6 @@ class DatabaseReferenceTests: XCTestCase {
         XCTAssertEqual(ref1.__child, nil)
         XCTAssertEqual(ref2.__child, nil)
 
-        Utils.connectionProperties = nil
-    }
-    
-    func test__database_reference__object_creation__should_pass() {
-        Utils.connectionProperties = .default
-
-        let exp = self.expectation(description: #function)
-
-        let newItem = TodoItem()
-        newItem.datestamp = Date().timeIntervalSince1970
-        newItem.id = UUID().uuidString
-
-        try! Database("todolist").create { db, error in
-            if let error = error {
-                XCTFail(for: error)
-                exp.fulfill()
-            } else {
-                db.reference.create(for: newItem, with: { (snapshot, error) in
-                    if let error = error {
-                        XCTFail(for: error)
-                        exp.fulfill()
-                    } else {
-                        db.delete(callback: { (error) in
-                            if let error = error {
-                                XCTFail(for: error)
-                                exp.fulfill()
-                            } else {
-                                exp.fulfill()
-                            }
-                        })
-                    }
-                })
-            }
-        }
-
-        self.waitForExpectations(timeout: 40, handler: nil)
-    }
-
-    func test__database_reference__object_json_creation__should_pass() {
-        Utils.connectionProperties = .default
-
-        let exp = self.expectation(description: #function)
-
-        let json: JSON = [
-            "_id" : UUID().uuidString,
-            "type" : "tester",
-            "data" : ["name" : "harry"]
-        ]
-
-        try! Database("todolist").create { db, error in
-            if let error = error { XCTFail(for: error); exp.fulfill(); return }
-            db.reference.create(json, callback: { (snapshot, error) in
-                XCTAssertNotNil(snapshot)
-
-                db.delete(callback: { (error) in
-                    if let error = error {
-                        XCTFail(for: error)
-                        exp.fulfill()
-                    } else {
-                        exp.fulfill()
-                    }
-                })
-            })
-        }
-
-        self.waitForExpectations(timeout: 40, handler: nil)
-        Utils.connectionProperties = nil
-    }
-
-    func test__database_reference__invalid_object_creation__should_be_nil() {
-        Utils.connectionProperties = .default
-        let exp = self.expectation(description: #function)
-
-        let newItem = TodoItem()
-        newItem.datestamp = Date().timeIntervalSince1970
-        newItem.id = UUID().uuidString
-
-        try! Database("todolist").create(callback: { (db, error) in
-            if let error = error { XCTFail(for: error); exp.fulfill(); return }
-
-            db.reference(for: "list_1").create(for: newItem, with: { (snapshot, error) in
-                XCTAssertNotNil(error)
-
-                db.delete(callback: { (error) in
-                    if let error = error {
-                        XCTFail(for: error)
-                        exp.fulfill()
-                    } else {
-                        exp.fulfill()
-                    }
-                })
-            })
-        })
-
-        self.waitForExpectations(timeout: 40, handler: nil)
         Utils.connectionProperties = nil
     }
     

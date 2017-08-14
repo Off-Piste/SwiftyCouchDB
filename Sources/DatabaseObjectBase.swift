@@ -8,11 +8,17 @@
 
 import Foundation
 
+public enum ObjectState {
+    case created
+    case deleted
+    case unknown
+}
+
 /** */
 open class DatabaseObjectBase: NSObject {
 
     /// <#Description#>
-    final internal var revision: String?
+    final public var state: ObjectState = .unknown
 
     /// <#Description#>
     open var database: Database? {

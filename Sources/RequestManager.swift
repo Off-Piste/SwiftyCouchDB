@@ -140,6 +140,46 @@ struct RequestManager {
         }
     }
 
+    func post(_ objects: [JSON], in db: Database, callback: @escaping ([DBSnapshot], Swift.Error?) -> Void) {
+        let escapedName = HTTP.escape(url: db.name)
+        let requestOptions = CouchDBCore.Utils.prepareRequest(
+            for: _core.connectionProperties,
+            method: .post,
+            path: "/\(escapedName)",
+            hasBody: true
+        )
+
+        let jsonableObject = objects
+            .filter { $0.type == .dictionary }
+            .map { $0.dictionaryObject }
+            .flatMap { $0 }
+
+        print(jsonableObject)
+
+        if let requestBody = JSON(["docs": jsonableObject]).rawString() {
+            print(requestBody)
+            
+            let req = HTTP.request(requestOptions) { (response) in
+                if let response = response {
+                    do {
+                        let docs = try CouchDBCore.Utils.getBodyAsJSON(for: response)
+                        print(docs.rawString() ?? "")
+
+                        print("Hello")
+                    } catch {
+                        callback([], error)
+                    }
+                } else {
+                    let err = Database.Error.internalError
+                    callback([], err)
+                }
+            }
+            req.end(requestBody)
+        } else {
+            callback([], DError.invalidJSON)
+        }
+    }
+
     func delete(_ id: String, in db: Database, callback: @escaping (Swift.Error?) -> Void) {
         let escapedName = HTTP.escape(url: db.name)
         let requestOptions = CouchDBCore.Utils.prepareRequest(

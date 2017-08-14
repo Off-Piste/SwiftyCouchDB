@@ -75,4 +75,59 @@ class DatabaseTests: XCTestCase {
         Utils.connectionProperties = nil
     }
 
+    func test__Database__Object_Creation__Should_Pass() {
+        Utils.connectionProperties = .default
+
+        let exp = self.expectation(description: #function)
+
+        let newItem = TodoItem()
+        newItem.datestamp = Date().timeIntervalSince1970
+        newItem.id = UUID().uuidString
+
+        try! Database("todolist").create(with: newItem, callback: { (database, error) in
+            if let error = error { XCTFail(for: error) }
+            
+            database.delete(callback: { (error) in
+                if let error = error { XCTFail(for: error) }
+                exp.fulfill()
+            })
+        })
+
+        self.waitForExpectations(timeout: 40, handler: nil)
+        Utils.connectionProperties = nil
+    }
+
+    func test__database__adding_products__should_pass() {
+        Utils.connectionProperties = .default
+
+        let exp = self.expectation(description: #function)
+
+        let item1 = TodoItem()
+        item1.datestamp = Date().timeIntervalSince1970
+        item1.id = UUID().uuidString
+
+        let item2 = TodoItem()
+        item2.datestamp = Date().timeIntervalSince1970
+        item2.id = UUID().uuidString
+
+        let objects: [TodoItem] = [item1, item2]
+
+        try! Database("todolist").create(callback: { (db, error) in
+            if let error = error { XCTFail(for: error); exp.fulfill() }
+            else {
+                db.add(objects, callback: { (error) in
+                    if let error = error { XCTFail(for: error) }
+
+                    db.delete(callback: { (error) in
+                        if let error = error { XCTFail(for: error) }
+                        exp.fulfill()
+                    })
+                })
+            }
+        })
+
+        self.waitForExpectations(timeout: 40, handler: nil)
+        Utils.connectionProperties = nil
+    }
+
 }

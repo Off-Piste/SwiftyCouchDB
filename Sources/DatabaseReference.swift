@@ -13,11 +13,11 @@ import MiniPromiseKit
 
 public struct DBSnapshot {
 
-    var id: String
+    public var id: String
 
-    var revision: String
+    public var revision: String
 
-    var json: JSON
+    public var json: JSON
 
 }
 
@@ -239,126 +239,126 @@ extension DatabaseReference {
 
 }
 
-// MARK: - Creating Documents
-extension DatabaseReference {
-
-    /// <#Description#>
-    ///
-    /// - Parameters:
-    ///   - object: <#object description#>
-    ///   - callback: <#callback description#>
-    public func create(
-        _ object: DatabaseObject,
-        callback: @escaping (DatabaseObject?, Error?) -> Void
-        )
-    {
-        preCreateCheck(object)
-
-        self.create(for: object) { (_, error) in
-            if let error = error {
-                callback(nil, error)
-            } else {
-                callback(object, nil)
-            }
-        }
-    }
-
-    public func create(_ json: JSON, callback: @escaping (DBSnapshot?, Error?) -> Void) {
-        self.preCreateCheck(json)
-
-        do {
-            try validateJSONForCouchDB(json)
-            self.database.requestManager
-                .create(for: json, in: self.database)
-                .then(on: kQueue, execute: { (snapshot) -> Void in callback(snapshot, nil) })
-                .catch(on: kQueue, execute: { (error) in callback(nil, error) })
-        } catch {
-            callback(nil, error)
-        }
-    }
-
-    // MARK: Testing
-
-    /* @testable */ internal func create(
-        for object: DatabaseObject,
-        with callback: @escaping (DBSnapshot?, Error?) -> Void
-        )
-    {
-        do {
-            // 1. Validate the Object
-            try validateObjectForCouchDB(object)
-
-            // 2. Check is the db exists
-            self.database.exists().then(on: kQueue, execute: { _ -> Promise<DBSnapshot> in
-                let scheme = try object.scheme()
-                let json = DatabaseObjectUtil.DBObjectJSON(from: scheme)
-                try self.validateSchemeForCouchDB(scheme)
-
-                // 3. Create the Object in the database
-                return self.database.requestManager.create(for: json, in: self.database)
-            }).then(on: kQueue, execute: { (snapshot) -> Void in
-                callback(snapshot, nil)
-            }).catch(on: kQueue) {
-                callback(nil, $0)
-            }
-        } catch {
-            callback(nil, error)
-        }
-    }
-
-    // MARK: Checks
-
-    private func preCreateCheck(_ object: Any) {
-        if !self.__children.isEmpty {
-            Log.info("The children will be ignored when creating a new document for the object: \(object)")
-        }
-    }
-
-    private func validateObjectForCouchDB(_ object: DatabaseObject) throws {
-        if let db = object.database {
-            if db != self.database {
-                throw SwiftError("Databases for [\(object)] are not equal", -100)
-            } else {
-                return
-            }
-        } else {
-            do {
-                _ = try Database(object.className.lowercased())
-                throw SwiftError("Unknown Error", -404)
-            } catch {
-                throw error
-            }
-        }
-    }
-
-    private func validateSchemeForCouchDB(_ scheme: DatabaseObjectScheme) throws {
-        if let aFile = self.__file, let id = scheme.id.value as? String, aFile != id {
-            let message = "This reference is set for [\(aFile)], " +
-                          "but the id of the object is [\(id)] " +
-                          "if you are creating a document please use " +
-                          "`database.reference` for a clean reference"
-
-            throw SwiftError(message, -200)
-        }
-    }
-
-    private func validateJSONForCouchDB(_ json: JSON) throws {
-        if let id = json["_id"].string, let aFile = self.__file, id != aFile {
-            let message = "This reference is set for [\(aFile)], " +
-                          "but the id of the object is [\(id)] " +
-                          "if you are creating a document please use " +
-                          "`database.reference` for a clean reference"
-
-            throw SwiftError(message, -200)
-        }
-
-        if let id = json["id"].string, let aFile = self.__file, id != aFile {
-            let message = "This reference is set for [\(aFile)], " +
-                          "but the id of the object is [\(id)] " +
-                          "if you are creating a document please use " +
-                          "`database.reference` for a clean reference"
-
-            throw SwiftError(message, -200)
-        }
-    }
-}
+//// MARK: - Creating Documents
+//extension DatabaseReference {
+//
+//    /// <#Description#>
+//    ///
+//    /// - Parameters:
+//    ///   - object: <#object description#>
+//    ///   - callback: <#callback description#>
+//    public func create(
+//        _ object: DatabaseObject,
+//        callback: @escaping (DatabaseObject?, Error?) -> Void
+//        )
+//    {
+//        preCreateCheck(object)
+//
+//        self.create(for: object) { (_, error) in
+//            if let error = error {
+//                callback(nil, error)
+//            } else {
+//                callback(object, nil)
+//            }
+//        }
+//    }
+//
+//    public func create(_ json: JSON, callback: @escaping (DBSnapshot?, Error?) -> Void) {
+//        self.preCreateCheck(json)
+//
+//        do {
+//            try validateJSONForCouchDB(json)
+//            self.database.requestManager
+//                .create(for: json, in: self.database)
+//                .then(on: kQueue, execute: { (snapshot) -> Void in callback(snapshot, nil) })
+//                .catch(on: kQueue, execute: { (error) in callback(nil, error) })
+//        } catch {
+//            callback(nil, error)
+//        }
+//    }
+//
+//    // MARK: Testing
+//
+//    /* @testable */ internal func create(
+//        for object: DatabaseObject,
+//        with callback: @escaping (DBSnapshot?, Error?) -> Void
+//        )
+//    {
+//        do {
+//            // 1. Validate the Object
+//            try validateObjectForCouchDB(object)
+//
+//            // 2. Check is the db exists
+//            self.database.exists().then(on: kQueue, execute: { _ -> Promise<DBSnapshot> in
+//                let scheme = try object.scheme()
+//                let json = DatabaseObjectUtil.DBObjectJSON(from: scheme)
+//                try self.validateSchemeForCouchDB(scheme)
+//
+//                // 3. Create the Object in the database
+//                return self.database.requestManager.create(for: json, in: self.database)
+//            }).then(on: kQueue, execute: { (snapshot) -> Void in
+//                callback(snapshot, nil)
+//            }).catch(on: kQueue) {
+//                callback(nil, $0)
+//            }
+//        } catch {
+//            callback(nil, error)
+//        }
+//    }
+//
+//    // MARK: Checks
+//
+//    private func preCreateCheck(_ object: Any) {
+//        if !self.__children.isEmpty {
+//            Log.info("The children will be ignored when creating a new document for the object: \(object)")
+//        }
+//    }
+//
+//    private func validateObjectForCouchDB(_ object: DatabaseObject) throws {
+//        if let db = object.database {
+//            if db != self.database {
+//                throw SwiftError("Databases for [\(object)] are not equal", -100)
+//            } else {
+//                return
+//            }
+//        } else {
+//            do {
+//                _ = try Database(object.className.lowercased())
+//                throw SwiftError("Unknown Error", -404)
+//            } catch {
+//                throw error
+//            }
+//        }
+//    }
+//
+//    private func validateSchemeForCouchDB(_ scheme: DatabaseObjectScheme) throws {
+//        if let aFile = self.__file, let id = scheme.id.value as? String, aFile != id {
+//            let message = "This reference is set for [\(aFile)], " +
+//                          "but the id of the object is [\(id)] " +
+//                          "if you are creating a document please use " +
+//                          "`database.reference` for a clean reference"
+//
+//            throw SwiftError(message, -200)
+//        }
+//    }
+//
+//    private func validateJSONForCouchDB(_ json: JSON) throws {
+//        if let id = json["_id"].string, let aFile = self.__file, id != aFile {
+//            let message = "This reference is set for [\(aFile)], " +
+//                "but the id of the object is [\(id)] " +
+//                "if you are creating a document please use " +
+//            "`database.reference` for a clean reference"
+//
+//            throw SwiftError(message, -200)
+//        }
+//
+//        if let id = json["id"].string, let aFile = self.__file, id != aFile {
+//            let message = "This reference is set for [\(aFile)], " +
+//                "but the id of the object is [\(id)] " +
+//                "if you are creating a document please use " +
+//            "`database.reference` for a clean reference"
+//
+//            throw SwiftError(message, -200)
+//        }
+//    }
+//}
