@@ -37,6 +37,19 @@ public struct DatabaseObjectScheme: Hashable {
         self.className = object.className
     }
 
+    internal subscript (_ propertyName: String) -> DatabaseObjectProperty? {
+        if propertyName == "id" {
+            return self.id
+        } else if propertyName == "type" {
+            return self.type
+        } else {
+            for property in self.properties where property.key == propertyName {
+                return property
+            }
+            return nil
+        }
+    }
+
     /// Returns a Boolean value indicating whether two values are equal.
     ///
     /// Equality is the inverse of inequality. For any values `a` and `b`,

@@ -120,6 +120,13 @@ public struct DatabaseObjectProperty {
         }
     }
 
+    // TODO: Fix
+
+//    internal var ivar: Ivar? {
+//        let ivar = class_getInstanceVariable(type(of: parent), self.key)
+//        return ivar
+//    }
+
 }
 
 extension DatabaseObjectProperty: Hashable {

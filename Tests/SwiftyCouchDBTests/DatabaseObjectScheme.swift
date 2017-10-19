@@ -28,53 +28,53 @@ class DatabaseObjectSchemeTests: XCTestCase {
     }
 
 
-    func test__valid_object__creation__should_not_throw() {
-        let user = User()
-        user.email = "haroldtomwright@gmail.com"
-        user.id = UUID().uuidString
-        
-        XCTAssertNoThrow(try DatabaseObjectUtil.DBObjectScheme(for: user))
-    }
-
-    func test__valid_object__properties__should_pass() {
-        let user = User()
-        user.id = UUID().uuidString
-
-        let scheme = try! DatabaseObjectUtil.DBObjectScheme(for: user)
-        XCTAssertEqual(scheme.className, "User")
-        XCTAssertEqual(scheme.properties.count, 4)
-        XCTAssertEqual((scheme.id.value as! String), user.id)
-    }
-
-    func test__valid_scheme__equatable__should_pass() {
-        let user = User()
-        user.id = UUID().uuidString
-
-        var scheme = try! DatabaseObjectUtil.DBObjectScheme(for: user)
-        let scheme2 = try! DatabaseObjectUtil.DBObjectScheme(for: user)
-
-        XCTAssertEqual(scheme, scheme2)
-
-        user.email = "haroldtomwright@gmail.com"
-        scheme = try! DatabaseObjectUtil.DBObjectScheme(for: user)
-
-        XCTAssertNotEqual(scheme, scheme2)
-    }
-
-    func test__valid_scheme__json() {
-        let user = User()
-        user.id = UUID().uuidString
-        user.email = "haroldtomwright@gmail.com"
-        user.password = "1234567890".data(using: .utf8)!.base64EncodedString()
-        user.username = "harrytwright"
-        user.roles.append("Admin")
-
-        let password = "1234567890".data(using: .utf8)!.base64EncodedString()
-        let json = DatabaseObjectUtil.DBObjectJSON(from: try! user.scheme())
-        XCTAssertEqual(json["data"].count, 4)
-        XCTAssertEqual(json["data"]["email"].stringValue, "haroldtomwright@gmail.com")
-        XCTAssertEqual(json["data"]["roles"].count, 1)
-        XCTAssertEqual(json["data"]["password"].stringValue, password)
-
-    }
+//    func test__valid_object__creation__should_not_throw() {
+//        let user = User()
+//        user.email = "haroldtomwright@gmail.com"
+//        user.id = UUID().uuidString
+//        
+//        XCTAssertNoThrow(try DatabaseObjectUtil.DBObjectScheme(for: user))
+//    }
+//
+//    func test__valid_object__properties__should_pass() {
+//        let user = User()
+//        user.id = UUID().uuidString
+//
+//        let scheme = try! DatabaseObjectUtil.DBObjectScheme(for: user)
+//        XCTAssertEqual(scheme.className, "User")
+//        XCTAssertEqual(scheme.properties.count, 4)
+//        XCTAssertEqual((scheme.id.value as! String), user.id)
+//    }
+//
+//    func test__valid_scheme__equatable__should_pass() {
+//        let user = User()
+//        user.id = UUID().uuidString
+//
+//        var scheme = try! DatabaseObjectUtil.DBObjectScheme(for: user)
+//        let scheme2 = try! DatabaseObjectUtil.DBObjectScheme(for: user)
+//
+//        XCTAssertEqual(scheme, scheme2)
+//
+//        user.email = "haroldtomwright@gmail.com"
+//        scheme = try! DatabaseObjectUtil.DBObjectScheme(for: user)
+//
+//        XCTAssertNotEqual(scheme, scheme2)
+//    }
+//
+//    func test__valid_scheme__json() {
+//        let user = User()
+//        user.id = UUID().uuidString
+//        user.email = "haroldtomwright@gmail.com"
+//        user.password = "1234567890".data(using: .utf8)!.base64EncodedString()
+//        user.username = "harrytwright"
+//        user.roles.append("Admin")
+//
+//        let password = "1234567890".data(using: .utf8)!.base64EncodedString()
+//        let json = DatabaseObjectUtil.DBObjectJSON(from: try! user.scheme())
+//        XCTAssertEqual(json["data"].count, 4)
+//        XCTAssertEqual(json["data"]["email"].stringValue, "haroldtomwright@gmail.com")
+//        XCTAssertEqual(json["data"]["roles"].count, 1)
+//        XCTAssertEqual(json["data"]["password"].stringValue, password)
+//
+//    }
 }

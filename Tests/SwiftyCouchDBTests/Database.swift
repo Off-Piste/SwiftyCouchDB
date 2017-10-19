@@ -1,5 +1,13 @@
 import XCTest
+import LoggerAPI
+import HeliumLogger
 @testable import SwiftyCouchDB
+
+@objcMembers class Product: DatabaseObject {
+    dynamic var id: String = UUID().uuidString
+    dynamic var type: String = "Product"
+    dynamic var product_name: String = ""
+}
 
 class DatabaseTests: XCTestCase {
 
@@ -10,13 +18,36 @@ class DatabaseTests: XCTestCase {
 
         Utils.connectionProperties = .default
 
+        HeliumLogger.use()
+
         self.database = try! Database("todolist")
+
+
     }
 
     override func tearDown() {
         print(">> Finished")
         
         Utils.connectionProperties = nil
+    }
+
+    func test() {
+//        let value = NSNull()
+//        let item = DatabaseObjectCoerceToNil(value)
+//        print(item as Any)
+
+//        var ref = try! Database("internal").reference(for: "keys")
+//        ref.children("Data").retrive { (snapshot, error) in
+//            if let error = error {
+//                XCTFail(for: error)
+//            } else {
+//                print(snapshot!.id, snapshot!.revision, snapshot!.json.rawString() ?? "")
+//            }
+//        }
+
+        try! Database("products").retrieve(Product.self, callback: { (products, error) in
+            print(products.map { $0.product_name }, error?.localizedDescription ?? "")
+        })
     }
 
     func test__Database__Creation_And_Deletion__Should_Pass() {

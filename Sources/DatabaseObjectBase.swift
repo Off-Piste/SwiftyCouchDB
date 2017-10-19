@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 public enum ObjectState {
     case created
@@ -14,11 +15,31 @@ public enum ObjectState {
     case unknown
 }
 
+func +=<K, V> (lhs: inout [K: V], rhs: [K: V]) {
+    for (key, value) in rhs {
+        lhs.updateValue(value, forKey: key)
+    }
+}
+
+extension Dictionary where Key == String, Value == Any {
+    func flatten() -> Dictionary {
+        let dict = self.reduce([:]) { (result, touple) -> [String : Any] in
+            var dict: [String: Any] = result
+            if touple.key == "data", let toupleDict = touple.value as? [String: Any] {
+                dict += toupleDict
+            } else {
+                dict.updateValue(touple.value, forKey: touple.key)
+            }
+
+            return dict
+        }
+
+        return dict
+    }
+}
+
 /** */
 open class DatabaseObjectBase: NSObject {
-
-    /// <#Description#>
-    final public var state: ObjectState = .unknown
 
     /// <#Description#>
     open var database: Database? {

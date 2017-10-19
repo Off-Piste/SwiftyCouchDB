@@ -15,14 +15,14 @@ struct RequestManager {
     var _core: CouchDBCore
 
     func allDatabases(callback: @escaping (JSON?, Swift.Error?) -> Void) {
-        let options = CouchDBCore.Utils.prepareRequest(
+        let requestOptions = CouchDBCore.Utils.prepareRequest(
             for: _core.connectionProperties,
             method: .get,
             path: "_all_dbs",
             hasBody: false
         )
 
-        let request = HTTP.request(options) { response in
+        let request = HTTP.request(requestOptions) { response in
             if let response = response {
                 if response.statusCode == HTTPStatusCode.OK {
                     do {
@@ -43,14 +43,14 @@ struct RequestManager {
     }
 
     func exists(_ db: Database, callback: @escaping (Swift.Error?) -> Void) {
-        let options = CouchDBCore.Utils.prepareRequest(
+        let requestOptions = CouchDBCore.Utils.prepareRequest(
             for: _core.connectionProperties,
             method: .get,
             path: "/\(HTTP.escape(url: db.name))",
             hasBody: false
         )
 
-        let request = HTTP.request(options) { response in
+        let request = HTTP.request(requestOptions) { response in
             if let response = response {
                 if response.statusCode == HTTPStatusCode.OK {
                     callback(nil)
@@ -64,15 +64,93 @@ struct RequestManager {
         request.end()
     }
 
+    func get_retieveDocument(_ id: String, in db: Database, callback: @escaping Snapshot) {
+        let dbName = HTTP.escape(url: db.name)
+        let requestOptions = CouchDBCore.Utils.prepareRequest(
+            for: _core.connectionProperties,
+            method: .get,
+            path: "/\(dbName)/\(HTTP.escape(url: id))",
+            hasBody: true
+        )
+
+        let request = HTTP.request(requestOptions) { (response) in
+            if let response = response {
+                do {
+                    let document = try CouchDBCore.Utils.getBodyAsJSON(for: response)
+                    if response.statusCode != .OK {
+                        let error = Database.Error
+                            .couchDBError(
+                                document.rawString() ?? "Invalid JSON",
+                                code: response.statusCode
+                        )
+                        callback(nil, nil, nil, error)
+                    } else {
+                        let rev = document["_rev"].stringValue
+                        callback(id, rev, document, nil)
+                    }
+                } catch {
+                    callback(nil, nil, nil, error)
+                }
+            } else {
+                callback(nil, nil, nil, Database.Error.internalError)
+            }
+        }
+        request.end()
+    }
+
+    func get_allDocuments(
+        in database: Database,
+        includeDocuments: Bool,
+        callback: @escaping (JSON?, Swift.Error?) -> Void
+        )
+    {
+        let dbName = HTTP.escape(url: database.name)
+        var path = "/\(dbName)/_all_docs"
+        if includeDocuments {
+            path += "?include_docs=true"
+        }
+
+        let requestOptions = CouchDBCore.Utils.prepareRequest(
+            for: _core.connectionProperties,
+            method: .get,
+            path: path,
+            hasBody: false
+        )
+
+        let request = HTTP.request(requestOptions) { response in
+            if let response = response {
+                do {
+                    let document = try CouchDBCore.Utils.getBodyAsJSON(for: response)
+                    if response.statusCode != .OK {
+                        let error = Database.Error.couchDBError(
+                            document.rawString() ?? "",
+                            code: response.statusCode
+                        )
+
+                        callback(nil, error)
+                    } else {
+                        callback(document, nil)
+                    }
+                } catch {
+                    callback(nil, error)
+                }
+            } else {
+                callback(nil, Database.Error.internalError)
+            }
+        }
+        request.end()
+
+    }
+
     func create(_ db: Database, callback: @escaping (Swift.Error?) -> Void) {
-        let options = CouchDBCore.Utils.prepareRequest(
+        let requestOptions = CouchDBCore.Utils.prepareRequest(
             for: _core.connectionProperties,
             method: .put,
             path: "/\(HTTP.escape(url: db.name))",
             hasBody: false
         )
 
-        let request = HTTP.request(options) { (response) in
+        let request = HTTP.request(requestOptions) { (response) in
             guard let response = response else {
                 callback(Database.Error.internalError)
                 return
@@ -114,7 +192,7 @@ struct RequestManager {
                 hasBody: true
             )
 
-            let req = HTTP.request(requestOptions, callback: { (response) in
+            let request = HTTP.request(requestOptions, callback: { (response) in
                 if let response = response {
                     do {
                         doc = try CouchDBCore.Utils.getBodyAsJSON(for: response)
@@ -134,7 +212,7 @@ struct RequestManager {
                     callback(nil, nil, nil, DError.internalError)
                 }
             })
-            req.end(requestBody)
+            request.end(requestBody)
         } else {
             callback(nil, nil, nil, DError.invalidJSON)
         }
@@ -159,7 +237,7 @@ struct RequestManager {
         if let requestBody = JSON(["docs": jsonableObject]).rawString() {
             print(requestBody)
             
-            let req = HTTP.request(requestOptions) { (response) in
+            let request = HTTP.request(requestOptions) { (response) in
                 if let response = response {
                     do {
                         let docs = try CouchDBCore.Utils.getBodyAsJSON(for: response)
@@ -174,7 +252,7 @@ struct RequestManager {
                     callback([], err)
                 }
             }
-            req.end(requestBody)
+            request.end(requestBody)
         } else {
             callback([], DError.invalidJSON)
         }
@@ -189,7 +267,7 @@ struct RequestManager {
             hasBody: false
         )
 
-        let req = HTTP.request(requestOptions) { response in
+        let request = HTTP.request(requestOptions) { response in
             if let response = response {
                 if (response.statusCode != .OK && response.statusCode != .accepted) {
                     callback(Database.Error.invalidStatusCode(response.statusCode))
@@ -200,18 +278,18 @@ struct RequestManager {
                 callback(Database.Error.internalError)
             }
         }
-        req.end()
+        request.end()
     }
 
     func delete(_ db: Database, callback: @escaping (Swift.Error?) -> Void) {
-        let options = CouchDBCore.Utils.prepareRequest(
+        let requestOptions = CouchDBCore.Utils.prepareRequest(
             for: _core.connectionProperties,
             method: .delete,
             path:"/\(HTTP.escape(url: db.name))",
             hasBody: false
         )
 
-        let request = HTTP.request(options) { (response) in
+        let request = HTTP.request(requestOptions) { (response) in
             guard let response = response else {
                 callback(Database.Error.internalError)
                 return

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import MiniPromiseKit
+//import MiniPromiseKit
 import SwiftyJSON
 import LoggerAPI
 
@@ -22,42 +22,6 @@ extension RequestManager {
                     let snapshot = DBSnapshot(id: id!, revision: rev!, json: json!)
                     fullfill(snapshot)
                 }
-            }
-        }
-    }
-}
-
-private extension Array where Element == DatabaseObject {
-
-    func removingInvalidObjects(in db: Database) -> [Element] {
-        var validObject: [Element] = []
-
-        for object in self {
-            do {
-                try validateObjectForCouchDB(object, db)
-                validObject.append(object)
-                continue
-            } catch {
-                Log.error(error.localizedDescription)
-            }
-        }
-
-        return validObject
-    }
-
-    private func validateObjectForCouchDB(_ object: DatabaseObject, _ database: Database) throws {
-        if let db = object.database {
-            if db != database {
-                throw SwiftError("Databases for [\(object)] are not equal", -100)
-            } else {
-                return
-            }
-        } else {
-            do {
-                _ = try Database(object.className.lowercased())
-                throw SwiftError("Unknown Error", -404)
-            } catch {
-                throw error
             }
         }
     }
@@ -92,12 +56,6 @@ public class Database {
     /// The `Request Manager` for the database, this will power the network calls
     internal var requestManager: RequestManager
 
-    /// The `DatabaseReference` for the current database
-    ///
-    /// - Note: Will soon be changed to internal so users will have to use
-    ///         `reference(for:)`
-    public lazy var reference: DatabaseReference = DatabaseReference(self)
-
     // MARK: Reference
 
     /// The `DatabaseReference` for a database file/document.
@@ -108,7 +66,8 @@ public class Database {
     /// - Parameter file: The object id
     /// - Returns: The `DatabaseReference` for a database file/document
     public func reference(for file: String) -> DatabaseReference {
-        return self.reference.file(file)
+        let ref = DatabaseReference(self, file: file)
+        return ref
     }
 
     /// The `DatabaseReference` for a database file/document.
@@ -152,10 +111,17 @@ public class Database {
 
     // MARK: Initializers
 
-    /// <#Description#>
+    /// Create an insance of a CouchDB Database with
+    /// only the database name
     ///
-    /// - Parameter name: <#name description#>
-    /// - Throws: <#throws value description#>
+    /// - Note:
+    /// We use the Connection Properties set upon
+    /// `Utils.connectionProperties` which is set to 
+    /// `ConnectionProperties.default` upon code restart.
+    ///
+    /// - Parameter name: The name of the database you are wanting to use
+    /// - Throws: An error is the name is not valid or Connection Properties
+    ///           have be `niled`
     public init(_ name: String) throws {
         if !Regex(name).matches("^[a-z0-9_$,+/]+$") {
             let reqDBName = "Note that only lowercase characters (a-z), " +
@@ -176,18 +142,30 @@ public class Database {
         self.requestManager = rm
     }
 
-    /// <#Description#>
+    /// Create an insance of a CouchDB Database with
+    /// from another database
     ///
-    /// - Parameter database: <#database description#>
-    /// - Throws: <#throws value description#>
+    /// - Note:
+    /// We use the Connection Properties set upon
+    /// `Utils.connectionProperties` which is set to
+    /// `ConnectionProperties.default` upon code restart.
+    ///
+    /// - Parameter database: A database
+    /// - Throws: An error for the database
     public convenience init<D: Database>(database: @autoclosure () throws -> D) throws {
         try self.init(database: { () -> D in try database() })
     }
 
-    /// <#Description#>
+    /// Create an insance of a CouchDB Database with
+    /// from another database
     ///
-    /// - Parameter database: <#database description#>
-    /// - Throws: <#throws value description#>
+    /// - Note:
+    /// We use the Connection Properties set upon
+    /// `Utils.connectionProperties` which is set to
+    /// `ConnectionProperties.default` upon code restart.
+    ///
+    /// - Parameter database: A database
+    /// - Throws: An error for the database
     public init<D: Database>(database: (() throws -> D)) throws /* rethrows */ {
         do {
             let db = try database()
@@ -352,39 +330,60 @@ public class Database {
         }
     }
 
-    /// - warning: This produces some strange results, will see if its how
-    ///            its meant to do it. For now please use `add(_:callback:)`
+    /// <#Description#>
     ///
     /// - Parameters:
-    ///   - objects: An array of Objects
-    ///   - callback:
-    public func bulkAdd(_ objects: [DatabaseObject], callback: @escaping (Swift.Error?) -> Void) {
-        // 1. if objects are empty, end here
-        if objects.isEmpty { callback(SwiftError("Cannot add empty array", -100)); return }
+    ///   - json: <#json description#>
+    ///   - callback: <#callback description#>
+    public func bulkAdd(_ json: JSON, callback: @escaping (Swift.Error?) -> Void) {
+        if json.type != .array { callback(Database.Error.invalidJSON); return }
 
-        do {
-
-            // 2. Check for invalid objects and throw if they are, else convert to JSON
-            let newObjects = try objects
-                .removingInvalidObjects(in: self)
-                .map { DatabaseObjectUtil.DBObjectJSON(from: try $0.scheme()) }
-
-            // 3. POST _bulk_docs
-            self.requestManager.post(newObjects, in: self, callback: { (_, error) in
-                callback(error)
-            })
-        } catch {
-            callback(error)
-        }
+        self.requestManager.post(json.arrayValue, in: self) { (_, error) in callback(error) }
     }
 
     // MARK: Deleting Objects
 
-    /// <#Description#>
+    /// Delete the database for the name set in `Database().name`
     ///
-    /// - Parameter callback: <#callback description#>
+    /// - Parameter callback: The error for the request if there is one
     public func delete(callback: @escaping (Swift.Error?) -> Void) {
         self.requestManager.delete(self, callback: callback)
+    }
+
+    public func delete(_ object: DatabaseObject, callback: @escaping (Database, Swift.Error?) -> Void) {
+        do {
+            let scheme = try object.scheme()
+            guard let id = scheme.id.value as? String else {
+                throw Database.Error.propertyNotFound(forKey: "id")
+            }
+
+            self.requestManager.delete(id, in: self, callback: { callback(self, $0) })
+        } catch {
+            callback(self, error)
+        }
+    }
+
+    public func retrieve<Object: DatabaseObject>(
+        _ object: Object.Type,
+        callback: @escaping ([Object], SError?) -> Void
+        )
+    {
+        self.requestManager.get_allDocuments(in: self, includeDocuments: true) { (doc, error) in
+            if let error = error {
+                callback([], error)
+            } else {
+                let rows = doc!["rows"].array!
+                
+                do {
+                    let objects = try rows
+                        .map { return try object.init(values: $0["doc"]) }
+                        .flatMap { $0 }
+                    callback(objects, nil)
+                } catch {
+                    callback([], error)
+                }
+            }
+        }
     }
 
 }
@@ -399,7 +398,9 @@ private extension Database {
     func validateObjectForCouchDB(_ object: DatabaseObject) throws {
         if let db = object.database {
             if db != self {
-                throw SwiftError("Databases for the object to be added [\(object.database!)] and the database making the request [\(self)] are not equal", -100)
+                let msg = "Databases for the object to be added [\(object.database!)] " +
+                          "and the database making the request [\(self)] are not equal"
+                throw SwiftError(msg, -100)
             } else {
                 return
             }

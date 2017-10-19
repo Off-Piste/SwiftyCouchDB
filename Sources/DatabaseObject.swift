@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import SwiftyJSON
+import LoggerAPI
 
 func DatabaseObjectAreEqual(_ lhs: DatabaseObject, _ rhs: DatabaseObject) -> Bool {
     if let lhsScheme = try? lhs.scheme(), let rhsScheme = try? rhs.scheme() {
@@ -15,8 +17,62 @@ func DatabaseObjectAreEqual(_ lhs: DatabaseObject, _ rhs: DatabaseObject) -> Boo
     return false
 }
 
+extension Array where Element == DatabaseObjectProperty {
+
+    func getProperty(withKey key: String) -> Element? {
+        for value in self where value.key == key {
+            return value
+        }
+
+        return nil
+    }
+}
+
 /** */
 open class DatabaseObject: DatabaseObjectBase {
+
+    private var requiredDBProperties: [String] = ["_id", "_rev", "type", "id"]
+
+    /// <#Description#>
+    public override init() {
+        super.init()
+    }
+
+    ///
+    ///
+    /// - Parameter values:
+    required public init?(values: JSON) throws {
+        super.init()
+
+        guard let doc = values.dictionaryObject?.flatten() else {
+            throw Database.Error.invalidJSON
+        }
+
+        if let id = doc["_id"] as? String {
+            if id.contains("_design") { return nil }
+
+            let scheme = try self.scheme()
+//            if doc.count > (scheme.properties.count + 2) {
+//                preconditionFailure("Invalid Dictionary input")
+//            }
+
+            for (key, value) in doc {
+                if key == "id" || key == "_id" {
+                    self.setValue(value, forKey: scheme.id.key)
+                } else if key == "type" {
+                    self.setValue(value, forKey: scheme.type.key)
+                } else {
+                    if let property = scheme.properties.getProperty(withKey: key) {
+                        self.setValue(value, forKey: property.key)
+                    } else {
+                        continue
+                    }
+                }
+            }
+        } else {
+            throw Database.Error.internalError
+        }
+    }
 
     /// <#Description#>
     ///
@@ -131,31 +187,31 @@ extension Array where Element == DatabaseObject {
 
         return arr
     }
-    
+
 }
 
 // MARK: - User
 
 /** */
-public final class User: DatabaseObject {
+@objcMembers public final class User: DatabaseObject {
 
     /// <#Description#>
-    dynamic var id: String = ""
+    @objc dynamic var id: String = ""
 
     /// <#Description#>
-    dynamic var roles: [String] = []
+    @objc dynamic var roles: [String] = []
 
     /// <#Description#>
-    dynamic var type: String = "user"
+    @objc dynamic var type: String = "user"
 
     /// <#Description#>
-    dynamic var password: String = ""
+    @objc dynamic var password: String = ""
 
     /// <#Description#>
-    dynamic var username: String = ""
+    @objc dynamic var username: String = ""
 
     /// <#Description#>
-    dynamic var email: String = ""
+    @objc dynamic var email: String = ""
 
     public override var database: Database? {
         return try? Database("_user")

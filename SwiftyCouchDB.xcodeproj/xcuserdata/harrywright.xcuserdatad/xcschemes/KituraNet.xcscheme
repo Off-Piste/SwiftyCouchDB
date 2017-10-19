@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_232"
-               BuildableName = "CouchDBSample"
-               BlueprintName = "CouchDBSample"
+               BlueprintIdentifier = "Kitura-net::KituraNet"
+               BuildableName = "KituraNet.framework"
+               BlueprintName = "KituraNet"
                ReferencedContainer = "container:SwiftyCouchDB.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -30,15 +30,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "OBJ_232"
-            BuildableName = "CouchDBSample"
-            BlueprintName = "CouchDBSample"
-            ReferencedContainer = "container:SwiftyCouchDB.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -53,16 +44,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "OBJ_232"
-            BuildableName = "CouchDBSample"
-            BlueprintName = "CouchDBSample"
+            BlueprintIdentifier = "Kitura-net::KituraNet"
+            BuildableName = "KituraNet.framework"
+            BlueprintName = "KituraNet"
             ReferencedContainer = "container:SwiftyCouchDB.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -72,16 +62,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "OBJ_232"
-            BuildableName = "CouchDBSample"
-            BlueprintName = "CouchDBSample"
+            BlueprintIdentifier = "Kitura-net::KituraNet"
+            BuildableName = "KituraNet.framework"
+            BlueprintName = "KituraNet"
             ReferencedContainer = "container:SwiftyCouchDB.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
