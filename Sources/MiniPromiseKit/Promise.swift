@@ -14,6 +14,10 @@
 import Foundation
 import Dispatch
 
+/// <#Description#>
+///
+/// - Parameter body: <#body description#>
+/// - Returns: <#return value description#>
 public func firstly<FulfilledValue>(
     execute body: () throws -> Promise<FulfilledValue>
     ) -> Promise<FulfilledValue>
@@ -26,48 +30,52 @@ public func firstly<FulfilledValue>(
 }
 
 
-
-
 public struct Promise<FulfilledValue> {
+
+    /// <#Description#>
+    public typealias PromiseResolvers = (
+        _ fulfill: @escaping (FulfilledValue) -> Void,
+        _ reject:  @escaping (Error) -> Void
+        ) throws -> Void
+
+    /// <#Description#>
+    public typealias PendingTuple = (
+        promise: Promise,
+        fulfill: (FulfilledValue) -> Void,
+        reject: (Error) -> Void
+    )
+
     fileprivate let basicPromise: BasicPromise< Result< FulfilledValue > >
 }
 
-
 public extension Promise {
-    fileprivate init(
-        basedOn basis: BasicPromise< Result<FulfilledValue> > = BasicPromise()
-        )
-    {
+
+    // MARK: Life Cycle
+
+    private init(basedOn basis: BasicPromise<Result<FulfilledValue>> = BasicPromise()) {
         basicPromise = basis
     }
     
     // Following PromiseKit's convention, the public initializer and static method also supply the fulfill and reject routines for the created Promise:
 
-    public  init(
-        resolvers: (
-        _ fulfill: @escaping (FulfilledValue ) -> Void,
-        _ reject:  @escaping (Error          ) -> Void
-        ) throws -> Void
-        )
-    {
+    /// <#Description#>
+    ///
+    /// - Parameter resolvers: <#resolvers description#>
+    public init(resolvers: PromiseResolvers) {
         self.init()
-        let bP = basicPromise // fix for EXC_BAD_ACCESS after update to Swift 3.1 (in func fulfillBasic)
+
+        // fix for EXC_BAD_ACCESS after update to Swift 3.1 (in func fulfillBasic)
+        let bP = basicPromise
         func fulfillBasic(_ r: Result< FulfilledValue >) {
             bP.fulfill(r)
         }
-        do {
-            try resolvers(
-                { fulfillBasic(.fulfilled($0)) },
-                { fulfillBasic(.rejected($0)) }
-            )
-        }
-        catch {
-            fulfillBasic(.rejected(error))
-        }
+        do { try resolvers({ fulfillBasic(.fulfilled($0)) }, { fulfillBasic(.rejected($0)) }) }
+        catch { fulfillBasic(.rejected(error)) }
     }
     
-    public typealias PendingTuple = (promise: Promise, fulfill: (FulfilledValue) -> Void, reject: (Error) -> Void)
-    
+    /// <#Description#>
+    ///
+    /// - Returns: <#return value description#>
     public static func pending() -> PendingTuple {
         var fulfill: ((FulfilledValue) -> Void)!
         var reject:  ((Error) -> Void)!
@@ -75,12 +83,19 @@ public extension Promise {
         return (promise, fulfill, reject)
     }
 
+    /// <#Description#>
+    ///
+    /// - Parameter value: <#value description#>
     public init(value: FulfilledValue) {
         self.init {
             fulfill, reject in
             fulfill(value)
         }
     }
+
+    /// <#Description#>
+    ///
+    /// - Parameter error: <#error description#>
     public init(error: Error) {
         self.init {
             fulfill, reject in
@@ -92,7 +107,15 @@ public extension Promise {
 
 // Two implementations of then are needed, depending upon whether the body is synchronous or asynchronous:
 public extension Promise {
-    
+
+    // MARK: Then
+
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - q: <#q description#>
+    ///   - body: <#body description#>
+    /// - Returns: <#return value description#>
     public func then<NewFulfilledValue>(
         on q: DispatchQueue  = BasicPromise<Void>.defaultQueue,
         execute body: @escaping (FulfilledValue) throws -> NewFulfilledValue
@@ -104,7 +127,12 @@ public extension Promise {
         return Promise<NewFulfilledValue>(basedOn: newBasicPromise)
     }
     
-    
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - q: <#q description#>
+    ///   - body: <#body description#>
+    /// - Returns: <#return value description#>
     public func then<NewFulfilledValue>(
         on q: DispatchQueue  = BasicPromise<Void>.defaultQueue,
         execute body: @escaping (FulfilledValue) throws -> Promise<NewFulfilledValue>
@@ -131,6 +159,15 @@ public extension Promise {
 
 // Catch and recover handle errors. The latter allows an error to be turned back into success:
 public extension Promise {
+
+    // MARK: Error Handling
+
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - q: <#q description#>
+    ///   - body: <#body description#>
+    /// - Returns: <#return value description#>
     @discardableResult
     public func `catch`(
         on q: DispatchQueue  = BasicPromise<Void>.defaultQueue,
@@ -145,6 +182,12 @@ public extension Promise {
         return Promise(basedOn: newBasicPromise)
     }
     
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - q: <#q description#>
+    ///   - body: <#body description#>
+    /// - Returns: <#return value description#>
     public func recover(
         on q: DispatchQueue  = BasicPromise<Void>.defaultQueue,
         execute body: @escaping (Error) throws -> Promise
@@ -166,6 +209,12 @@ public extension Promise {
         return newPromise
     }
     
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - q: <#q description#>
+    ///   - body: <#body description#>
+    /// - Returns: <#return value description#>
     public func recover(
         on q: DispatchQueue  = BasicPromise<Void>.defaultQueue,
         execute body: @escaping (Error) throws -> FulfilledValue
@@ -184,6 +233,15 @@ public extension Promise {
 
 // Tap and always provide points to observe a chain of results no matter whether things are failing or succeeding:
 public extension Promise {
+
+    // MARK: Chaining
+
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - q: <#q description#>
+    ///   - body: <#body description#>
+    /// - Returns: <#return value description#>
     public func tap(
         on q: DispatchQueue  = BasicPromise<Void>.defaultQueue,
         execute body: @escaping (Result<FulfilledValue>) -> Void
@@ -197,6 +255,12 @@ public extension Promise {
         return Promise(basedOn: newBasicPromise)
     }
     
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - q: <#q description#>
+    ///   - body: <#body description#>
+    /// - Returns: <#return value description#>
     public func always(
         on q: DispatchQueue  = BasicPromise<Void>.defaultQueue,
         execute body: @escaping () -> Void

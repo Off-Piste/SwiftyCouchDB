@@ -1,423 +1,219 @@
 //
 //  Database.swift
-//  SwiftyCouchDB
+//  CouchDB
 //
-//  Created by Harry Wright on 08.08.17.
-//
+//  Created by Harry Wright on 20.10.17.
+//  Copyright © 2017 Trolley. All rights reserved.
 //
 
-import Foundation
-//import MiniPromiseKit
+import Cocoa
 import SwiftyJSON
 import LoggerAPI
 
-extension RequestManager {
+/// The infomation returned froma GET request on the server.
+public struct DatabaseInfo: Codable, CustomStringConvertible {
 
-    fileprivate func create(for json: JSON, in database: Database) -> Promise<DBSnapshot> {
-        return Promise { fullfill, reject in
-            self.createObject(for: json, in: database) { (id, rev, json, error) in
-                if let error = error {
-                    reject(error)
-                } else {
-                    let snapshot = DBSnapshot(id: id!, revision: rev!, json: json!)
-                    fullfill(snapshot)
-                }
-            }
+    /// Set to true if the database compaction routine is operating on this database.
+    public var compact_running: Bool
+
+    /// The name of the database.
+    public var db_name: String
+
+    /// The version of the physical format used for the data when it is stored on disk.
+    public var disk_format_version: Int
+
+    /// A count of the documents in the specified database.
+    public var doc_count: Int
+
+    /// Number of deleted documents
+    public var doc_del_count: Int
+
+    /// The number of purge operations on the database.
+    public var purge_seq: Int
+
+    /// The current number of updates to the database.
+    public var update_seq: Int
+
+    /// A textual representation of this instance.
+    public var description: String {
+        do {
+            let str = String(data: try JSONEncoder().encode(self), encoding: .utf8)
+            return "DatabaseInfo<\(db_name)>\(str ?? "Invalid JSON")"
+        } catch {
+            return error.localizedDescription
         }
     }
 }
 
-class Regex {
+/// <#Description#>
+public struct DBDocumentInfo {
 
-    var string: String
+    /// <#Description#>
+    public var _id: String
 
-    init(_ string: String) {
-        self.string = string
-    }
+    /// <#Description#>
+    public var _rev: String
 
-    func matches(_ regex: String) -> Bool {
-        return (self.string as NSString)
-            .range(of: regex, options: .regularExpression)
-            .location != NSNotFound
-    }
-
+    /// <#Description#>
+    public var json: JSON
 }
 
-/**
- Database Manages the creation and deletion of the databases inside couchdb
- */
-public class Database {
+/// Callback for any simple requests where a bool is used
+public typealias CouchDBCheckCallback = (Bool, Swift.Error?) -> Void
+
+/// Callback for getting the database info
+public typealias CouchDBDatabseInfoCallback = (DatabaseInfo?, Swift.Error?) -> Void
+
+public typealias CouchDBResponse = (DBDocumentInfo?, Swift.Error?) -> Void
+
+/// A `Database` instance represents a CouchDB database
+///
+/// Database will be using the Database API references found
+/// [here](http://docs.couchdb.org/en/2.1.0/api/database/index.html)
+///
+///
+public struct Database {
 
     // MARK: Properties
 
-    /// The name of the database you are referencing
+    /// The name of the Databae
     public var name: String
 
-    /// The `Request Manager` for the database, this will power the network calls
-    internal var requestManager: RequestManager
+    /// The infomation returned froma GET request on the server.
+    ///
+    /// - Note: Will be nil if the server returns a 404 or if the request
+    ///         has not been returned yet.
+    public var info: DatabaseInfo?
 
-    // MARK: Reference
+    /// The DBConfiguration for the server
+    public var configuration: DBConfiguration
 
-    /// The `DatabaseReference` for a database file/document.
-    ///
-    /// This is the gateway to modify and delete selected files,
-    /// and retrive objects
-    ///
-    /// - Parameter file: The object id
-    /// - Returns: The `DatabaseReference` for a database file/document
-    public func reference(for file: String) -> DatabaseReference {
-        let ref = DatabaseReference(self, file: file)
-        return ref
-    }
+    /// The request manager to the CouchDB requests
+    internal weak var request: CouchDBRequests?
 
-    /// The `DatabaseReference` for a database file/document.
-    ///
-    /// This is the gateway to modify and delete selected files,
-    /// and retrive objects
-    ///
-    /// - Parameter object: The object you are wishing to reference
-    /// - Returns: The Database reference for the said object
-    /// - Throws: An error for an invalid object
-    public func reference(for object: DatabaseObject) throws -> DatabaseReference {
-        let scheme = try object.scheme()
+    // MARK: Life Cycle
 
-        guard let id = scheme.id.value as? String else {
-            throw SwiftError("Invalid Object: \(object)", -400)
-        }
-
-        return self.reference(for: id)
-    }
-
-    /// The `DatabaseReference` for a database file/document.
+    /// The method to create a new Database object.
     ///
-    /// This is the gateway to modify and delete selected files,
-    /// and retrive objects
+    /// This is used by any DBObject subclass unless the `database` property is
+    /// overwriten.
     ///
-    /// - note: If the object produces an invalid scheme
-    ///         or the id is not a string, the closure will
-    ///         not be called
-    ///
-    /// - Parameters:
-    ///   - object: The object you are wishing to reference
-    ///   - callback: The Database reference for the said object
-    public func reference(for object: DatabaseObject, callback: (DatabaseReference) -> Void) {
-        do {
-            let ref = try self.reference(for: object)
-            callback(ref)
-        } catch {
-            Log.error("[Invalid Reference] error: \(error.localizedDescription)")
-        }
-    }
-
-    // MARK: Initializers
-
-    /// Create an insance of a CouchDB Database with
-    /// only the database name
-    ///
-    /// - Note:
-    /// We use the Connection Properties set upon
-    /// `Utils.connectionProperties` which is set to 
-    /// `ConnectionProperties.default` upon code restart.
-    ///
-    /// - Parameter name: The name of the database you are wanting to use
-    /// - Throws: An error is the name is not valid or Connection Properties
-    ///           have be `niled`
+    /// - Note:             Passes `DBConfiguration.default`, which can be changed
+    ///                     by calling `DBConfiguration.setDefault()`.
+    /// - Parameter name:   The database name
+    /// - Throws:           This will either throw an `.invalidDatabase` error if the
+    ///                     database name is invalid or a `.couchNotRunning`
+    ///                     if couchdb is set to run locally but is not running.
     public init(_ name: String) throws {
-        if !Regex(name).matches("^[a-z0-9_$,+/]+$") {
+        try self.init(name, configuration: .default)
+    }
+
+    /// Method to create a new Database object with a given DBConfiguration
+    ///
+    /// - Parameters:
+    ///   - name:           The database name
+    ///   - configuration:  The configuration for the database
+    /// - Throws:           This will either throw an `.invalidDatabase` error if the
+    ///                     database name is invalid or a `.couchNotRunning`
+    ///                     if couchdb is set to run locally but is not running.
+    public init(_ name: String, configuration: DBConfiguration) throws {
+        // Check the
+        let patern = "^[a-z][a-z0-9_$()+/-]*$"
+        if !name.doesMatch(patern) {
             let reqDBName = "Note that only lowercase characters (a-z), " +
-                            "digits (0-9), or any of the characters _, $, " +
-                            "(, ), +, -, and / are allowed."
-
-            throw SwiftError("Invalid Database Name, \(reqDBName) ", -200)
+                "digits (0-9), or any of the characters _, $, " +
+            "(, ), +, -, and / are allowed."
+            throw createDBError(.invalidDatabase, reason: "Invalid Database Name, \(reqDBName)")
         }
 
-        guard let cp = Utils.connectionProperties else {
-            throw Database.Error.nilConnectionProperties
-        }
+        // Take the first is there are more matches so we won't hit any errors
+        self.name = name.matches(patern).first!
+        self.configuration = configuration
 
-        let core = CouchDBCore(connectionProperties: cp)
-        let rm = RequestManager(_core: core)
 
-        self.name = name
-        self.requestManager = rm
+        self.request = CouchDBRequests(db: self)
+
+        try self.commonInit()
     }
 
-    /// Create an insance of a CouchDB Database with
-    /// from another database
+    /// Method to create a Database with an URL.
     ///
-    /// - Note:
-    /// We use the Connection Properties set upon
-    /// `Utils.connectionProperties` which is set to
-    /// `ConnectionProperties.default` upon code restart.
-    ///
-    /// - Parameter database: A database
-    /// - Throws: An error for the database
-    public convenience init<D: Database>(database: @autoclosure () throws -> D) throws {
-        try self.init(database: { () -> D in try database() })
-    }
-
-    /// Create an insance of a CouchDB Database with
-    /// from another database
-    ///
-    /// - Note:
-    /// We use the Connection Properties set upon
-    /// `Utils.connectionProperties` which is set to
-    /// `ConnectionProperties.default` upon code restart.
-    ///
-    /// - Parameter database: A database
-    /// - Throws: An error for the database
-    public init<D: Database>(database: (() throws -> D)) throws /* rethrows */ {
-        do {
-            let db = try database()
-            self.name = db.name
-            self.requestManager = db.requestManager
-        } catch {
-            throw error
-        }
-    }
-
-    // MARK: CouchDB API Requests
-
-    /// <#Description#>
-    ///
-    /// - Parameter callback: <#callback description#>
-    public static func allDatabases(callback: @escaping ([Database], Swift.Error?) -> Void) {
-        guard let cp = Utils.connectionProperties else {
-            callback([], Database.Error.nilConnectionProperties)
-            return
-        }
-
-        let core = CouchDBCore(connectionProperties: cp)
-        let rm = RequestManager(_core: core)
-
-        rm.allDatabases { (json, error) in
-            if let error = error {
-                callback([], error)
-            } else {
-                if let jsonArr = json!.arrayObject {
-                    let dbArr = jsonArr.map { try? Database("\($0)") }.flatMap { $0 }
-                    callback(dbArr, nil)
-                } else {
-                    callback([], Database.Error.invalidJSON)
-                }
-            }
-
-        }
-    }
-
-    /// Checks to see if the database exists
-    ///
-    /// These methods use the [CouchDB API](http://docs.couchdb.org/en/2.1.0/intro/api.html)
-    /// calls to create your database, like so:
-    ///
-    /// ```bash
-    /// curl -X HEAD 127.0.0.1:5984/database_name
+    /// Passing `'http://127.0.0.1:5984/_users'` will create a database with:
+    /// ```
+    /// var config = DBConfiguration(host: 127.0.0.1, port: 5984, secure: false)
+    /// var db_name = String("_users")
+    /// try Database(db_name, configuration: config)
     /// ```
     ///
-    /// - Parameter callback: An error if the database does not exist
-    public func exists(callback: @escaping (Swift.Error?) -> Void) {
-        self.requestManager.exists(self, callback: callback)
+    /// - Parameter url: The url for your CouchDB Database
+    /// - Throws: An invalid URL if the URL is invalid.
+    public init(url: URL) throws {
+        let (name, config) = try handleURL(url)
+        try self.init(name, configuration: config)
     }
 
-    // MARK: Creating Database
+    private mutating func commonInit() throws {
+        if configuration.host == "127.0.0.1" {
+            // Using Data(contentsOf: ...) as CouchDB is running local so will be > 21ms
+            let base_url: URL = URL(string: "\(self.configuration.URL)")!
 
-    /// Create a new empty Database with `Database().name`
-    ///
-    /// These methods use the [CouchDB API](http://docs.couchdb.org/en/2.1.0/intro/api.html) 
-    /// calls to create your database, like so:
-    ///
-    /// ```bash
-    /// curl -X PUT 127.0.0.1:5984/database_name
-    /// ```
-    ///
-    /// - Parameter callback: The current database and an error if the call fails
-    public func create(callback: @escaping (Database, Swift.Error?) -> Void) {
-        self.requestManager.create(self) { callback(self, $0) }
-    }
-
-    /// Create a new Database with an document inside
-    ///
-    /// This is cleaner than calling `.create(callback:)` 
-    /// and then `.add(_:callback:)`
-    ///
-    /// - Note: Design views are subclasses of Database object
-    ///         so can be used here.
-    ///
-    /// - Warning: Structs cannot be subclasses of `DatabaseObject`,
-    ///            so for them **until** *Swift 4.0* is compatable with
-    ///            us please use the JSON create method
-    ///
-    /// - Parameters:
-    ///   - object: The object to be added upon database creation
-    ///   - callback: The current database and an error if the call fails
-    public func create(with object: DatabaseObject, callback: @escaping (Database, Swift.Error?) -> Void) {
-        do {
-            try self.validateObjectForCouchDB(object)
-
-            self.create { (database, error) in
-                if error != nil { callback(database, error); return }
-                self.add(object, callback: callback)
-            }
-        } catch {
-            callback(self, error)
-        }
-    }
-
-    /// Create a new Database with an document inside
-    ///
-    /// This is cleaner than calling `.create(callback:)`
-    /// and then `.add(_:callback:)`
-    ///
-    /// - Note: Design views are subclasses of Database object
-    ///         so should be used for the `DatabaseObject` call.
-    ///
-    /// - Parameters:
-    ///   - json: The `JSON` of the object to be added, must be
-    ///           a dictionary type
-    ///   - callback: The current database and an error if the call fails
-    public func create(with json: JSON, callback: @escaping (Database, Swift.Error?) -> Void) {
-        if json.type != .dictionary { callback(self, SwiftError("", -0)); return }
-        self.requestManager.create(for: json, in: self).then(on: kQueue) { _ -> Void in
-            callback(self, nil)
-        }.catch(on: kQueue) {
-            callback(self, $0)
-        }
-    }
-
-    // MARK: Adding Objects
-
-    /// <#Description#>
-    ///
-    /// - Parameters:
-    ///   - object: <#object description#>
-    ///   - callback: <#callback description#>
-    public func add(_ object: DatabaseObject, callback: @escaping (Database, Swift.Error?) -> Void) {
-        do {
-            try self.validateObjectForCouchDB(object)
-
-            firstly { () -> Promise<DBSnapshot> in
-                let scheme = try object.scheme()
-                let json = DatabaseObjectUtil.DBObjectJSON(from: scheme)
-
-                return self.requestManager.create(for: json, in: self)
-            }.then(on: self.kQueue, execute: { (_) -> Void in
-                callback(self, nil)
-            }).catch(on: self.kQueue, execute: { (error) in
-                callback(self, error)
-            })
-        } catch {
-             callback(self, error)
-        }
-    }
-
-    /// <#Description#>
-    ///
-    /// - Parameters:
-    ///   - objects: <#objects description#>
-    ///   - callback: <#callback description#>
-    public func add(_ objects: [DatabaseObject], callback: @escaping (Swift.Error?) -> Void) {
-        if objects.isEmpty { callback(SwiftError("Cannot add empty array", -100)); return }
-        let count = objects.count
-
-        var index = 0
-        for object in objects {
-            self.add(object, callback: { (_, error) in
-                if error != nil { callback(error); return }
-
-                index += 1
-                if count == index { callback(error); return }
-            })
-        }
-    }
-
-    /// <#Description#>
-    ///
-    /// - Parameters:
-    ///   - json: <#json description#>
-    ///   - callback: <#callback description#>
-    public func bulkAdd(_ json: JSON, callback: @escaping (Swift.Error?) -> Void) {
-        if json.type != .array { callback(Database.Error.invalidJSON); return }
-
-        self.requestManager.post(json.arrayValue, in: self) { (_, error) in callback(error) }
-    }
-
-    // MARK: Deleting Objects
-
-    /// Delete the database for the name set in `Database().name`
-    ///
-    /// - Parameter callback: The error for the request if there is one
-    public func delete(callback: @escaping (Swift.Error?) -> Void) {
-        self.requestManager.delete(self, callback: callback)
-    }
-
-    public func delete(_ object: DatabaseObject, callback: @escaping (Database, Swift.Error?) -> Void) {
-        do {
-            let scheme = try object.scheme()
-            guard let id = scheme.id.value as? String else {
-                throw Database.Error.propertyNotFound(forKey: "id")
+            // Check if CouchDB is running
+            let couch_db_welcome = try? Data(contentsOf: base_url)
+            if couch_db_welcome == nil {
+                let msg = "CouchDB is not running, please call `couchdb` in your terminal"
+                throw createDBError(.couchNotRunning, reason: msg)
             }
 
-            self.requestManager.delete(id, in: self, callback: { callback(self, $0) })
-        } catch {
-            callback(self, error)
-        }
-    }
+            // Get Database Infomation
+            do {
+                let data: Data = try Data(contentsOf: base_url.appendingPathComponent(name))
+                self.info = try? JSONDecoder().decode(DatabaseInfo.self, from: data)
 
-    public func retrieve<Object: DatabaseObject>(
-        _ object: Object.Type,
-        callback: @escaping ([Object], SError?) -> Void
-        )
-    {
-        self.requestManager.get_allDocuments(in: self, includeDocuments: true) { (doc, error) in
-            if let error = error {
-                callback([], error)
-            } else {
-                let rows = doc!["rows"].array!
-                
-                do {
-                    let objects = try rows
-                        .map { return try object.init(values: $0["doc"]) }
-                        .flatMap { $0 }
-                    callback(objects, nil)
-                } catch {
-                    callback([], error)
+                if self.info == nil {
+                    var json = JSON(data: data)
+                    Log.error(json.stringValue)
                 }
-            }
-        }
-    }
-
-}
-
-// MARK: - Private
-private extension Database {
-
-    var kQueue: DispatchQueue {
-        return DispatchQueue(label: "io.offpist", qos: .userInitiated, attributes: .concurrent)
-    }
-
-    func validateObjectForCouchDB(_ object: DatabaseObject) throws {
-        if let db = object.database {
-            if db != self {
-                let msg = "Databases for the object to be added [\(object.database!)] " +
-                          "and the database making the request [\(self)] are not equal"
-                throw SwiftError(msg, -100)
-            } else {
-                return
+            } catch {
+                Log.info("Could not connect to database")
+                Log.verbose("Could not connect to database, so will assume database has not bee created yet")
             }
         } else {
-            do {
-                _ = try Database(object.className.lowercased())
-                throw SwiftError("Unknown Error", -404)
-            } catch {
-                throw error
-            }
+            // Get Database Infomation
+            self.info(callback: { (new_info, error) in
+                if let new_info = new_info {
+                    DispatchQueue.main.sync { self.info = new_info }
+                }
+                Log.error(error!.localizedDescription)
+            })
         }
-    }
 
+    }
 }
 
-// MARK: - Hashable
-extension Database : Hashable, CustomStringConvertible {
+extension Database: Hashable, CustomStringConvertible {
+
+    // MARK: Hashable, CustomStringConvertible
+
+
+    /// The hash value.
+    ///
+    /// Hash values are not guaranteed to be equal across different executions of
+    /// your program. Do not save hash values to use during a future execution.
+    public var hashValue: Int {
+        return self.name.hashValue
+    }
+
+    /// Returns a Boolean value indicating whether two values are equal.
+    ///
+    /// Equality is the inverse of inequality. For any values `a` and `b`,
+    /// `a == b` implies that `a != b` is `false`.
+    ///
+    /// - Parameters:
+    ///   - lhs: A value to compare.
+    ///   - rhs: Another value to compare.
+    public static func ==(lhs: Database, rhs: Database) -> Bool {
+        return lhs.hashValue == rhs.hashValue
+    }
 
     /// A textual representation of this instance.
     ///
@@ -441,73 +237,278 @@ extension Database : Hashable, CustomStringConvertible {
     /// The conversion of `p` to a string in the assignment to `s` uses the
     /// `Point` type's `description` property.
     public var description: String {
-        return "Database { name: \(self.name) }"
+        return "Database{name=\(self.name)}"
     }
-
-    /// Returns a Boolean value indicating whether two values are equal.
-    ///
-    /// Equality is the inverse of inequality. For any values `a` and `b`,
-    /// `a == b` implies that `a != b` is `false`.
-    ///
-    /// - Parameters:
-    ///   - lhs: A value to compare.
-    ///   - rhs: Another value to compare.
-    public static func == (lhs: Database, rhs: Database) -> Bool {
-        return lhs.hashValue == rhs.hashValue
-    }
-
-    /// The hash value.
-    ///
-    /// Hash values are not guaranteed to be equal across different executions of 
-    /// your program. Do not save hash values to use during a future execution.
-    public var hashValue: Int { return self.name.hashValue ^ 1 }
 
 }
 
-// MARK: - UserDatabase
+extension Database {
 
-/**
- UserDatabase works slightly differently.
- */
-public class UserDatabase: Database {
+    // MARK: /{db} Requests
 
-    /// <#Description#>
+    /// Method used to check if a Database exists.
     ///
-    /// - Throws: <#throws value description#>
-    public convenience init() throws {
-        try self.init("_users")
+    /// Using this method is the same as calling this with curl:
+    ///
+    /// ```bash
+    /// curl -X HEAD 127.0.0.1:5984/database_name
+    /// ```
+    ///
+    /// - Note:                 For more info on the see
+    ///                         [here](http://docs.couchdb.org/en/2.1.0/api/database/common.html#db)
+    /// - Parameter callback:   True if the response code is 200 or false if 404.
+    ///                         Will only return an error if there is no response
+    public func exists(callback: @escaping CouchDBCheckCallback) {
+        self.request?.database_exists(callback: callback)
+    }
+
+    /// PUT /{db}
+    ///
+    /// - Parameter callback: <#callback description#>
+    public func create(callback: @escaping CouchDBCheckCallback) {
+        self.request?.database_create { callback($1 == nil, $1) }
+    }
+
+    /// HEAD /{db} -> PUT /{db}
+    ///
+    /// - Parameter callback: <#callback description#>
+    public func createIfDoesNotExist(callback: @escaping CouchDBCheckCallback) {
+        self.exists { (exists, error) in
+            // Error code 500 is internal error, so the next request would return the same
+            // result, so just return there to save time.
+            if error?._code == 500 { callback(false, error); return }
+
+            // If the server doesn't exist then create the new server
+            if !exists { self.create(callback: callback) }
+        }
+    }
+
+    /// GET /{db}
+    ///
+    /// - Parameter callback: <#callback description#>
+    public func info(callback: @escaping CouchDBDatabseInfoCallback) {
+        self.request?.database_info { (data, error) in
+            if let error = error { callback(nil, error); return }
+
+            do {
+                let info = try JSONDecoder().decode(DatabaseInfo.self, from: data!)
+                callback(info, nil)
+            } catch {
+                callback(nil, error)
+            }
+        }
+    }
+
+    /// DELETE /{db}
+    ///
+    /// - Parameter callback: <#callback description#>
+    public func delete(callback: @escaping (Bool, Swift.Error?) -> Void) {
+        self.request?.database_delete(callback: callback)
+    }
+
+    /// POST /{db}
+    ///
+    /// - Parameters:
+    ///   - object: <#object description#>
+    ///   - callback: <#callback description#>
+    public func add<Object: DBObject>(_ object: Object, callback: @escaping CouchDBResponse) {
+        do {
+            let data = try JSONEncoder().encode(object)
+            self.add(JSON(data: data), callback: callback)
+        } catch {
+            callback(nil, error)
+        }
     }
 
     /// <#Description#>
     ///
-    /// - Parameter name: <#name description#>
-    /// - Throws: <#throws value description#>
-    private override init(_ name: String) throws {
-        try super.init(name)
+    /// - Parameters:
+    ///   - json: <#json description#>
+    ///   - callback: <#callback description#>
+    public func add(_ json: JSON, callback: @escaping CouchDBResponse) {
+        if json.error != nil { callback(nil, json.error!); return }
+        self.request?.database_add(json, callback: callback)
     }
 
-    // MARK: Depreciations
+}
 
-    @available(*, unavailable, message: "Not Needed")
-    public override func delete(callback: @escaping (Swift.Error?) -> Void) { fatalError() }
+extension Database {
 
-    @available(*, unavailable, message: "Not Needed")
-    public override func create(callback: @escaping (Database, Swift.Error?) -> Void) { fatalError() }
+    // MARK: /db/_all_docs
 
-    @available(*, unavailable, message: "Not Needed")
-    public override func exists(callback: @escaping (Swift.Error?) -> Void) { fatalError() }
+    /// GET /{db}/_all_docs
+    ///
+    /// - Parameter callback: <#callback description#>
+    public func allDocs(callback: CouchDBResponse) { }
 
-    @available(*, unavailable, message: "Not Needed")
-    public func add<C: Collection>(
-        _ objects: C,
-        callback: @escaping (Error?) -> Void
-        ) where C.Iterator.Element == DatabaseObject
+    /// POST /{db}/_all_docs
+    ///
+    /// - Parameters:
+    ///   - ids: <#ids description#>
+    ///   - callback: <#callback description#>
+    public func mutipleDocs(with ids: [String], callback: CouchDBResponse) { }
+
+}
+
+extension Database {
+
+    // MARK: Retriving Objects
+
+    /// Method to retrive an object with the required _id
+    ///
+    /// - Parameters:
+    ///   - type:       The type of DBObject
+    ///   - id:         The _id for the Document
+    ///   - callback:   (Object?, Swift.Error?) -> Void
+    public func object<Object: DBObject>(
+        _ type: Object.Type,
+        withID id: String,
+        callback: @escaping (Object?, Swift.Error?) -> Void
+        )
     {
-        fatalError()
+        self.objects(type) { (objects, error) in
+            if let error = error {
+                callback(nil, error)
+            } else {
+                let filteredObject = objects?.filter { $0._id == id }
+                if let object = filteredObject?.first {
+                    callback(object, nil)
+                } else {
+                    let msg = "Objects \(objects!) does not contain an object with the id: \(id)"
+                    let err = createDBError(.invalidRequest, reason: msg)
+                    callback(nil, err)
+                }
+            }
+        }
     }
 
-    @available(*, unavailable, message: "Not Needed")
-    public func add(_ object: DatabaseObject, callback: @escaping (Database, Error?) -> Void) {
-        fatalError()
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - type: <#type description#>
+    ///   - predicateFormat: <#predicateFormat description#>
+    ///   - args: <#args description#>
+    ///   - callback: <#callback description#>
+    public func objects<Object: DBObject>(
+        _ type: Object.Type,
+        where predicateFormat: String,
+        args: Any...,
+        callback: ([Object]?, Swift.Error?) -> Void
+        )
+    {
+        let predicate = NSPredicate(format: predicateFormat, argumentArray: args)
+        self.objects(type, where: predicate, callback: callback)
     }
+
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - type: <#type description#>
+    ///   - predicate: <#predicate description#>
+    ///   - callback: <#callback description#>
+    public func objects<Object: DBObject>(
+        _ type: Object.Type,
+        where predicate: NSPredicate,
+        callback: ([Object]?, Swift.Error?) -> Void
+        )
+    {
+        self.objects(type) { (objects, error) in
+            if let error = error {
+                callback(nil, error)
+            } else {
+                callback((objects! as NSArray).filtered(using: predicate) as? [Object], nil)
+            }
+        }
+    }
+
+
+    /// Method to get an array of Objects from the database.
+    ///
+    /// - Note: Using the class passed in `type:` we will create an array of
+    ///         those objects, ignoring ones that are not of that type so if your
+    ///         array contains many different objects they will not be parsed
+    /// - Parameters:
+    ///   - type: The
+    ///   - callback: <#callback description#>
+    public func objects<Object: DBObject>(
+        _ type: Object.Type,
+        callback: ([Object]?, Swift.Error?) -> Void
+        )
+    {
+        do { try validateRequest(type) } catch { callback(nil, error) }
+    }
+
+    private func validateRequest<Object: DBObject>(_ type: Object.Type) throws {
+        guard let objectDB = type.database else {
+            let msg = "The object type \(type) has an invalid database so we cannot connect"
+            throw createDBError(.invalidDatabase, reason: msg)
+        }
+
+        if objectDB != self {
+            let msg = "The object has a differring database [\(objectDB)] to the one being used [\(self)]"
+            throw createDBError(.incompatableDatabase, reason: msg)
+        }
+    }
+}
+
+func handleURL(_ url: URL) throws -> (String, DBConfiguration) {
+    let schemePatern = "http(s)?"
+    let authorityPatern = "//[0-9a-zA-Z.@:]{1,}"
+
+    var secure: Bool
+    if url.absoluteString.doesMatch(schemePatern) {
+        secure = url.absoluteString.matches(schemePatern).first! == "https"
+    } else {
+        throw createDBError(.invalidURL, reason: "Invalid URL: \(url)")
+    }
+
+    var authority: String
+    var host: String
+    var username: String?
+    var password: String?
+    var port: Int16
+    if url.absoluteString.doesMatch(authorityPatern, options: .withoutAnchoringBounds) {
+        authority = url.absoluteString.matches(authorityPatern, options: .withoutAnchoringBounds).first!
+        authority.removeFirst(2)
+
+        if authority.doesMatch("[/]{2}[0-9a-zA-Z._:]{1,}@", options: .withoutAnchoringBounds) {
+            var userInfo = authority.matches("[/]{2}[0-9a-zA-Z._:]{1,}@").first!
+            userInfo.removeFirst(2)
+
+            if let userNameLength = userInfo.range(of: ":") {
+                username = String(userInfo[userNameLength])
+                password = String(userInfo[userInfo.index(of: ":")!...])
+            } else {
+                userInfo.removeLast()
+                username = userInfo
+            }
+
+            host = String(authority[authority.index(of: "@")!...])
+        } else {
+            host = authority
+        }
+
+        if host.doesMatch(":[0-9]{1,4}", options: .withoutAnchoringBounds) {
+            var portStr = host.matches(":[0-9]{1,4}", options: .withoutAnchoringBounds).first!
+            host.removeLast(portStr.count)
+
+            portStr.removeFirst()
+            port = Int16(portStr)!
+        } else {
+            port = 0000
+        }
+    } else {
+        throw createDBError(.invalidURL, reason: "Invalid URL: \(url.absoluteString)")
+    }
+
+    var dbName: String
+    let pathComponents = url.pathComponents
+    if pathComponents.count < 1 {
+        throw createDBError(.invalidURL, reason: "Invalid URL: \(url.absoluteString)")
+    } else {
+        dbName = pathComponents.filter { $0 != "/" }.last!
+    }
+
+    let config = DBConfiguration(host: host, port: port, secured: secure, username: username, password: password)
+    return (dbName, config)
 }

@@ -14,7 +14,7 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "SwiftyCouchDB::SwiftyCouchDBTests"
+               BlueprintIdentifier = "C87568921F9F5856006548EE"
                BuildableName = "SwiftyCouchDBTests.xctest"
                BlueprintName = "SwiftyCouchDBTests"
                ReferencedContainer = "container:SwiftyCouchDB.xcodeproj">
@@ -33,7 +33,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "SwiftyCouchDB::SwiftyCouchDBTests"
+               BlueprintIdentifier = "C87568921F9F5856006548EE"
                BuildableName = "SwiftyCouchDBTests.xctest"
                BlueprintName = "SwiftyCouchDBTests"
                ReferencedContainer = "container:SwiftyCouchDB.xcodeproj">
@@ -57,7 +57,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "SwiftyCouchDB::SwiftyCouchDBTests"
+            BlueprintIdentifier = "C87568921F9F5856006548EE"
             BuildableName = "SwiftyCouchDBTests.xctest"
             BlueprintName = "SwiftyCouchDBTests"
             ReferencedContainer = "container:SwiftyCouchDB.xcodeproj">
@@ -75,7 +75,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "SwiftyCouchDB::SwiftyCouchDBTests"
+            BlueprintIdentifier = "C87568921F9F5856006548EE"
             BuildableName = "SwiftyCouchDBTests.xctest"
             BlueprintName = "SwiftyCouchDBTests"
             ReferencedContainer = "container:SwiftyCouchDB.xcodeproj">

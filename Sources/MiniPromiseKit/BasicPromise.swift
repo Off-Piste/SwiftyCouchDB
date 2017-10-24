@@ -18,72 +18,85 @@ import Dispatch
 
 private var defaultQ: DispatchQueue = .main
 
+/// <#Description#>
 public class BasicPromise<Outcome> {
+
     private typealias Consumer = (Outcome) -> Void
+
     private var outcomeIfKnown: Outcome?
+
     private var consumerAndQueueIfKnown: (consumer: Consumer, q: DispatchQueue)?
     
-    
     private let racePrevention = DispatchSemaphore(value: 1)
+
     private func oneAtATime(_ fn: () -> Void) {
         defer { racePrevention.signal() }
         racePrevention.wait()
         fn()
     }
     
+    /// <#Description#>
     public static var defaultQueue: DispatchQueue {
         get { return defaultQ }
         set { defaultQ = newValue }
     }
     
-    public init() {}
+    public init() { }
     
-    
-    
-    public func fulfill(_ outcome: Outcome) -> Void
-    {
+    /// <#Description#>
+    ///
+    /// - Parameter outcome: <#outcome description#>
+    public func fulfill(_ outcome: Outcome) -> Void {
         oneAtATime {
             if let (consumer, q) = self.consumerAndQueueIfKnown {
-                q.async {
-                    consumer(outcome)
-                }
-            }
-            else {
+                q.async { consumer(outcome) }
+            } else {
                 self.outcomeIfKnown = outcome
             }
         }
     }
-    
-    
+
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - q: <#q description#>
+    ///   - consumer: <#consumer description#>
     public func then(
         on q: DispatchQueue = BasicPromise.defaultQueue,
         execute consumer: @escaping (Outcome) -> Void
-    )
+        )
     {
         oneAtATime {
             if let outcome = outcomeIfKnown {
                 q.async { consumer(outcome) }
-            }
-            else {
+            } else {
                 self.consumerAndQueueIfKnown = (consumer, q)
             }
         }
     }
-    
-    
+
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - q: <#q description#>
+    ///   - transformer: <#transformer description#>
+    /// - Returns: <#return value description#>
     public func then<NewOutcome>(
         on q: DispatchQueue = BasicPromise.defaultQueue,
-        execute transformer:
-            @escaping (Outcome) -> NewOutcome
-        )
-        -> BasicPromise<NewOutcome>
+        execute transformer: @escaping (Outcome) -> NewOutcome
+        ) -> BasicPromise<NewOutcome>
     {
         let p = BasicPromise<NewOutcome>()
-        then(on: q) { p.fulfill( transformer( $0 ) ) }
+        then(on: q) { p.fulfill(transformer($0)) }
         return p
     }
-    
-    
+
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - q: <#q description#>
+    ///   - asyncTransformer: <#asyncTransformer description#>
+    /// - Returns: <#return value description#>
     public func then<NewOutcome>(
         on q: DispatchQueue = BasicPromise.defaultQueue,
         execute asyncTransformer: @escaping (Outcome) -> BasicPromise<NewOutcome>
@@ -91,8 +104,7 @@ public class BasicPromise<Outcome> {
     {
         let p = BasicPromise<NewOutcome>()
         then(on: q) {
-            asyncTransformer($0)
-                .then(on: q) { p.fulfill($0) }
+            asyncTransformer($0).then(on: q) { p.fulfill($0) }
         }
         return p
     }

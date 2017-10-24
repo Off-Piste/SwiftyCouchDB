@@ -50,6 +50,6 @@ let package = Package(
         .testTarget(
             name: "SwiftyCouchDBTests",
             dependencies: ["SwiftyCouchDB"],
-            path: "./Tests")
+            path: "./SwiftyCouchDBTests")
     ]
 )
