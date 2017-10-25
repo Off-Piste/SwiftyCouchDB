@@ -38,17 +38,3 @@ extension String {
         }
     }
 }
-
-extension URL: ExpressibleByStringLiteral {
-
-    /// A type that represents a string literal.
-    public typealias StringLiteralType = String
-
-    /// Creates an instance initialized to the given string value.
-    ///
-    /// - Parameter value: The value of the new instance.
-    public init(stringLiteral value: StringLiteralType) {
-        self.init(string: value)!
-    }
-    
-}

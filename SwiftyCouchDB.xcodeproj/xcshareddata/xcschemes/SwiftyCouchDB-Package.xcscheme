@@ -42,51 +42,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Kitura-net::KituraNet"
-               BuildableName = "KituraNet.framework"
-               BlueprintName = "KituraNet"
-               ReferencedContainer = "container:SwiftyCouchDB.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "SSLService::SSLService"
-               BuildableName = "SSLService.framework"
-               BlueprintName = "SSLService"
-               ReferencedContainer = "container:SwiftyCouchDB.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Socket::Socket"
-               BuildableName = "Socket.framework"
-               BlueprintName = "Socket"
-               ReferencedContainer = "container:SwiftyCouchDB.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Kitura-net::CHTTPParser"
-               BuildableName = "CHTTPParser.framework"
-               BlueprintName = "CHTTPParser"
+               BlueprintIdentifier = "Alamofire::Alamofire"
+               BuildableName = "Alamofire.framework"
+               BlueprintName = "Alamofire"
                ReferencedContainer = "container:SwiftyCouchDB.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

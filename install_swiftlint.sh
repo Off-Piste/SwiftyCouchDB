@@ -10,6 +10,13 @@ set -e
 source_root="$(dirname "$0")"
 source="$0"
 
+
+function pre_handle_CouchDB {
+  eval "curl -X PUT 127.0.0.1:5984/test_exists"
+  # eval "curl -X DELETE 127.0.0.1:5984/test_does_not_exist"
+}
+
+
 function usage {
   echo "$source [tests-macos, swiftlint, jazzy, before-swiftlint, before-tests-macos]"
   exit 0
@@ -84,6 +91,7 @@ case $1 in
     swiftlint) _swiftlint ;;
     tests-macos) run_tests ;;
     jazzy) _jazzy ;;
+    before-tests-couch-db) pre_handle_CouchDB ;;
     before-tests-script) pre_xcode_gem ;;
     before-tests-macos) pre_xcode ;;
     before-swiftlint) build_for_swiftlint ;;

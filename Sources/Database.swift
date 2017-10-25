@@ -89,7 +89,7 @@ public struct Database {
     public var configuration: DBConfiguration
 
     /// The request manager to the CouchDB requests
-    internal weak var request: CouchDBRequests?
+    internal var request: CouchDBRequests
 
     // MARK: Life Cycle
 
@@ -121,17 +121,15 @@ public struct Database {
         let patern = "^[a-z][a-z0-9_$()+/-]*$"
         if !name.doesMatch(patern) {
             let reqDBName = "Note that only lowercase characters (a-z), " +
-                "digits (0-9), or any of the characters _, $, " +
-            "(, ), +, -, and / are allowed."
+                            "digits (0-9), or any of the characters _, $, " +
+                            "(, ), +, -, and / are allowed."
             throw createDBError(.invalidDatabase, reason: "Invalid Database Name, \(reqDBName)")
         }
 
         // Take the first is there are more matches so we won't hit any errors
         self.name = name.matches(patern).first!
         self.configuration = configuration
-
-
-        self.request = CouchDBRequests(db: self)
+        self.request = CouchDBRequests(name: name, configuartion: configuration)
 
         try self.commonInit()
     }
@@ -179,12 +177,12 @@ public struct Database {
             }
         } else {
             // Get Database Infomation
-            self.info(callback: { (new_info, error) in
-                if let new_info = new_info {
-                    DispatchQueue.main.sync { self.info = new_info }
-                }
-                Log.error(error!.localizedDescription)
-            })
+//            self.info(callback: { (new_info, error) in
+//                if let new_info = new_info {
+//                    DispatchQueue.main.sync { self.info = new_info }
+//                }
+//                Log.error(error!.localizedDescription)
+//            })
         }
 
     }
@@ -259,24 +257,24 @@ extension Database {
     /// - Parameter callback:   True if the response code is 200 or false if 404.
     ///                         Will only return an error if there is no response
     public func exists(callback: @escaping CouchDBCheckCallback) {
-        self.request?.database_exists(callback: callback)
+        self.request.database_exists(callback: callback)
     }
 
     /// PUT /{db}
     ///
     /// - Parameter callback: <#callback description#>
-    public func create(callback: @escaping CouchDBCheckCallback) {
-        self.request?.database_create { callback($1 == nil, $1) }
+    public func create(callback: @escaping (Database?, Error?) -> Void) {
+        self.request.database_create(callback: callback)
     }
 
     /// HEAD /{db} -> PUT /{db}
     ///
     /// - Parameter callback: <#callback description#>
-    public func createIfDoesNotExist(callback: @escaping CouchDBCheckCallback) {
+    public func createIfDoesNotExist(callback: @escaping (Database?, Error?) -> Void) {
         self.exists { (exists, error) in
             // Error code 500 is internal error, so the next request would return the same
             // result, so just return there to save time.
-            if error?._code == 500 { callback(false, error); return }
+            if error?._code == 500 { callback(nil, error); return }
 
             // If the server doesn't exist then create the new server
             if !exists { self.create(callback: callback) }
@@ -287,7 +285,7 @@ extension Database {
     ///
     /// - Parameter callback: <#callback description#>
     public func info(callback: @escaping CouchDBDatabseInfoCallback) {
-        self.request?.database_info { (data, error) in
+        self.request.database_info { (data, error) in
             if let error = error { callback(nil, error); return }
 
             do {
@@ -303,7 +301,7 @@ extension Database {
     ///
     /// - Parameter callback: <#callback description#>
     public func delete(callback: @escaping (Bool, Swift.Error?) -> Void) {
-        self.request?.database_delete(callback: callback)
+        self.request.database_delete(callback: callback)
     }
 
     /// POST /{db}
@@ -327,7 +325,7 @@ extension Database {
     ///   - callback: <#callback description#>
     public func add(_ json: JSON, callback: @escaping CouchDBResponse) {
         if json.error != nil { callback(nil, json.error!); return }
-        self.request?.database_add(json, callback: callback)
+        self.request.database_add(json, callback: callback)
     }
 
 }

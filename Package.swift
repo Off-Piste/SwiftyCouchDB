@@ -27,15 +27,17 @@ extension Package {
     }
 }
 
+// Will stick with Alamofire as it is the best for Networking tools
+// easier than making my own to do the same purpose
 let dependencies: [PDependency] = [
     .package(url: "https://github.com/IBM-Swift/HeliumLogger.git", .upToNextMinor(from: "1.7.0")),
-    .package(url: "https://github.com/IBM-Swift/Kitura-net.git", .upToNextMinor(from: "1.7.0")),
+    .package(url: "https://github.com/Alamofire/Alamofire.git", .exact("4.5.1")),
     .package(url: "https://github.com/IBM-Swift/SwiftyJSON.git", .upToNextMinor(from: "17.0.0"))
 ]
 
 let targetDependencies: [TDependency] = [
     .byNameItem(name: "HeliumLogger"),
-    .byNameItem(name: "KituraNet"),
+    .byNameItem(name: "Alamofire"),
     .byNameItem(name: "SwiftyJSON")
 ]
 
@@ -50,6 +52,6 @@ let package = Package(
         .testTarget(
             name: "SwiftyCouchDBTests",
             dependencies: ["SwiftyCouchDB"],
-            path: "./SwiftyCouchDBTests")
+            path: "./Tests")
     ]
 )

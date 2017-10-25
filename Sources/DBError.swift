@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import KituraNet
+//import KituraNet
 
 let kDBErrorDomain = "io.off_piste.swifty_couch_db.error"
 
@@ -21,14 +21,14 @@ enum DBErrorCode: Int {
     case internalError = 500
 }
 
-func createDBError(_ response: ClientResponse) -> Swift.Error {
-    do {
-        var json = try CouchDBRequestsUtils.getBodyAsJson(response)
-        return createDBError(response.statusCode.rawValue, reason: json.string)
-    } catch {
-        return error
-    }
-}
+//func createDBError(_ response: ClientResponse) -> Swift.Error {
+//    do {
+//        var json = try CouchDBRequestsUtils.getBodyAsJson(response)
+//        return createDBError(response.statusCode.rawValue, reason: json.string)
+//    } catch {
+//        return error
+//    }
+//}
 
 func createDBError(_ code: DBErrorCode, reason: String? = nil) -> Swift.Error {
     return createDBError(code.rawValue, reason: reason)

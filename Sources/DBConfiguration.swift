@@ -8,6 +8,7 @@
 
 import Foundation
 import LoggerAPI
+import Alamofire
 
 private var kDefault: DBConfiguration = DBConfiguration(host: "127.0.0.1", port: 5984, secured: false)
 
@@ -55,6 +56,9 @@ public final class DBConfiguration {
         self.username = username
         self.password = password
 
+        // FIXME: Remove Depenecency on HelliumLogger
+        // Or add #if COCOAPOD so we can use HelliumLogger/LoggerAPI
+        // for just server side
         if self.username == nil || self.password == nil {
             Log.warning("Initializing a CouchDB configuration without a username or password.")
         }
@@ -73,7 +77,7 @@ public final class DBConfiguration {
     }
 
     /// CouchDB URL
-    internal var URL: String {
+    internal var URL: URLConvertible {
         var base: String
         if let username = username, let password = password {
             base = "\(HTTPProtocol)://\(username):\(password)@\(host)"
