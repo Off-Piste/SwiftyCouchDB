@@ -38,7 +38,10 @@ function pre_xcode_gem {
   gem install xcpretty-travis-formatter --no-rdoc --no-ri --no-document --quiet
 
   brew outdated couchdb || brew upgrade couchdb
-  brew services start couchdb
+  couchdb -b
+  couchdb -s
+
+  eval "curl -X GET 127.0.0.1:5984"
 }
 
 function pre_xcode {
