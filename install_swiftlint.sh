@@ -13,7 +13,7 @@ source="$0"
 
 function pre_handle_CouchDB {
   eval "curl -X PUT 127.0.0.1:5984/test_exists"
-  # eval "curl -X DELETE 127.0.0.1:5984/test_does_not_exist"
+  eval "curl -X PUT 127.0.0.1:5984/test_deletion"
 }
 
 

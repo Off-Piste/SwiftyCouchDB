@@ -9,11 +9,9 @@ matrix:
   include:
     - script: ./install_swiftlint.sh tests-macos # tests
       os: osx
-      osx_image: xcode9.0
+      osx_image: xcode9
       env: JOB=tests-macos
       before_script: ./install_swiftlint.sh before-tests-couch-db
-      services:
-        - couchdb
       before_install:
         - brew install couchdb
         - ./install_swiftlint.sh before-tests-macos
