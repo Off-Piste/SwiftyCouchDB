@@ -72,6 +72,8 @@ function install_xcode_helpers {
 function create_couch_db_databases {
   eval "curl -X PUT 127.0.0.1:5984/test_exists"
   eval "curl -X PUT 127.0.0.1:5984/test_deletion"
+
+  eval "curl -X GET 127.0.0.1:5984/_all_dbs"
 }
 
 function build_swift {
