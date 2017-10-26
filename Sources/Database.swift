@@ -9,6 +9,7 @@
 import Cocoa
 import SwiftyJSON
 import LoggerAPI
+@_exported import Alamofire
 
 /// The infomation returned froma GET request on the server.
 public struct DatabaseInfo: Codable, CustomStringConvertible {
@@ -145,8 +146,9 @@ public struct Database {
     ///
     /// - Parameter url: The url for your CouchDB Database
     /// - Throws: An invalid URL if the URL is invalid.
-    public init(url: URL) throws {
-        let (name, config) = try handleURL(url)
+    public init(url: URLConvertible) throws {
+        let realURL = try url.asURL()
+        let (name, config) = try handleURL(realURL)
         try self.init(name, configuration: config)
     }
 
@@ -450,61 +452,21 @@ extension Database {
 }
 
 func handleURL(_ url: URL) throws -> (String, DBConfiguration) {
-    let schemePatern = "http(s)?"
-    let authorityPatern = "//[0-9a-zA-Z.@:]{1,}"
-
-    var secure: Bool
-    if url.absoluteString.doesMatch(schemePatern) {
-        secure = url.absoluteString.matches(schemePatern).first! == "https"
-    } else {
-        throw createDBError(.invalidURL, reason: "Invalid URL: \(url)")
+    guard let urlComps = URLComponents(url: url, resolvingAgainstBaseURL: false),
+        let scheme = urlComps.scheme,
+        let host = urlComps.host
+        else {
+            throw createDBError(.invalidURL, reason: "Invalid URL: \(url)")
     }
 
-    var authority: String
-    var host: String
-    var username: String?
-    var password: String?
-    var port: Int16
-    if url.absoluteString.doesMatch(authorityPatern, options: .withoutAnchoringBounds) {
-        authority = url.absoluteString.matches(authorityPatern, options: .withoutAnchoringBounds).first!
-        authority.removeFirst(2)
+    let secure: Bool = scheme == "https"
+    let port: Int16 = Int16(urlComps.port ?? 0000)
+    let username: String? = urlComps.user
+    let password: String? = url.password
 
-        if authority.doesMatch("[/]{2}[0-9a-zA-Z._:]{1,}@", options: .withoutAnchoringBounds) {
-            var userInfo = authority.matches("[/]{2}[0-9a-zA-Z._:]{1,}@").first!
-            userInfo.removeFirst(2)
-
-            if let userNameLength = userInfo.range(of: ":") {
-                username = String(userInfo[userNameLength])
-                password = String(userInfo[userInfo.index(of: ":")!...])
-            } else {
-                userInfo.removeLast()
-                username = userInfo
-            }
-
-            host = String(authority[authority.index(of: "@")!...])
-        } else {
-            host = authority
-        }
-
-        if host.doesMatch(":[0-9]{1,4}", options: .withoutAnchoringBounds) {
-            var portStr = host.matches(":[0-9]{1,4}", options: .withoutAnchoringBounds).first!
-            host.removeLast(portStr.count)
-
-            portStr.removeFirst()
-            port = Int16(portStr)!
-        } else {
-            port = 0000
-        }
-    } else {
-        throw createDBError(.invalidURL, reason: "Invalid URL: \(url.absoluteString)")
-    }
-
-    var dbName: String
-    let pathComponents = url.pathComponents
-    if pathComponents.count < 1 {
-        throw createDBError(.invalidURL, reason: "Invalid URL: \(url.absoluteString)")
-    } else {
-        dbName = pathComponents.filter { $0 != "/" }.last!
+    let paths = urlComps.path.components(separatedBy: "/")
+    guard let dbName = paths.last else {
+        throw createDBError(40, reason: "Could not retreive Database name from: \(url)")
     }
 
     let config = DBConfiguration(host: host, port: port, secured: secure, username: username, password: password)

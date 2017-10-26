@@ -14,7 +14,7 @@ private var kDefault: DBConfiguration = DBConfiguration(host: "127.0.0.1", port:
 
 /// DBConfiguration is the Network Configuration for your CouchDB so we know to
 /// make requests to the right place.
-public final class DBConfiguration {
+public final class DBConfiguration: CustomStringConvertible {
 
     /// This is set to local, calling DBConfiguration.setDefault() will change this
     public static var `default`: DBConfiguration { return kDefault }
@@ -90,5 +90,20 @@ public final class DBConfiguration {
         } else {
             return "\(base):\(port)"
         }
+    }
+
+    public var description: String {
+        var items: [String] = [
+            "host=\(self.host)",
+            "port=\(self.port)",
+            "secured=\(self.secured)"
+        ]
+
+        if let username = self.username, let password = self.password {
+            items.append("username=\(username)")
+            items.append("password=\(password)")
+        }
+        
+        return "DBConfiguration{\(items.joined(separator: ","))}"
     }
 }
