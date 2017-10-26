@@ -97,6 +97,7 @@ function delete_couch_db_databases {
 case $1 in
   tests-before-install) install_xcode_helpers ;;
   tests-before-script) create_couch_db_databases ;;
+  tests-after-script) delete_couch_db_databases ;;
   build-swift-package) build_swift ;;
   run-tests) run_mac_os_tests ;;
   jazzy) create_docs ;;

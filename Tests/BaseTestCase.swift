@@ -61,20 +61,6 @@ class BaseTestCase: XCTestCase {
         if let obserser = _observer {
             NotificationCenter.default.removeObserver(obserser)
         }
-
-        if let databaseName = _dbName {
-            let exp = self.expectation(description: databaseName)
-
-            let db = try! Database(databaseName)
-            db.delete(callback: { (success, error) in
-                XCTAssert(success)
-                XCTAssertNil(error)
-
-                exp.fulfill()
-            })
-
-            self.waitForExpectations(timeout: timeout, handler: nil)
-        }
     }
 
 }
