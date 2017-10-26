@@ -245,6 +245,26 @@ extension CouchDBRequests {
     }
 
     public func database_delete(callback: @escaping (Bool, Swift.Error?) -> Void) {
+        do {
+            let request = try Utils.createRequest(
+                databaseConfiguration,
+                method: .delete,
+                path: "\(databaseName)",
+                body: nil
+            )
+
+            self.sessionManager
+                .request(request)
+                .validate()
+                .responseData(queue: self.queue, completionHandler: { (resp) in
+                    switch resp.result {
+                    case .success: callback(true, nil)
+                    case .failure(let error): callback(false, error)
+                    }
+            })
+        } catch {
+            callback(false, error)
+        }
 //        let requestOptions = Utils.prepareRequest(
 //            databaseConfiguration,
 //            method: "DELETE",

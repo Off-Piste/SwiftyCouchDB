@@ -7,12 +7,20 @@ branches:
     - /\s*([\d.]+)/
 matrix:
   include:
-    - script: ./install_swiftlint.sh tests-macos # tests
+    - script: ./install_swiftlint.sh run-tests # tests
       os: osx
       osx_image: xcode9
       env: JOB=tests-macos
-      before_script: ./install_swiftlint.sh before-tests-couch-db
+      before_script:
+        - ./install_swiftlint.sh build-swift-package
+        - ./install_swiftlint.sh tests-before-script
       before_install:
         - brew install couchdb
-        - ./install_swiftlint.sh before-tests-macos
-        - ./install_swiftlint.sh before-tests-script
+        - brew services start couchdb
+        - ./install_swiftlint.sh tests-before-install
+    - script: ./install_swiftlint.sh jazzy #jazzy
+      os: osx
+      osx_image: xcode9
+      env: JOB=Jazzy
+      before_install: gem install jazzy
+      before_script: ./install_swiftlint.sh build-swift-package

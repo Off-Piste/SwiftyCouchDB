@@ -21,7 +21,7 @@ class DatabaseTests: BaseTestCase {
     func test_exists() {
         async { (exp) in
             // Given
-            let database = try Database(#function)
+            let database = try Database("test_exists")
 
             // When
             database.exists(callback: { (exists, error) in
@@ -34,7 +34,7 @@ class DatabaseTests: BaseTestCase {
         }
     }
 
-    /// We called: `curl -X DELETE 127.0.0.1:5984/test_deletion`
+    /// We called: `curl -X PUT 127.0.0.1:5984/test_deletion`
     /// before the tests start so we don't have to do:
     ///
     /// ```swift
@@ -45,7 +45,7 @@ class DatabaseTests: BaseTestCase {
     func test_deletion() {
         async { (exp) in
             // Given
-            let database = try Database(#function)
+            let database = try Database("test_deletion")
 
             // When
             database.delete(callback: { (success, error) in

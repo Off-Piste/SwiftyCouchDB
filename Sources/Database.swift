@@ -151,39 +151,39 @@ public struct Database {
     }
 
     private mutating func commonInit() throws {
-        if configuration.host == "127.0.0.1" {
-            // Using Data(contentsOf: ...) as CouchDB is running local so will be > 21ms
-            let base_url: URL = URL(string: "\(self.configuration.URL)")!
-
-            // Check if CouchDB is running
-            let couch_db_welcome = try? Data(contentsOf: base_url)
-            if couch_db_welcome == nil {
-                let msg = "CouchDB is not running, please call `couchdb` in your terminal"
-                throw createDBError(.couchNotRunning, reason: msg)
-            }
-
-            // Get Database Infomation
-            do {
-                let data: Data = try Data(contentsOf: base_url.appendingPathComponent(name))
-                self.info = try? JSONDecoder().decode(DatabaseInfo.self, from: data)
-
-                if self.info == nil {
-                    var json = JSON(data: data)
-                    Log.error(json.stringValue)
-                }
-            } catch {
-                Log.info("Could not connect to database")
-                Log.verbose("Could not connect to database, so will assume database has not bee created yet")
-            }
-        } else {
-            // Get Database Infomation
-//            self.info(callback: { (new_info, error) in
-//                if let new_info = new_info {
-//                    DispatchQueue.main.sync { self.info = new_info }
+//        if configuration.host == "127.0.0.1" {
+//            // Using Data(contentsOf: ...) as CouchDB is running local so will be > 21ms
+//            let base_url: URL = URL(string: "\(self.configuration.URL)")!
+//
+//            // Check if CouchDB is running
+//            let couch_db_welcome = try? Data(contentsOf: base_url)
+//            if couch_db_welcome == nil {
+//                let msg = "CouchDB is not running, please call `couchdb` in your terminal"
+//                throw createDBError(.couchNotRunning, reason: msg)
+//            }
+//
+//            // Get Database Infomation
+//            do {
+//                let data: Data = try Data(contentsOf: base_url.appendingPathComponent(name))
+//                self.info = try? JSONDecoder().decode(DatabaseInfo.self, from: data)
+//
+//                if self.info == nil {
+//                    var json = JSON(data: data)
+//                    Log.error(json.stringValue)
 //                }
-//                Log.error(error!.localizedDescription)
-//            })
-        }
+//            } catch {
+//                Log.info("Could not connect to database")
+//                Log.verbose("Could not connect to database, so will assume database has not bee created yet")
+//            }
+//        } else {
+//            // Get Database Infomation
+////            self.info(callback: { (new_info, error) in
+////                if let new_info = new_info {
+////                    DispatchQueue.main.sync { self.info = new_info }
+////                }
+////                Log.error(error!.localizedDescription)
+////            })
+//        }
 
     }
 }
