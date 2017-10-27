@@ -14,17 +14,14 @@ import SwiftyJSON
 
 import Alamofire
 
-//import KituraNet
-
-//private extension ClientResponse {
-//    func isEqual(to codes: HTTPStatusCode...) -> Bool {
-//        for code in codes {
-//            if self.statusCode != code { return false }
-//        }
-//
-//        return true
-//    }
-//}
+extension URLComponents {
+    init(url: URLConvertible) throws {
+        guard let comps = URLComponents(url: try url.asURL(), resolvingAgainstBaseURL: true) else {
+            throw createDBError(.invalidURL)
+        }
+        self = comps
+    }
+}
 
 extension String {
     private var allowedCharacterSet: CharacterSet {
@@ -55,6 +52,32 @@ struct CouchDBRequestsUtils {
         headers["Accept"] = "application/json"
 
         var request = try URLRequest(url: url, method: method, headers: headers)
+
+        guard let body = body, let data = try? body.rawData() else { return request }
+
+        request.addValue(contentType, forHTTPHeaderField: "Content-Type")
+        request.httpBody = data
+        return request
+    }
+
+    static func createRequest(
+        _ connProperties: DBConfiguration,
+        method: HTTPMethod,
+        path: String,
+        parameters: Parameters,
+        body: JSON?,
+        contentType: String = "application/json"
+        ) throws -> URLRequest
+    {
+        let queryItems = parameters.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
+        var urlComps = try URLComponents(url: connProperties.URL)
+        urlComps.queryItems = queryItems
+        urlComps.path = path
+
+        var headers: HTTPHeaders = [:]
+        headers["Accept"] = "application/json"
+
+        var request = try URLRequest(url: urlComps, method: method, headers: headers)
 
         guard let body = body, let data = try? body.rawData() else { return request }
 
@@ -292,45 +315,45 @@ extension CouchDBRequests {
     }
 
     func database_add(_ json: JSON, batch: Bool = false, callback: @escaping (DBDocumentInfo?, Swift.Error?) -> Void) {
-//        if let json_str = json.rawString() {
-//            var path: String = "/\(HTTP.escape(url: databaseName))"
-//            if batch { path += "?batch=true" }
-//
-//            let requestOptions = Utils.prepareRequest(
-//                databaseConfiguration,
-//                method: "POST",
-//                path: path,
-//                hasBody: true
-//            )
-//
-//            let req = HTTP.request(requestOptions, callback: { (response) in
-//                if let response = response {
-//                    if response.isEqual(to: .accepted, .OK) {
-//                        do {
-//                            let doc = try Utils.getBodyAsData(response)
-//
-//                            let json = JSON(doc)
-//                            let _id = json["_id"].stringValue
-//                            let _rev = json["_rev"].stringValue
-//
-//                            callback(DBDocumentInfo(_id: _id, _rev: _rev, json: json), nil)
-//                        } catch {
-//                            callback(nil, error)
-//                        }
-//                    } else {
-//                        let error = createDBError(response)
-//                        callback(nil, error)
-//                    }
-//                } else {
-//                    let error = createDBError(.internalError)
-//                    callback(nil, error)
-//                }
-//            })
-//            req.end(json_str)
-//        } else {
-//            let error = createDBError(.invalidJSON, reason: "Could not read the JSON")
-//            callback(nil, error)
-//        }
+        if json.rawString() != nil {
+            let path: String = self.databaseName.escaped
+
+            var parameters: Parameters = [:]
+            if batch {
+                parameters["batch"] = batch
+            }
+
+            do {
+                let request = try Utils.createRequest(
+                    databaseConfiguration,
+                    method: .post,
+                    path: path,
+                    parameters: parameters,
+                    body: json
+                )
+
+                self.sessionManager
+                    .request(request)
+                    .validate()
+                    .responseJSON(queue: queue, completionHandler: { (resp) in
+                        switch resp.result {
+                        case .success(let value):
+                            let json: JSON = JSON(value)
+                            let _id = json["_id"].stringValue
+                            let _rev = json["_rev"].stringValue
+                            callback(DBDocumentInfo(_id: _id, _rev: _rev, json: json), nil)
+                        case .failure(let error):
+                            callback(nil, error)
+                        }
+                    }
+                )
+            } catch {
+                callback(nil, error)
+            }
+        } else {
+            let error = createDBError(.invalidJSON, reason: json.error?.localizedDescription)
+            callback(nil, error)
+        }
     }
 
 
