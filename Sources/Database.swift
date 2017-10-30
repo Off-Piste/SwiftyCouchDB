@@ -313,7 +313,7 @@ extension Database {
     ///   - callback: <#callback description#>
     public func add<Object: DBObject>(_ object: Object, callback: @escaping CouchDBResponse) {
         do {
-            let data = try JSONEncoder().encode(object)
+            let data = try Utils.encoder.encode(object)
             self.add(JSON(data: data), callback: callback)
         } catch {
             callback(nil, error)

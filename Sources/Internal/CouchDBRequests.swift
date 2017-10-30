@@ -165,8 +165,8 @@ extension CouchDBRequests {
                 switch resp.result {
                 case .success(let value):
                     let json: JSON = JSON(value)
-                    let _id = json["_id"].stringValue
-                    let _rev = json["_rev"].stringValue
+                    let _id = json["id"].stringValue
+                    let _rev = json["rev"].stringValue
                     callback(DBDocumentInfo(_id: _id, _rev: _rev, json: json), nil)
                 case .failure(let error):
                     callback(nil, error)

@@ -26,10 +26,16 @@ func demangleSwiftClass(_ className: NSString) -> NSString {
 
 open class DBObjectBase: Codable {
 
+    /// <#Description#>
     public init() { }
 
+    /// <#Description#>
+    ///
+    /// - Parameter decoder: <#decoder description#>
+    /// - Throws: <#throws value description#>
     public required init(from decoder: Decoder) throws { }
 
+    /// <#Description#>
     open class var database: Database? {
         let class_string: NSString = NSStringFromClass(self).lowercased() as NSString
         if isSwiftClassName(class_string) {
@@ -43,11 +49,18 @@ open class DBObjectBase: Codable {
 
 extension DBObjectBase: Hashable {
 
+    /// <#Description#>
     public var hashValue: Int {
         let data = try? Utils.encoder.encode(self)
         return data?.hashValue ?? 1 ^ 1
     }
 
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - lhs: <#lhs description#>
+    ///   - rhs: <#rhs description#>
+    /// - Returns: <#return value description#>
     public static func ==(lhs: DBObjectBase, rhs: DBObjectBase) -> Bool {
         guard let lhs_data = try? Utils.encoder.encode(lhs),
             let rhs_data = try? Utils.encoder.encode(rhs) else { return false }
@@ -59,10 +72,19 @@ extension DBObjectBase: Hashable {
 
 extension DBObjectBase {
 
+    /// <#Description#>
+    ///
+    /// - Parameter callback: <#callback description#>
     public final func add(callback: (Bool, Swift.Error?) -> Void) { fatalError() }
 
+    /// <#Description#>
+    ///
+    /// - Parameter callback: <#callback description#>
     public final func update(callback: ([DBObjectChanges]?, Swift.Error?) -> Void) { fatalError() }
 
+    /// <#Description#>
+    ///
+    /// - Parameter callback: <#callback description#>
     public final func delete(callback: (Bool, Swift.Error?) -> Void) { fatalError() }
 
 }

@@ -22,6 +22,7 @@
 
 /* Begin PBXBuildFile section */
 		C83DF5691FA7685D00E5630D /* DBObjectBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83DF5681FA7685D00E5630D /* DBObjectBase.swift */; };
+		C83DF56B1FA7719D00E5630D /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83DF56A1FA7719D00E5630D /* Models.swift */; };
 		C86E9C181FA73BD80098359A /* CouchDB+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E9C171FA73BD80098359A /* CouchDB+Alamofire.swift */; };
 		OBJ_100 /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* BaseTestCase.swift */; };
 		OBJ_101 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* Database.swift */; };
@@ -158,6 +159,7 @@
 /* Begin PBXFileReference section */
 		"Alamofire::Alamofire::Product" /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C83DF5681FA7685D00E5630D /* DBObjectBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBObjectBase.swift; sourceTree = "<group>"; };
+		C83DF56A1FA7719D00E5630D /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		C86E9C171FA73BD80098359A /* CouchDB+Alamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CouchDB+Alamofire.swift"; sourceTree = "<group>"; };
 		C895A1ED1FA730B1002FEB70 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C895A1EE1FA730B2002FEB70 /* install_swiftlint.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = install_swiftlint.sh; sourceTree = "<group>"; };
@@ -300,6 +302,7 @@
 			children = (
 				OBJ_22 /* BaseTestCase.swift */,
 				OBJ_23 /* Database.swift */,
+				C83DF56A1FA7719D00E5630D /* Models.swift */,
 			);
 			path = Tests;
 			sourceTree = SOURCE_ROOT;
@@ -771,6 +774,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				C83DF56B1FA7719D00E5630D /* Models.swift in Sources */,
 				OBJ_100 /* BaseTestCase.swift in Sources */,
 				OBJ_101 /* Database.swift in Sources */,
 			);

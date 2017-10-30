@@ -76,6 +76,27 @@ class DatabaseTests: BaseTestCase {
         }
     }
 
+    func testThatAddingValidObjectToValidDatabasePasses() {
+        async { (exp) in
+            // Given
+            let object = User()
+            object.id = "qwertyuiop"
+            object.username = "swiftylover99"
+            object.email = "swiftylover99@hotmail.com"
+
+            // When
+            let database = try Database("test_adding")
+            database.add(object, callback: { (info, error) in
+                // Then
+                XCTAssertNotNil(info)
+                XCTAssertNil(error)
+                XCTAssertEqual(info?._id, "qwertyuiop")
+
+                exp.fulfill()
+            })
+        }
+    }
+
     func testThatInvalidValidDatabaseDoesNotExist() {
         async { (exp) in
             // Given
