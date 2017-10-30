@@ -326,8 +326,12 @@ extension Database {
     ///   - json: <#json description#>
     ///   - callback: <#callback description#>
     public func add(_ json: JSON, callback: @escaping CouchDBResponse) {
-        if json.error != nil { callback(nil, json.error!); return }
-        self.request.database_add(json, callback: callback)
+        if let error = json.error {
+            callback(nil, error)
+        } else {
+            self.request.database_add(json, callback: callback)
+
+        }
     }
 
 }
@@ -339,7 +343,9 @@ extension Database {
     /// GET /{db}/_all_docs
     ///
     /// - Parameter callback: <#callback description#>
-    public func allDocs(callback: CouchDBResponse) { }
+    public func allDocs(callback: (JSON?, Error?) -> Void) {
+        
+    }
 
     /// POST /{db}/_all_docs
     ///

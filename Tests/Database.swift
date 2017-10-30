@@ -8,6 +8,10 @@
 import XCTest
 import SwiftyCouchDB
 
+class BasicObject: DBObject {
+    var name: String = ""
+}
+
 class DatabaseTests: BaseTestCase {
 
     func testThatDatabaseNameIsValid() {
@@ -73,6 +77,23 @@ class DatabaseTests: BaseTestCase {
 
                 exp.fulfill()
             })
+        }
+    }
+
+    func testThatAddingValidObjectsPasses() {
+        async { (exp) in
+            let database = try Database("test_adding")
+
+            let object = BasicObject()
+            object.name = "Tester"
+            object._id = "t1e4s6t7e8r9"
+
+            database.add(object) { (info, error) in
+                XCTAssertNotNil(info)
+                XCTAssertNil(error)
+
+                exp.fulfill()
+            }
         }
     }
 
