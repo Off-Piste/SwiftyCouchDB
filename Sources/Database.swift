@@ -376,7 +376,7 @@ extension Database {
             if let error = error {
                 callback(nil, error)
             } else {
-                let filteredObject = objects?.filter { $0._id == id }
+                let filteredObject = objects?.filter { $0.id == id }
                 if let object = filteredObject?.first {
                     callback(object, nil)
                 } else {

@@ -21,6 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		C83DF5691FA7685D00E5630D /* DBObjectBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83DF5681FA7685D00E5630D /* DBObjectBase.swift */; };
+		C86E9C181FA73BD80098359A /* CouchDB+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E9C171FA73BD80098359A /* CouchDB+Alamofire.swift */; };
 		OBJ_100 /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* BaseTestCase.swift */; };
 		OBJ_101 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* Database.swift */; };
 		OBJ_103 /* SwiftyCouchDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SwiftyCouchDB::SwiftyCouchDB::Product" /* SwiftyCouchDB.framework */; };
@@ -155,6 +157,8 @@
 
 /* Begin PBXFileReference section */
 		"Alamofire::Alamofire::Product" /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C83DF5681FA7685D00E5630D /* DBObjectBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBObjectBase.swift; sourceTree = "<group>"; };
+		C86E9C171FA73BD80098359A /* CouchDB+Alamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CouchDB+Alamofire.swift"; sourceTree = "<group>"; };
 		C895A1ED1FA730B1002FEB70 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C895A1EE1FA730B2002FEB70 /* install_swiftlint.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = install_swiftlint.sh; sourceTree = "<group>"; };
 		"HeliumLogger::HeliumLogger::Product" /* HeliumLogger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = HeliumLogger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -274,6 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_14 /* CouchDBRequests.swift */,
+				C86E9C171FA73BD80098359A /* CouchDB+Alamofire.swift */,
 				OBJ_15 /* String+Regex.swift */,
 			);
 			path = Internal;
@@ -423,6 +428,7 @@
 				OBJ_9 /* DBConfiguration.swift */,
 				OBJ_10 /* DBError.swift */,
 				OBJ_11 /* DBObject.swift */,
+				C83DF5681FA7685D00E5630D /* DBObjectBase.swift */,
 				OBJ_12 /* Database.swift */,
 				OBJ_13 /* Internal */,
 				OBJ_16 /* MiniPromiseKit */,
@@ -656,6 +662,7 @@
 			buildActionMask = 0;
 			files = (
 				OBJ_122 /* CouchDB.swift in Sources */,
+				C86E9C181FA73BD80098359A /* CouchDB+Alamofire.swift in Sources */,
 				OBJ_123 /* DBConfiguration.swift in Sources */,
 				OBJ_124 /* DBError.swift in Sources */,
 				OBJ_125 /* DBObject.swift in Sources */,
@@ -665,6 +672,7 @@
 				OBJ_129 /* Apply.swift in Sources */,
 				OBJ_130 /* BasicPromise.swift in Sources */,
 				OBJ_131 /* Promise.swift in Sources */,
+				C83DF5691FA7685D00E5630D /* DBObjectBase.swift in Sources */,
 				OBJ_132 /* Result.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
