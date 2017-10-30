@@ -311,7 +311,7 @@ extension Database {
     /// - Parameters:
     ///   - object: <#object description#>
     ///   - callback: <#callback description#>
-    public func add<Object: DBObject>(_ object: Object, callback: @escaping CouchDBResponse) {
+    public func add<Object: DBObjectBase>(_ object: Object, callback: @escaping CouchDBResponse) {
         do {
             let data = try Utils.encoder.encode(object)
             self.add(JSON(data: data), callback: callback)
@@ -320,7 +320,7 @@ extension Database {
         }
     }
 
-    /// <#Description#>
+    /// POST /{db}
     ///
     /// - Parameters:
     ///   - json: <#json description#>

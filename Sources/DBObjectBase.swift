@@ -75,7 +75,20 @@ extension DBObjectBase {
     /// <#Description#>
     ///
     /// - Parameter callback: <#callback description#>
-    public final func add(callback: (Bool, Swift.Error?) -> Void) { fatalError() }
+    public final func add(callback: @escaping (Bool, Swift.Error?) -> Void) {
+        guard let database = type(of: self).database else {
+            callback(false, createDBError(.invalidDatabase, reason: "Database is nil"))
+            return
+        }
+        
+        database.add(self, callback: { (info, error) in
+            if let error = error {
+                callback(false, error)
+            } else {
+                callback(true, nil)
+            }
+        })
+    }
 
     /// <#Description#>
     ///

@@ -39,4 +39,8 @@ class User: DBObject {
         try container.encode(email, forKey: .email)
     }
 
+    override class var database: Database? {
+        return try? Database("test_adding")
+    }
+
 }
