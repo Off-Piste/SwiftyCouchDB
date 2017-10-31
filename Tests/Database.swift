@@ -127,33 +127,10 @@ extension DatabaseTests {
 
     func testThatUpdatingWorks() {
         async { (exp) in
-            let object = User()
+            let object = UpdatingUser()
             object.id = "qwertyuiop"
             object.username = "swiftylover99"
             object.email = "swiftylover99@hotmail.com"
-
-//            // TODO: Look at why this isn't working
-//            // Check SwiftJSON
-//            let data = try Utils.encoder.encode(object)
-//            XCTAssert(data.count != 0)
-//            XCTAssertNotNil(String(data: data, encoding: .utf8))
-//            var json = JSON(data: data)
-//            XCTAssertNil(json.error)
-//
-//            let newData = try object.toData()
-//            XCTAssert(newData.count != 0)
-//            XCTAssertNotNil(String(data: newData, encoding: .utf8))
-//            json = JSON(data:newData)
-//            XCTAssertNil(json.error)
-//
-//            exp.fulfill()
-//
-////            object.add(callback: { (success, error) in
-////                XCTAssert(success)
-////                XCTAssertNil(error)
-////
-////                exp.fulfill()
-////            })
 
             object.update(callback: { (change) in
                 switch change {
