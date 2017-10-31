@@ -7,6 +7,7 @@
 
 import XCTest
 import SwiftyCouchDB
+import SwiftyJSON
 
 class DatabaseTests: BaseTestCase {
 
@@ -114,7 +115,62 @@ class DatabaseTests: BaseTestCase {
         }
     }
 
-    func test_() {
+}
+
+extension DBObjectBase {
+    func toData() throws -> Data {
+        return try Utils.encoder.encode(self)
+    }
+}
+
+extension DatabaseTests {
+
+    func testThatUpdatingWorks() {
+        async { (exp) in
+            let object = User()
+            object.id = "qwertyuiop"
+            object.username = "swiftylover99"
+            object.email = "swiftylover99@hotmail.com"
+
+//            // TODO: Look at why this isn't working
+//            // Check SwiftJSON
+//            let data = try Utils.encoder.encode(object)
+//            XCTAssert(data.count != 0)
+//            XCTAssertNotNil(String(data: data, encoding: .utf8))
+//            var json = JSON(data: data)
+//            XCTAssertNil(json.error)
+//
+//            let newData = try object.toData()
+//            XCTAssert(newData.count != 0)
+//            XCTAssertNotNil(String(data: newData, encoding: .utf8))
+//            json = JSON(data:newData)
+//            XCTAssertNil(json.error)
+//
+//            exp.fulfill()
+//
+////            object.add(callback: { (success, error) in
+////                XCTAssert(success)
+////                XCTAssertNil(error)
+////
+////                exp.fulfill()
+////            })
+
+            object.update(callback: { (change) in
+                switch change {
+                case .changes(let changes):
+                    XCTAssertChanges(
+                        changes: changes,
+                        equalTo: ("email", .addition)
+                    )
+                case .error(let error): XCTFail(error.localizedDescription)
+                default: XCTFail()
+                }
+                exp.fulfill()
+            })
+        }
+    }
+
+    func testThatRetrievingPassesWithValidObject() {
         async { (exp) in
             let database = try Database("test_retrieve")
 

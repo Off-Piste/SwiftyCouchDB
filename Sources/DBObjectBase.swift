@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 public struct Utils {
 
@@ -93,7 +94,51 @@ extension DBObjectBase {
     /// <#Description#>
     ///
     /// - Parameter callback: <#callback description#>
-    public final func update(callback: ([DBObjectChanges]?, Swift.Error?) -> Void) { fatalError() }
+    public final func update(callback: @escaping (DBObjectChange) -> Void) {
+        guard let db = type(of: self).database else {
+            callback(.error(createDBError(.invalidDatabase, reason: "Database is nil")))
+            return
+        }
+
+        // 1. Retrieve the old object
+        // Id is not set yet and the User should only use DBObject not DBObjectBase
+        db.retrieve((self as! DBObject).id) { (info, err) in
+            if let info = info {
+                // 2. Get the oldProperties
+                let oldProperies = info.json.toProperties
+
+                do {
+                    // 3. Encode the object to JSON
+                    let object = self
+                    let data = try Utils.encoder.encode(object)
+                    let newJSON = JSON(data: data)
+
+                    // 4. Set the new Properties
+                    let newProperies = newJSON.toProperties
+
+                    // 5. Update the documents
+                    db.request.doc_update(info._id, rev: info._rev, json: newJSON) { (info, err) in
+                        if let err = err {
+                            callback(.error(err))
+                        } else {
+                            // 6. Check for changes and pass changes back
+                            let changes = checkChanges(from: oldProperies, to: newProperies)
+                            callback(.changes(changes))
+                        }
+                    }
+                } catch {
+                    callback(.error(error))
+                }
+            } else {
+                // If the error code is 404, safe to assume the object has been deleted
+                if err!._code == 404 {
+                    callback(.deleted)
+                } else {
+                    callback(.error(err!))
+                }
+            }
+        }
+    }
 
     /// <#Description#>
     ///
@@ -101,3 +146,4 @@ extension DBObjectBase {
     public final func delete(callback: (Bool, Swift.Error?) -> Void) { fatalError() }
 
 }
+

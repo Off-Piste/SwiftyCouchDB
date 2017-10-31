@@ -189,6 +189,39 @@ extension CouchDBRequests {
         }
     }
 
+    func doc_update(
+        _ id: String,
+        rev: String,
+        json: JSON,
+        callback: @escaping (DBDocumentInfo?, Error?) -> Void
+        )
+    {
+        guard json.error == nil else {
+            callback(nil, json.error)
+            return
+        }
+
+        let request = CouchDBRequest(
+            databaseConfiguration,
+            path: "\(databaseName.escaped)/\(id.escaped)",
+            method: .post,
+            parameters: ["rev":rev]
+        )
+        request.json = json
+
+        self.sessionManager.request(request).validate().responseJSON(queue: queue) { (resp) in
+            switch resp.result {
+            case .success(let value):
+                let json = JSON(value)
+                let _id = json["id"].exists() ? json["id"].stringValue : json["_id"].stringValue
+                let _rev = json["rev"].exists() ? json["rev"].stringValue : json["_rev"].stringValue
+                callback(DBDocumentInfo(_id: _id, _rev: _rev, json: json), nil)
+            case .failure(let error):
+                callback(nil, error)
+            }
+        }
+    }
+
 }
 
 extension CouchDBRequests {

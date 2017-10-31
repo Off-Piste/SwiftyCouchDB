@@ -9,9 +9,6 @@
 import Foundation
 
 /// <#Description#>
-public struct DBObjectChanges { }
-
-/// <#Description#>
 open class DBObject: DBObjectBase {
 
     /// <#Description#>

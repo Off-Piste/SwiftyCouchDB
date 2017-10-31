@@ -9,6 +9,39 @@ import XCTest
 import SwiftyCouchDB
 import HeliumLogger
 
+enum Change {
+    case addition
+    case deletion
+    case change(from: Any, to: Any)
+}
+
+extension Array where Element == (String, Change) {
+    subscript (_ string: String) -> Element? {
+        for touple in self {
+            if touple.0 == string { return touple }
+        }
+        return nil
+    }
+}
+
+func XCTAssertChanges(changes: [DBPropertyChange], equalTo checks: (String, Change)...) {
+    let checkingChanges = changes.filter { change in
+        checks.contains { touple -> Bool in touple.0 == change.name }
+    }
+
+    for change in checkingChanges {
+        guard let touple = checks[change.name] else { continue }
+
+        switch touple.1 {
+        case .addition: XCTAssertNil(change.oldValue)
+        case .deletion: XCTAssertNil(change.newValue)
+        case .change(let old, let new):
+            XCTAssertNotEqual(old as? AnyHashable, new as? AnyHashable)
+        }
+    }
+
+}
+
 typealias TestNotificationHandler = (Notification, XCTestExpectation) -> Void
 
 var _has_set_up_db: Bool = false

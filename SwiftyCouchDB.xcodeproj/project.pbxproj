@@ -24,6 +24,7 @@
 		C83DF5691FA7685D00E5630D /* DBObjectBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83DF5681FA7685D00E5630D /* DBObjectBase.swift */; };
 		C83DF56B1FA7719D00E5630D /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83DF56A1FA7719D00E5630D /* Models.swift */; };
 		C86E9C181FA73BD80098359A /* CouchDB+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E9C171FA73BD80098359A /* CouchDB+Alamofire.swift */; };
+		C8D201571FA892E80083CBA1 /* DBObjectChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D201561FA892E80083CBA1 /* DBObjectChanges.swift */; };
 		OBJ_100 /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* BaseTestCase.swift */; };
 		OBJ_101 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* Database.swift */; };
 		OBJ_103 /* SwiftyCouchDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SwiftyCouchDB::SwiftyCouchDB::Product" /* SwiftyCouchDB.framework */; };
@@ -163,6 +164,7 @@
 		C86E9C171FA73BD80098359A /* CouchDB+Alamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CouchDB+Alamofire.swift"; sourceTree = "<group>"; };
 		C895A1ED1FA730B1002FEB70 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C895A1EE1FA730B2002FEB70 /* install_swiftlint.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = install_swiftlint.sh; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.sh; };
+		C8D201561FA892E80083CBA1 /* DBObjectChanges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBObjectChanges.swift; sourceTree = "<group>"; };
 		"HeliumLogger::HeliumLogger::Product" /* HeliumLogger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = HeliumLogger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"LoggerAPI::LoggerAPI::Product" /* LoggerAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LoggerAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_10 /* DBError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBError.swift; sourceTree = "<group>"; };
@@ -432,6 +434,7 @@
 				OBJ_10 /* DBError.swift */,
 				OBJ_11 /* DBObject.swift */,
 				C83DF5681FA7685D00E5630D /* DBObjectBase.swift */,
+				C8D201561FA892E80083CBA1 /* DBObjectChanges.swift */,
 				OBJ_12 /* Database.swift */,
 				OBJ_13 /* Internal */,
 				OBJ_16 /* MiniPromiseKit */,
@@ -666,6 +669,7 @@
 			files = (
 				OBJ_122 /* CouchDB.swift in Sources */,
 				C86E9C181FA73BD80098359A /* CouchDB+Alamofire.swift in Sources */,
+				C8D201571FA892E80083CBA1 /* DBObjectChanges.swift in Sources */,
 				OBJ_123 /* DBConfiguration.swift in Sources */,
 				OBJ_124 /* DBError.swift in Sources */,
 				OBJ_125 /* DBObject.swift in Sources */,
