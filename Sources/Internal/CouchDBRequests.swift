@@ -156,62 +156,41 @@ extension CouchDBRequests {
         )
         request.json = json
 
-        print(json)
-
-        self.sessionManager
-            .request(request)
-            .validate()
-            .responseJSON(queue: queue, completionHandler: { (resp) in
-                switch resp.result {
-                case .success(let value):
-                    let json: JSON = JSON(value)
-                    let _id = json["id"].stringValue
-                    let _rev = json["rev"].stringValue
-                    callback(DBDocumentInfo(_id: _id, _rev: _rev, json: json), nil)
-                case .failure(let error):
-                    callback(nil, error)
-                }
+        self.sessionManager.request(request).validate().responseJSON(queue: queue) { (resp) in
+            switch resp.result {
+            case .success(let value):
+                let json = JSON(value)
+                let _id = json["id"].exists() ? json["id"].stringValue : json["_id"].stringValue
+                let _rev = json["rev"].exists() ? json["rev"].stringValue : json["_rev"].stringValue
+                callback(DBDocumentInfo(_id: _id, _rev: _rev, json: json), nil)
+            case .failure(let error):
+                callback(nil, error)
             }
+        }
+    }
+
+    func database_retrieve(_ id: String, callback: @escaping (DBDocumentInfo?, Error?) -> Void) {
+        let request = CouchDBRequest(
+            databaseConfiguration,
+            path: "\(databaseName.escaped)/\(id.escaped)",
+            method: .get
         )
+
+        self.sessionManager.request(request).validate().responseJSON(queue: queue) { (resp) in
+            switch resp.result {
+            case .success(let value):
+                let json = JSON(value)
+                let _id = json["id"].exists() ? json["id"].stringValue : json["_id"].stringValue
+                let _rev = json["rev"].exists() ? json["rev"].stringValue : json["_rev"].stringValue
+                callback(DBDocumentInfo(_id: _id, _rev: _rev, json: json), nil)
+            case .failure(let error):
+                callback(nil, error)
+            }
+        }
     }
 
-    func database_all_docs(parameters: Parameters, callback: @escaping (JSON?, Error?) -> Void) {
-//        do {
-//            let path: String = self.databaseName.escaped + "/_all_docs"
-//
-//            let request = try Utils.createRequest(
-//                databaseConfiguration,
-//                method: .get,
-//                path: path,
-//                parameters: parameters,
-//                body: nil
-//            )
-//
-//            self.sessionManager
-//                .request(request)
-//                .validate()
-//                .responseJSON(queue: self.queue, completionHandler: { (resp) in
-//                    switch resp.result {
-//                    case .success(let value):
-//                        let json = JSON(value)
-//                        if json.type != Type.dictionary {
-//                            let error = createDBError(
-//                                .invalidJSON,
-//                                reason: "JSON [\(json)] is not a dictionary"
-//                            )
-//                            callback(nil, error)
-//                        } else {
-//                            callback(json, nil)
-//                        }
-//                    case .failure(let error):
-//                        callback(nil, error)
-//                    }
-//                }
-//            )
-//        } catch {
-//            callback(nil, error)
-//        }
-    }
+}
 
-
+extension CouchDBRequests {
+    
 }

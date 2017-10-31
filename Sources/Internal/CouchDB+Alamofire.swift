@@ -46,6 +46,8 @@ class CouchDBRequest: URLRequestConvertible {
         var baseURL = try url.asURL()
         baseURL.appendPathComponent(path)
 
+        // Use Alamofires request builder to place the parameteres right
+        // saves us building a function to do the same thing
         let req = request(baseURL, method: .get, parameters: parameters, encoding: encoding)
         return req.request?.url ?? baseURL
     }
@@ -58,8 +60,6 @@ class CouchDBRequest: URLRequestConvertible {
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             request.httpBody = data
         }
-
-        debugPrint(request)
         return request
     }
 }

@@ -114,6 +114,22 @@ class DatabaseTests: BaseTestCase {
         }
     }
 
+    func test_() {
+        async { (exp) in
+            let database = try Database("test_retrieve")
+
+            database.retrieve("qwertyuiop", callback: { (info, error) in
+                XCTAssertNil(error)
+                XCTAssertNotNil(info)
+
+                XCTAssertEqual(info?._id, "qwertyuiop")
+                XCTAssertEqual(info?.json["username"].string, "swiftylover99")
+
+                exp.fulfill()
+            })
+        }
+    }
+
     func testThatInvalidValidDatabaseDoesNotExist() {
         async { (exp) in
             // Given

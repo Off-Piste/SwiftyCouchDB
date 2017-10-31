@@ -338,123 +338,16 @@ extension Database {
 
 extension Database {
 
-    // MARK: /db/_all_docs
-
-    /// GET /{db}/_all_docs
-    ///
-    /// - Parameter callback: <#callback description#>
-    public func allDocs(callback: (JSON?, Error?) -> Void) {
-        
-    }
-
-    /// POST /{db}/_all_docs
-    ///
-    /// - Parameters:
-    ///   - ids: <#ids description#>
-    ///   - callback: <#callback description#>
-    public func mutipleDocs(with ids: [String], callback: CouchDBResponse) { }
-
 }
 
 extension Database {
 
     // MARK: Retriving Objects
 
-    /// Method to retrive an object with the required _id
-    ///
-    /// - Parameters:
-    ///   - type:       The type of DBObject
-    ///   - id:         The _id for the Document
-    ///   - callback:   (Object?, Swift.Error?) -> Void
-    public func object<Object: DBObject>(
-        _ type: Object.Type,
-        withID id: String,
-        callback: @escaping (Object?, Swift.Error?) -> Void
-        )
-    {
-        self.objects(type) { (objects, error) in
-            if let error = error {
-                callback(nil, error)
-            } else {
-                let filteredObject = objects?.filter { $0.id == id }
-                if let object = filteredObject?.first {
-                    callback(object, nil)
-                } else {
-                    let msg = "Objects \(objects!) does not contain an object with the id: \(id)"
-                    let err = createDBError(.invalidRequest, reason: msg)
-                    callback(nil, err)
-                }
-            }
-        }
+    public func retrieve(_ id: String, callback: @escaping (DBDocumentInfo?, Error?) -> Void) {
+        self.request.database_retrieve(id, callback: callback)
     }
 
-    /// <#Description#>
-    ///
-    /// - Parameters:
-    ///   - type: <#type description#>
-    ///   - predicateFormat: <#predicateFormat description#>
-    ///   - args: <#args description#>
-    ///   - callback: <#callback description#>
-    public func objects<Object: DBObject>(
-        _ type: Object.Type,
-        where predicateFormat: String,
-        args: Any...,
-        callback: ([Object]?, Swift.Error?) -> Void
-        )
-    {
-        let predicate = NSPredicate(format: predicateFormat, argumentArray: args)
-        self.objects(type, where: predicate, callback: callback)
-    }
-
-    /// <#Description#>
-    ///
-    /// - Parameters:
-    ///   - type: <#type description#>
-    ///   - predicate: <#predicate description#>
-    ///   - callback: <#callback description#>
-    public func objects<Object: DBObject>(
-        _ type: Object.Type,
-        where predicate: NSPredicate,
-        callback: ([Object]?, Swift.Error?) -> Void
-        )
-    {
-        self.objects(type) { (objects, error) in
-            if let error = error {
-                callback(nil, error)
-            } else {
-                callback((objects! as NSArray).filtered(using: predicate) as? [Object], nil)
-            }
-        }
-    }
-
-
-    /// Method to get an array of Objects from the database.
-    ///
-    /// - Note: Using the class passed in `type:` we will create an array of
-    ///         those objects, ignoring ones that are not of that type so if your
-    ///         array contains many different objects they will not be parsed
-    /// - Parameters:
-    ///   - type: The
-    ///   - callback: <#callback description#>
-    public func objects<Object: DBObject>(
-        _ type: Object.Type,
-        callback: ([Object]?, Swift.Error?) -> Void
-        )
-    {
-        do { try validateRequest(type) } catch { callback(nil, error) }
-    }
-
-    private func validateRequest<Object: DBObject>(_ type: Object.Type) throws {
-        guard let objectDB = type.database else {
-            let msg = "The object type \(type) has an invalid database so we cannot connect"
-            throw createDBError(.invalidDatabase, reason: msg)
-        }
-
-        if objectDB != self {
-            let msg = "The object has a differring database [\(objectDB)] to the one being used [\(self)]"
-            throw createDBError(.incompatableDatabase, reason: msg)
-        }
-    }
 }
 
 func handleURL(_ url: URL) throws -> (String, DBConfiguration) {

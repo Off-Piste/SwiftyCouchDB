@@ -70,15 +70,27 @@ function install_xcode_helpers {
 #######################################
 
 function create_couch_db_databases {
+  echo "curl -X PUT 127.0.0.1:5984/test_exists"
   eval "curl -X PUT 127.0.0.1:5984/test_exists"
+
+  echo "curl -X PUT 127.0.0.1:5984/test_deletion"
   eval "curl -X PUT 127.0.0.1:5984/test_deletion"
+
+  echo "curl -X PUT 127.0.0.1:5984/test_adding"
   eval "curl -X PUT 127.0.0.1:5984/test_adding"
 
+  echo "curl -X PUT 127.0.0.1:5984/test_retrieve"
+  eval "curl -X PUT 127.0.0.1:5984/test_retrieve"
+
+  echo "curl -X POST -H 'Content-Type: application/json' -d '{\"_id\":\"qwertyuiop\", \"username\":\"swiftylover99\"}' 127.0.0.1:5984/test_retrieve"
+  eval "curl -X POST -H 'Content-Type: application/json' -d '{\"_id\":\"qwertyuiop\", \"username\":\"swiftylover99\"}' 127.0.0.1:5984/test_retrieve"
+
+  echo "curl -X GET 127.0.0.1:5984/_all_dbs"
   eval "curl -X GET 127.0.0.1:5984/_all_dbs"
 }
 
 function build_swift {
-  swift build --verbose
+  swift build
 
   swift package generate-xcodeproj
 }
@@ -89,8 +101,10 @@ function build_swift {
 
 function delete_couch_db_databases {
   eval "curl -X DELETE 127.0.0.1:5984/test_exists"
-
   eval "curl -X DELETE 127.0.0.1:5984/test_adding"
+  eval "curl -X DELETE 127.0.0.1:5984/test_retrieve"
+
+  eval "curl -X GET 127.0.0.1:5984/_all_dbs"
 }
 
 #######################################
