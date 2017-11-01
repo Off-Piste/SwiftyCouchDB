@@ -23,7 +23,7 @@ public final class DBConfiguration: CustomStringConvertible {
     public let host: String
 
     /// Port number where CouchDB server is listening for incoming connections
-    public let port: Int16
+    public let port: Int16?
 
     /// Whether or not to use a secured connection
     public let secured: Bool
@@ -44,7 +44,7 @@ public final class DBConfiguration: CustomStringConvertible {
     ///   - password: The URI password
     public init(
         host: String,
-        port: Int16,
+        port: Int16?,
         secured: Bool,
         username: String? = nil,
         password: String? = nil
@@ -85,22 +85,28 @@ public final class DBConfiguration: CustomStringConvertible {
             base = "\(HTTPProtocol)://\(host)"
         }
 
-        if port == 0000 {
-            return base
-        } else {
+        if let port = self.port {
             return "\(base):\(port)"
+        } else {
+            return base
         }
     }
 
     public var description: String {
         var items: [String] = [
             "host=\(self.host)",
-            "port=\(self.port)",
             "secured=\(self.secured)"
         ]
 
-        if let username = self.username, let password = self.password {
+        if let port = self.port {
+            items.append("port=\(port)")
+        }
+
+        if let username = self.username {
             items.append("username=\(username)")
+        }
+
+        if let password = self.password {
             items.append("password=\(password)")
         }
         
