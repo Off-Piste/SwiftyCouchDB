@@ -11,6 +11,38 @@ import SwiftyJSON
 import LoggerAPI
 @_exported import Alamofire
 
+// FIXME: Finish
+
+public enum DBQueryOption {
+    case attachments(Bool)
+    case att_encoding_info(Bool)
+    case atts_since(NSArray)
+    case conflicts(Bool)
+    case deleted_conflicts(Bool)
+    case latest(Bool)
+    case local_seq(Bool)
+    case meta(Bool)
+    case open_revs(NSArray)
+    case rev(String)
+    case revs(Bool)
+    case revs_info(Bool)
+}
+
+extension Array where Element == DBQueryOption {
+    func toParameters() -> Parameters {
+        var parameters: Parameters = [:]
+
+        for option in self {
+            switch option {
+            case .rev(let revision): parameters.updateValue(revision, forKey: "rev")
+            default: continue
+            }
+        }
+
+        return parameters
+    }
+}
+
 /// The infomation returned froma GET request on the server.
 public struct DatabaseInfo: Codable, CustomStringConvertible {
 
@@ -80,12 +112,6 @@ public struct Database {
     /// The name of the Databae
     public var name: String
 
-    /// The infomation returned froma GET request on the server.
-    ///
-    /// - Note: Will be nil if the server returns a 404 or if the request
-    ///         has not been returned yet.
-    public var info: DatabaseInfo?
-
     /// The DBConfiguration for the server
     public var configuration: DBConfiguration
 
@@ -114,9 +140,8 @@ public struct Database {
     /// - Parameters:
     ///   - name:           The database name
     ///   - configuration:  The configuration for the database
-    /// - Throws:           This will either throw an `.invalidDatabase` error if the
-    ///                     database name is invalid or a `.couchNotRunning`
-    ///                     if couchdb is set to run locally but is not running.
+    /// - Throws:           An `.invalidDatabase` error if the database
+    ///                     name is invalid.
     public init(_ name: String, configuration: DBConfiguration) throws {
         // Check the
         let patern = "^[a-z][a-z0-9_$()+/-]*$"
@@ -131,8 +156,6 @@ public struct Database {
         self.name = name.matches(patern).first!
         self.configuration = configuration
         self.request = CouchDBRequests(name: name, configuartion: configuration)
-
-        try self.commonInit()
     }
 
     /// Method to create a Database with an URL.
@@ -151,48 +174,11 @@ public struct Database {
         let (name, config) = try handleURL(realURL)
         try self.init(name, configuration: config)
     }
-
-    private mutating func commonInit() throws {
-//        if configuration.host == "127.0.0.1" {
-//            // Using Data(contentsOf: ...) as CouchDB is running local so will be > 21ms
-//            let base_url: URL = URL(string: "\(self.configuration.URL)")!
-//
-//            // Check if CouchDB is running
-//            let couch_db_welcome = try? Data(contentsOf: base_url)
-//            if couch_db_welcome == nil {
-//                let msg = "CouchDB is not running, please call `couchdb` in your terminal"
-//                throw createDBError(.couchNotRunning, reason: msg)
-//            }
-//
-//            // Get Database Infomation
-//            do {
-//                let data: Data = try Data(contentsOf: base_url.appendingPathComponent(name))
-//                self.info = try? JSONDecoder().decode(DatabaseInfo.self, from: data)
-//
-//                if self.info == nil {
-//                    var json = JSON(data: data)
-//                    Log.error(json.stringValue)
-//                }
-//            } catch {
-//                Log.info("Could not connect to database")
-//                Log.verbose("Could not connect to database, so will assume database has not bee created yet")
-//            }
-//        } else {
-//            // Get Database Infomation
-////            self.info(callback: { (new_info, error) in
-////                if let new_info = new_info {
-////                    DispatchQueue.main.sync { self.info = new_info }
-////                }
-////                Log.error(error!.localizedDescription)
-////            })
-//        }
-
-    }
 }
 
 extension Database: Hashable, CustomStringConvertible {
 
-    // MARK: Hashable, CustomStringConvertible
+    // MARK: Hashable, Equatable, CustomStringConvertible.
 
 
     /// The hash value.
@@ -262,30 +248,17 @@ extension Database {
         self.request.database_exists(callback: callback)
     }
 
-    /// PUT /{db}
+    /// Method to get the information about the specified database.
     ///
-    /// - Parameter callback: <#callback description#>
-    public func create(callback: @escaping (Database?, Error?) -> Void) {
-        self.request.database_create(callback: callback)
-    }
-
-    /// HEAD /{db} -> PUT /{db}
+    /// Using this method is the same as calling this with curl:
     ///
-    /// - Parameter callback: <#callback description#>
-    public func createIfDoesNotExist(callback: @escaping (Database?, Error?) -> Void) {
-        self.exists { (exists, error) in
-            // Error code 500 is internal error, so the next request would return the same
-            // result, so just return there to save time.
-            if error?._code == 500 { callback(nil, error); return }
-
-            // If the server doesn't exist then create the new server
-            if !exists { self.create(callback: callback) }
-        }
-    }
-
-    /// GET /{db}
-    ///
-    /// - Parameter callback: <#callback description#>
+    /// ```bash
+    /// curl -X GET 127.0.0.1:5984/database_name
+    /// ```
+    /// - Note:                 For more info on the see
+    ///                         [here](http://docs.couchdb.org/en/2.1.0/api/database/common.html#db)
+    /// - Parameter callback:   The database info if the response is 200 or an
+    ///                         error if the response was 404
     public func info(callback: @escaping CouchDBDatabseInfoCallback) {
         self.request.database_info { (data, error) in
             if let error = error { callback(nil, error); return }
@@ -299,18 +272,55 @@ extension Database {
         }
     }
 
-    /// DELETE /{db}
+    /// Method to creates a new database.
     ///
-    /// - Parameter callback: <#callback description#>
+    ///
+    /// Using this method is the same as calling this with curl:
+    ///
+    /// ```bash
+    /// curl -X PUT 127.0.0.1:5984/database_name
+    /// ```
+    ///
+    /// - Warning:              Error: 412, is called if the Databse already exists
+    /// - Note:                 The database has already been validated so will never
+    ///                         his an error code 400
+    /// - Parameter callback:   Returns a Database if the request returns a 200 or an
+    ///                         error if code is 401 or 412
+    public func create(callback: @escaping (Database?, Error?) -> Void) {
+        self.request.database_create(callback: callback)
+    }
+
+    /// Method to deletes the specified database, and all the documents
+    /// and attachments contained within it.
+    ///
+    /// Using this method is the same as calling this with curl:
+    ///
+    /// ```bash
+    /// curl -X DELETE 127.0.0.1:5984/database_name
+    /// ```
+    ///
+    /// - Parameter callback:   Retuns True if the Database has been deleted,
+    ///                         or false if not, with an accompanying error
     public func delete(callback: @escaping (Bool, Swift.Error?) -> Void) {
         self.request.database_delete(callback: callback)
     }
 
-    /// POST /{db}
+    /// Creates a new document in the specified database,
+    /// using the supplied DBObject.
     ///
+    /// Using this method is the same as calling this with curl:
+    ///
+    /// ```bash
+    /// curl -X POST -H 'Content-Type: application/json' -d '{"_id":"abc"}' 127.0.0.1:5984/database_name
+    /// ```
+    ///
+    /// - Note:         The object uses Codable so make sure you override
+    ///                 the DBObjects's methods and call super or the object
+    ///                 will be sent with just an "_id"
     /// - Parameters:
-    ///   - object: <#object description#>
-    ///   - callback: <#callback description#>
+    ///   - object:     The object to be added to the Database
+    ///   - callback:   The document infomation if the request was sucessful
+    ///                 or the error that has occured
     public func add<Object: DBObjectBase>(_ object: Object, callback: @escaping CouchDBResponse) {
         do {
             let data = try Utils.encoder.encode(object)
@@ -320,11 +330,25 @@ extension Database {
         }
     }
 
-    /// POST /{db}
+    /// Creates a new document in the specified database,
+    /// using the supplied JSON document structure.
+    ///
+    /// If the JSON structure includes the "_id" field, then the
+    /// document will be created with the specified document ID.
+    ///
+    /// If the "_id" field is not specified, a new unique ID will be generated,
+    /// following whatever UUID algorithm is configured for that server.
+    ///
+    /// Using this method is the same as calling this with curl:
+    ///
+    /// ```bash
+    /// curl -X POST -H 'Content-Type: application/json' -d '{"_id":"abc"}' 127.0.0.1:5984/database_name
+    /// ```
     ///
     /// - Parameters:
-    ///   - json: <#json description#>
-    ///   - callback: <#callback description#>
+    ///   - json:       The JSON document to be added
+    ///   - callback:   The document infomation if the request was sucessful
+    ///                 or the error that has occured
     public func add(_ json: JSON, callback: @escaping CouchDBResponse) {
         if let error = json.error {
             callback(nil, error)
@@ -334,18 +358,89 @@ extension Database {
         }
     }
 
+    // TODO: Do we really need this??
+    internal func createIfDoesNotExist(callback: @escaping (Database?, Error?) -> Void) {
+        self.exists { (exists, error) in
+            // Error code 500 is internal error, so the next request would return the same
+            // result, so just return there to save time.
+            if error?._code == 500 { callback(nil, error); return }
+
+            // If the server doesn't exist then create the new server
+            if !exists { self.create(callback: callback) }
+        }
+    }
+
 }
+
+// TODO: PUT ?? Do we need PUT /{db}/{docid} or keep POST /{db}
+// TODO: DELETE
 
 extension Database {
 
-}
+    // MARK: /{db}/{docid}
+    // These will be for people using JSON and not DBObject subclasses.
 
-extension Database {
+    /// Method to get a document by the specified `docid` from the specified db.
+    ///
+    /// Using this method is the same as calling this with curl:
+    ///
+    /// ```bash
+    /// curl -X GET 127.0.0.1:5984/database_name/id
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - id:         The ID of the Object
+    ///   - options:    Any query parameters for the request
+    ///   - callback:   The document info for the document or an error
+    /// - Note:         Unless you pass [.rev(...)] for options you will get the
+    ///                 latest revision of the document will always be returned.
+    public func retrieve(_ id: String, options: [DBQueryOption]? = nil, callback: @escaping (DBDocumentInfo?, Error?) -> Void) {
+        self.request.database_retrieve(id, parameters: options?.toParameters(), callback: callback)
+    }
 
-    // MARK: Retriving Objects
+    /// Method to update a document with new JSON
+    ///
+    /// - Note:         If you are using a DBObject, please use
+    ///                 `DBObject().update(callback:)`
+    /// - Parameters:
+    ///   - id:         The ID for the Document
+    ///   - json:       The new JSON for the document
+    ///   - callback:   The changes that have occured to the document
+    public func update(_ id: String, with json: JSON, callback: @escaping (DBObjectChange) -> Void) {
+        // 1. Retrieve the old object
+        self.retrieve(id) { (info, error) in
+            if let info = info {
+                // 2. Get the oldProperties & revision for the retrieved object
+                let rev = info._rev
+                let oldProperties = info.json.toProperties
 
-    public func retrieve(_ id: String, callback: @escaping (DBDocumentInfo?, Error?) -> Void) {
-        self.request.database_retrieve(id, callback: callback)
+                // 3. Set the new Properties
+                let newProperties = json.toProperties
+
+                // 4. Update the documents
+                self.request.doc_update(id, rev: rev, json: json) { (info, error) in
+                    if let error = error {
+                        callback(.error(error))
+                    } else {
+                        // 5. Check for changes and pass changes back
+                        let changes = checkChanges(from: oldProperties, to: newProperties)
+                        callback(.changes(changes))
+                    }
+                }
+            } else {
+                // If error 404, safe to assume is deleted
+                if let afError = error as? AFError, let responseCode = afError.responseCode, responseCode == 404 {
+                    callback(.deleted)
+                } else {
+                    callback(.error(error!))
+                }
+            }
+        }
+    }
+
+
+    public func deleteObject(_ id: String, callback: @escaping (Bool, Error?) -> Void) {
+        self.request.doc_delete(id, callback: callback)
     }
 
 }

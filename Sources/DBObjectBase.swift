@@ -24,19 +24,24 @@ func demangleSwiftClass(_ className: NSString) -> NSString {
     return className.substring(from: className.range(of: ".").location + 1) as NSString
 }
 
+public typealias Object = DBObjectBase
 
 open class DBObjectBase: Codable {
 
-    /// <#Description#>
+    /// The default Init
     public init() { }
 
-    /// <#Description#>
+    /// Creates a new instance by decoding from the given decoder.
     ///
-    /// - Parameter decoder: <#decoder description#>
-    /// - Throws: <#throws value description#>
+    /// This initializer throws an error if reading from the decoder fails, or
+    /// if the data read is corrupted or otherwise invalid.
+    ///
+    /// - Parameter decoder: The decoder to read data from.
     public required init(from decoder: Decoder) throws { }
 
-    /// <#Description#>
+    /// The Database the Object uses
+    ///
+    /// - Note: Defaults to `NSStringFromClass(self).lowercased()`
     open class var database: Database? {
         let class_string: NSString = NSStringFromClass(self).lowercased() as NSString
         if isSwiftClassName(class_string) {
@@ -50,18 +55,23 @@ open class DBObjectBase: Codable {
 
 extension DBObjectBase: Hashable {
 
-    /// <#Description#>
+    /// The hash value.
+    ///
+    /// Hash values are not guaranteed to be equal across different executions of
+    /// your program. Do not save hash values to use during a future execution.
     public var hashValue: Int {
         let data = try? Utils.encoder.encode(self)
         return data?.hashValue ?? 1 ^ 1
     }
 
-    /// <#Description#>
+    /// Returns a Boolean value indicating whether two values are equal.
+    ///
+    /// Equality is the inverse of inequality. For any values `a` and `b`,
+    /// `a == b` implies that `a != b` is `false`.
     ///
     /// - Parameters:
-    ///   - lhs: <#lhs description#>
-    ///   - rhs: <#rhs description#>
-    /// - Returns: <#return value description#>
+    ///   - lhs: A value to compare.
+    ///   - rhs: Another value to compare.
     public static func ==(lhs: DBObjectBase, rhs: DBObjectBase) -> Bool {
         guard let lhs_data = try? Utils.encoder.encode(lhs),
             let rhs_data = try? Utils.encoder.encode(rhs) else { return false }
@@ -72,6 +82,38 @@ extension DBObjectBase: Hashable {
 }
 
 extension DBObjectBase {
+
+    /// Method used to get a specific Object.
+    ///
+    /// Using this method is the same as calling this with curl:
+    ///
+    /// ```bash
+    /// curl -X GET 127.0.0.1:5984/database_name/id
+    ///
+    /// - Parameters:
+    ///   - id: The ID of the object
+    ///   - callback: The decoded object if the request is sucessful or the error if not
+    public static func retrieve(_ id: String, callback: @escaping (Object?, Error?) -> Void) {
+        guard let database = self.database else {
+            callback(nil, createDBError(.invalidDatabase, reason: "Database is nil"))
+            return
+        }
+
+        database.retrieve(id) { (info, error) in
+            if let error = error {
+                callback(nil, error)
+            } else {
+                do {
+                    let data = try info!.json.rawData()
+                    let object = try Utils.decoder.decode(self, from: data)
+                    callback(object, nil)
+                } catch {
+                    callback(nil, error)
+                }
+            }
+        }
+
+    }
 
     /// <#Description#>
     ///
@@ -100,50 +142,28 @@ extension DBObjectBase {
             return
         }
 
-        // 1. Retrieve the old object
-        // Id is not set yet and the User should only use DBObject not DBObjectBase
-        db.retrieve((self as! DBObject).id) { (info, err) in
-            if let info = info {
-                // 2. Get the oldProperties
-                let oldProperies = info.json.toProperties
+        do {
+            let object = self
+            let data = try Utils.encoder.encode(object)
+            let newJSON = JSON(data: data)
 
-                do {
-                    // 3. Encode the object to JSON
-                    let object = self
-                    let data = try Utils.encoder.encode(object)
-                    let newJSON = JSON(data: data)
-
-                    // 4. Set the new Properties
-                    let newProperies = newJSON.toProperties
-
-                    // 5. Update the documents
-                    db.request.doc_update(info._id, rev: info._rev, json: newJSON) { (info, err) in
-                        if let err = err {
-                            callback(.error(err))
-                        } else {
-                            // 6. Check for changes and pass changes back
-                            let changes = checkChanges(from: oldProperies, to: newProperies)
-                            callback(.changes(changes))
-                        }
-                    }
-                } catch {
-                    callback(.error(error))
-                }
-            } else {
-                // If the error code is 404, safe to assume the object has been deleted
-                if err!._code == 404 {
-                    callback(.deleted)
-                } else {
-                    callback(.error(err!))
-                }
-            }
+            db.update((object as! DBObject).id, with: newJSON, callback: callback)
+        } catch {
+            callback(.error(error))
         }
     }
 
     /// <#Description#>
     ///
     /// - Parameter callback: <#callback description#>
-    public final func delete(callback: (Bool, Swift.Error?) -> Void) { fatalError() }
+    public final func delete(callback: @escaping (Bool, Swift.Error?) -> Void) {
+        guard let db = type(of: self).database else {
+            callback(false, createDBError(.invalidDatabase, reason: "Database is nil"))
+            return
+        }
+
+        db.deleteObject((self as! DBObject).id, callback: callback)
+    }
 
 }
 

@@ -115,16 +115,6 @@ class DatabaseTests: BaseTestCase {
         }
     }
 
-}
-
-extension DBObjectBase {
-    func toData() throws -> Data {
-        return try Utils.encoder.encode(self)
-    }
-}
-
-extension DatabaseTests {
-
     func testThatUpdatingWorks() {
         async { (exp) in
             let object = UpdatingUser()
@@ -140,7 +130,7 @@ extension DatabaseTests {
                         equalTo: ("email", .addition)
                     )
                 case .error(let error): XCTFail(error.localizedDescription)
-                default: XCTFail()
+                case .deleted: XCTFail("The object has been deleted, but should still be valid")
                 }
                 exp.fulfill()
             })

@@ -59,7 +59,7 @@ class CouchDBRequests {
 
 extension CouchDBRequests {
 
-    public func database_info(callback: @escaping (Data?, Swift.Error?) -> Void) {
+    func database_info(callback: @escaping (Data?, Swift.Error?) -> Void) {
         let request = CouchDBRequest(
             databaseConfiguration,
             path: self.databaseName.escaped,
@@ -74,7 +74,7 @@ extension CouchDBRequests {
         }
     }
 
-    public func database_exists(callback: @escaping (Bool, Swift.Error?) -> Void) {
+    func database_exists(callback: @escaping (Bool, Swift.Error?) -> Void) {
         let request = CouchDBRequest(
             databaseConfiguration,
             path: self.databaseName.escaped,
@@ -97,7 +97,7 @@ extension CouchDBRequests {
         }
     }
 
-    public func database_create(callback: @escaping (Database?, Swift.Error?) -> Void) {
+    func database_create(callback: @escaping (Database?, Swift.Error?) -> Void) {
         let request = CouchDBRequest(
             databaseConfiguration,
             path: databaseName.escaped,
@@ -121,7 +121,7 @@ extension CouchDBRequests {
         }
     }
 
-    public func database_delete(callback: @escaping (Bool, Swift.Error?) -> Void) {
+    func database_delete(callback: @escaping (Bool, Swift.Error?) -> Void) {
         let request = CouchDBRequest(
             databaseConfiguration,
             path: databaseName.escaped,
@@ -169,11 +169,17 @@ extension CouchDBRequests {
         }
     }
 
-    func database_retrieve(_ id: String, callback: @escaping (DBDocumentInfo?, Error?) -> Void) {
+    func database_retrieve(
+        _ id: String,
+        parameters: Parameters?,
+        callback: @escaping (DBDocumentInfo?, Error?) -> Void
+        )
+    {
         let request = CouchDBRequest(
             databaseConfiguration,
             path: "\(databaseName.escaped)/\(id.escaped)",
-            method: .get
+            method: .get,
+            parameters: parameters
         )
 
         self.sessionManager.request(request).validate().responseJSON(queue: queue) { (resp) in
@@ -185,6 +191,21 @@ extension CouchDBRequests {
                 callback(DBDocumentInfo(_id: _id, _rev: _rev, json: json), nil)
             case .failure(let error):
                 callback(nil, error)
+            }
+        }
+    }
+
+    func doc_delete(_ id: String, callback: @escaping (Bool, Error?) -> Void) {
+        let request = CouchDBRequest(
+            databaseConfiguration,
+            path: "\(databaseName.escaped)/\(id.escaped)",
+            method: .delete
+        )
+
+        self.sessionManager.request(request).validate().responseJSON(queue: queue) { (resp) in
+            switch resp.result {
+            case .success: callback(true, nil)
+            case .failure(let error): callback(false, error)
             }
         }
     }
