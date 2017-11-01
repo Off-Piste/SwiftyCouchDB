@@ -1,10 +1,26 @@
+language: objective-c
 branches:
   only:
     - master
     - develop
     - /^issue.*$/
-before_install:
-    - ./install_swiftlint.sh
-script:
-  - swiftlint
-sudo: required
+    - /\s*([\d.]+)/
+matrix:
+  include:
+    - script: ./install_swiftlint.sh run-tests # tests
+      os: osx
+      osx_image: xcode9
+      env: JOB=tests-macos
+      before_script:
+        - ./install_swiftlint.sh build-swift-package
+        - ./install_swiftlint.sh tests-before-script
+      before_install:
+        - brew install couchdb
+        - brew services start couchdb
+        - ./install_swiftlint.sh tests-before-install
+    - script: ./install_swiftlint.sh jazzy #jazzy
+      os: osx
+      osx_image: xcode9
+      env: JOB=Jazzy
+      before_install: gem install jazzy
+      before_script: ./install_swiftlint.sh build-swift-package
