@@ -4,11 +4,11 @@
 
 SwiftyCouchDB is a wrapper for CouchDB
 
-- [Requirements](#Features)
-- [Installation](#Installation)
-- [Usage](#Usage)
-  - [Basic Database Methods](#Basic-Database-Methods)
-  - [Custom Database Configuration](#Custom-Database-Configuration)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Basic Database Methods](#basic-database-methods)
+  - [Custom Database Configuration](#custom-database-configuration)
 
 ## Requirements
 
