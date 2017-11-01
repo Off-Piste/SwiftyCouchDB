@@ -11,8 +11,6 @@ import SwiftyJSON
 import LoggerAPI
 @_exported import Alamofire
 
-// FIXME: Finish
-
 public enum DBQueryOption {
     case attachments(Bool)
     case att_encoding_info(Bool)
@@ -34,8 +32,30 @@ extension Array where Element == DBQueryOption {
 
         for option in self {
             switch option {
-            case .rev(let revision): parameters.updateValue(revision, forKey: "rev")
-            default: continue
+            case .attachments(let attachments):
+                parameters.updateValue(attachments, forKey: "attachments")
+            case .att_encoding_info(let info):
+                parameters.updateValue(info, forKey: "att_encoding_info")
+            case .atts_since(let array):
+                parameters.updateValue(array, forKey: "atts_since")
+            case .conflicts(let conflicts):
+                parameters.updateValue(conflicts, forKey: "conflicts")
+            case .deleted_conflicts(let deleted_conflicts):
+                parameters.updateValue(deleted_conflicts, forKey: "deleted_conflicts")
+            case .latest(let latest):
+                parameters.updateValue(latest, forKey: "latest")
+            case .local_seq(let local_seq):
+                parameters.updateValue(local_seq, forKey: "local_seq")
+            case .meta(let meta):
+                parameters.updateValue(meta, forKey: "meta")
+            case .open_revs(let open_revs):
+                parameters.updateValue(open_revs, forKey: "open_revs")
+            case .rev(let revision):
+                parameters.updateValue(revision, forKey: "rev")
+            case .revs(let revisions):
+                parameters.updateValue(revisions, forKey: "revs")
+            case .revs_info(let rev_info):
+                parameters.updateValue(rev_info, forKey: "rev_info")
             }
         }
 
