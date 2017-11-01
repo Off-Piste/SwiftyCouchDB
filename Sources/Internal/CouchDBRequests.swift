@@ -204,7 +204,7 @@ extension CouchDBRequests {
         let request = CouchDBRequest(
             databaseConfiguration,
             path: "\(databaseName.escaped)/\(id.escaped)",
-            method: .post,
+            method: .put,
             parameters: ["rev":rev]
         )
         request.json = json
