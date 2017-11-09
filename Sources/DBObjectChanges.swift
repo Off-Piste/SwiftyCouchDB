@@ -81,15 +81,18 @@ func checkChanges(from old: [DBProperty], to new: [DBProperty]) -> [DBPropertyCh
         .filter { $0.label != old[$0]?.label }
         .map { DBPropertyChange.init(name: $0.label, oldValue: nil, newValue: $0.value) }
 
-    let changes = new.filter { $0.label == old[$0]?.label }.map { newChild -> DBPropertyChange? in
-        if newChild.value as? AnyHashable != old[newChild]!.value as? AnyHashable {
-            return DBPropertyChange(
-                name: newChild.label,
-                oldValue: old[newChild]?.value,
-                newValue: newChild.value
-            )
-        }
-        return nil }.flatMap { $0 }
+    let changes = new
+        .filter { $0.label == old[$0]?.label }
+        .map { newChild -> DBPropertyChange? in
+            if newChild.value as? AnyHashable != old[newChild]!.value as? AnyHashable {
+                return DBPropertyChange(
+                    name: newChild.label,
+                    oldValue: old[newChild]?.value,
+                    newValue: newChild.value
+                )
+            }
+            return nil
+        }.flatMap { $0 }
 
     removed.append(contentsOf: additions)
     removed.append(contentsOf: changes)

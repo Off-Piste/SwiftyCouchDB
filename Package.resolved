@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "Codable",
+        "repositoryURL": "https://github.com/harrytwright/Codable.git",
+        "state": {
+          "branch": "master",
+          "revision": "09eaef03b6f53934fd3f9786d1ed94f2c831db44",
+          "version": null
+        }
+      },
+      {
         "package": "HeliumLogger",
         "repositoryURL": "https://github.com/IBM-Swift/HeliumLogger.git",
         "state": {
