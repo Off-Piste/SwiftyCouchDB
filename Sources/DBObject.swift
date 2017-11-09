@@ -23,7 +23,7 @@ open class DBObject: DBObjectBase {
     open var id: String  = UUID().uuidString
 
     /// <#Description#>
-    public required override init() { super.init() }
+    public override init() { super.init() }
 
     /// <#Description#>
     ///
