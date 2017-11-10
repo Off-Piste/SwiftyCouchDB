@@ -11,7 +11,7 @@ import SwiftyJSON
 extension JSON {
     init<C: Codable>(codable: C) {
         do {
-            let data = try Utils.encoder.encode(codable)
+            let data = try CodableUtils.encoder.encode(codable)
             self.init(data: data)
         } catch {
             self.init(NSNull())

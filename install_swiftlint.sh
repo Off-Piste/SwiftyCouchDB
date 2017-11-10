@@ -82,6 +82,12 @@ function create_couch_db_databases {
   echo "curl -X PUT 127.0.0.1:5984/test_retrieve"
   eval "curl -X PUT 127.0.0.1:5984/test_retrieve"
 
+  eval "curl -X PUT 127.0.0.1:5984/test_add_change"
+  echo "curl -X PUT 127.0.0.1:5984/test_add_change"
+
+  eval "curl -X POST -H 'Content-Type: application/json' -d '{\"_id\":\"qwertyuiop\",\"list\":[{\"_id\":\"abc\",\"username\":\"qwerty\",\"email\":\"qwerty@email.com\"}]} 127.0.0.1:5985/test_add_change'"
+  eval "curl -X POST -H 'Content-Type: application/json' -d '{\"_id\":\"qwertyuiop\",\"list\":[{\"_id\":\"abc\",\"username\":\"qwerty\",\"email\":\"qwerty@email.com\"}]} 127.0.0.1:5985/test_add_change'"
+
   echo "curl -X POST -H 'Content-Type: application/json' -d '{\"_id\":\"qwertyuiop\", \"username\":\"swiftylover99\"}' 127.0.0.1:5984/test_retrieve"
   eval "curl -X POST -H 'Content-Type: application/json' -d '{\"_id\":\"qwertyuiop\", \"username\":\"swiftylover99\"}' 127.0.0.1:5984/test_retrieve"
 

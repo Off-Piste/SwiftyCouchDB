@@ -130,6 +130,7 @@ class DatabaseTests: BaseTestCase {
                         equalTo: ("email", .addition)
                     )
                 case .error(let error): XCTFail(error.localizedDescription)
+                case .addition: XCTFail("The object has been added, but should have been changed")
                 case .deleted: XCTFail("The object has been deleted, but should still be valid")
                 }
                 exp.fulfill()
@@ -168,5 +169,6 @@ class DatabaseTests: BaseTestCase {
             })
         }
     }
+
     
 }

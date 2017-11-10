@@ -62,7 +62,7 @@ extension DBDocument {
             } else {
                 do {
                     let data = try info!.json.rawData()
-                    let object = try Utils.decoder.decode(self, from: data)
+                    let object = try CodableUtils.decoder.decode(self, from: data)
                     callback(object, nil)
                 } catch {
                     callback(nil, error)
@@ -112,7 +112,7 @@ extension DBDocument {
         
         do {
             let object = self
-            let newJSON = try Utils.encoder.encodeJSON(object)
+            let newJSON = try CodableUtils.encoder.encodeJSON(object)
             
             db.update(object._id, with: newJSON, callback: callback)
         } catch {
@@ -120,79 +120,73 @@ extension DBDocument {
         }
     }
     
-//    /// Method to be used when you wish to add an object to an array inside an Object but
-//    /// don't know the previous contents of the Array
-//    ///
-//    /// Using Swift 4's WritableKeyPath you can choose the path you wish to update when the
-//    /// object is retrieved
-//    ///
-//    /// - Parameters:
-//    ///   - change: <#change description#>
-//    ///   - keyPath: <#keyPath description#>
-//    ///   - callback: <#callback description#>
-//    public final func addChange<Change: Codable, Sequence: RangeReplaceableCollection>(
-//        _ change: Change,
-//        forKeyPath keyPath: WritableKeyPath<DBObjectBase, Sequence>,
-//        callback: @escaping (DBObjectChange) -> Void
-//        ) where Sequence.Element == Change
-//    {
-//        // 1. Retrieve the document
-//        guard let db = type(of: self).database else {
-//            callback(.error(createDBError(.invalidDatabase, reason: "Database is nil")))
-//            return
-//        }
-//        
-//        db.retrieve((self as! DBObject).id) { (info, error) in
-//            if let error = error as? AFError, error.responseCode == 404 {
-//                var newObject = self
-//                newObject[keyPath: keyPath].append(change)
-//            } else if let error = error {
-//                callback(.error(error))
-//            }
-//        }
-//        
-//        // 2. Check the errors
-//        
-//        // 3. If
-//    }
+    /// Method to be used when you wish to add an object to an array inside an Object but
+    /// don't know the previous contents of the Array
+    ///
+    /// Using Swift 4's WritableKeyPath you can choose the path you wish to update when the
+    /// object is retrieved
+    ///
+    /// - Parameters:
+    ///   - change: <#change description#>
+    ///   - keyPath: <#keyPath description#>
+    ///   - callback: <#callback description#>
+    public func addChange<Change: Codable, Sequence: RangeReplaceableCollection>(
+        _ change: Change,
+        forKeyPath keyPath: WritableKeyPath<Self, Sequence>,
+        callback: @escaping (DBObjectChange, DBDocument) -> Void
+        ) where Sequence.Element == Change
+    {
+        // 1. Retrieve the document
+        guard let db = type(of: self).database else {
+            callback(.error(createDBError(.invalidDatabase, reason: "Database is nil")), self)
+            return
+        }
+        
+        db.retrieve(self._id) { (info, error) in
+            // Document does not exist
+            // Create the document
+            if let error = error as? AFError, error.responseCode == 404 {
+                var newObject = self
+                changeObject(change, in: &newObject, forKeyPath: keyPath)
+
+                db.add(newObject, callback: { (info, error) in
+                    if let error = error { callback(.error(error), self) }
+                    else { callback(.addition, newObject) }
+                })
+            } else if let error = error {
+                callback(.error(error), self)
+            } else {
+                do {
+                    var oldObject = try JSONDecoder().decodeJSON(type(of: self), info!.json)
+                    changeObject(change, in: &oldObject, forKeyPath: keyPath)
+
+                    oldObject.update(callback: { (change) in
+                        // If there are no changes then we can return self
+                        // rather than `oldObject` (newObject)
+                        switch change {
+                        case .changes: callback(change, oldObject)
+                        default: callback(change, self)
+                        }
+                    })
+                } catch {
+                    callback(.error(error), self)
+                }
+            }
+        }
+        
+        // 2. Check the errors
+        
+        // 3. If
+    }
 }
 
-///// <#Description#>
-//open class DBObject: DBObjectBase {
-//
-//    /// <#Description#>
-//    ///
-//    /// - id: <#id description#>
-//    private enum CodingKeys : String, CodingKey {
-//        case id = "_id"
-//    }
-//
-//    /// <#Description#>
-//    open var id: String  = UUID().uuidString
-//
-//    /// <#Description#>
-//    public override init() { super.init() }
-//
-//    /// <#Description#>
-//    ///
-//    /// - Parameter decoder: <#decoder description#>
-//    /// - Throws: <#throws value description#>
-//    public required init(from decoder: Decoder) throws {
-//        try super.init(from: decoder)
-//
-//        let container = try decoder.container(keyedBy: CodingKeys.self)
-//        self.id = try container.decode(String.self, forKey: .id)
-//    }
-//
-//
-//    /// <#Description#>
-//    ///
-//    /// - Parameter encoder: <#encoder description#>
-//    /// - Throws: <#throws value description#>
-//    open override func encode(to encoder: Encoder) throws {
-//        var container = encoder.container(keyedBy: CodingKeys.self)
-//        try container.encode(id, forKey: .id)
-//    }
-//
-//}
+// Move this outside as there was an error before :/
+func changeObject<Change: Codable, Document: DBDocument, Sequence: RangeReplaceableCollection>(
+    _ change: Change,
+    in document: inout Document,
+    forKeyPath keyPath: WritableKeyPath<Document, Sequence>
+    ) where Sequence.Element == Change
+{
+    document[keyPath: keyPath].append(change)
+}
 

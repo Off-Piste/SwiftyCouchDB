@@ -343,7 +343,7 @@ extension Database {
     ///                 or the error that has occured
     public func add<Document: DBDocument>(_ object: Document, callback: @escaping CouchDBResponse) {
         do {
-            let data = try Utils.encoder.encode(object)
+            let data = try CodableUtils.encoder.encode(object)
             self.add(JSON(data: data), callback: callback)
         } catch {
             callback(nil, error)

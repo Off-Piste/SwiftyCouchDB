@@ -70,6 +70,11 @@ public enum DBObjectChange {
     case changes([DBPropertyChange])
     /// The object has been deleted from the CouchDB.
     case deleted
+
+    /// The object has been added
+    ///
+    /// - Note: Only occurs when adding a collection to the document
+    case addition
 }
 
 func checkChanges(from old: [DBProperty], to new: [DBProperty]) -> [DBPropertyChange] {
