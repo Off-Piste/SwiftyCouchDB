@@ -7,7 +7,7 @@
 //
 
 import Foundation
-@_exported import Codable
+@_exported import CodableCollection
 
 /// <#Description#>
 open class DBObject: DBObjectBase {

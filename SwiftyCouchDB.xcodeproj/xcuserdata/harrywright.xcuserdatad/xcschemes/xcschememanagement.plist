@@ -14,10 +14,15 @@
 			<key>orderHint</key>
 			<integer>13</integer>
 		</dict>
-		<key>CodablePackageDescription.xcscheme</key>
+		<key>CodableCollectionPackageDescription.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>5</integer>
+		</dict>
+		<key>CodablePackageDescription.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
 		</dict>
 		<key>CouchDBSample.xcscheme</key>
 		<dict>

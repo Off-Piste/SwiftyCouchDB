@@ -11,11 +11,11 @@
         }
       },
       {
-        "package": "Codable",
-        "repositoryURL": "https://github.com/harrytwright/Codable.git",
+        "package": "CodableCollection",
+        "repositoryURL": "https://github.com/harrytwright/CodableCollection.git",
         "state": {
           "branch": "master",
-          "revision": "09eaef03b6f53934fd3f9786d1ed94f2c831db44",
+          "revision": "ff8457b05c56e396a9ce12bae184c899a5e88b89",
           "version": null
         }
       },

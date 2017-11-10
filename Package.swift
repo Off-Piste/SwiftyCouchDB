@@ -33,14 +33,14 @@ let dependencies: [PDependency] = [
     .package(url: "https://github.com/IBM-Swift/HeliumLogger.git", .upToNextMinor(from: "1.7.0")),
     .package(url: "https://github.com/Alamofire/Alamofire.git", .exact("4.5.1")),
     .package(url: "https://github.com/IBM-Swift/SwiftyJSON.git", .upToNextMinor(from: "17.0.0")),
-    .package(url: "https://github.com/harrytwright/Codable.git", .branch("master"))
+    .package(url: "https://github.com/harrytwright/CodableCollection.git", .branch("master"))
 ]
 
 let targetDependencies: [TDependency] = [
     .byNameItem(name: "HeliumLogger"),
     .byNameItem(name: "Alamofire"),
     .byNameItem(name: "SwiftyJSON"),
-    .byNameItem(name: "Codable")
+    .byNameItem(name: "CodableCollection")
 ]
 
 let package = Package(
