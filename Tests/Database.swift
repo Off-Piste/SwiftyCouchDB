@@ -80,8 +80,8 @@ class DatabaseTests: BaseTestCase {
     func testThatAddingValidObjectToValidDatabasePasses() {
         async { (exp) in
             // Given
-            let object = User()
-            object.id = "qwertyuiop"
+            var object = User()
+            object._id = "qwertyuiop"
             object.username = "swiftylover99"
             object.email = "swiftylover99@hotmail.com"
 
@@ -101,8 +101,8 @@ class DatabaseTests: BaseTestCase {
     func testThatAddingValidObjectPasses() {
         async { (exp) in
             // Given
-            let object = User()
-            object.id = "qwertyuiop123456789"
+            var object = User()
+            object._id = "qwertyuiop123456789"
             object.username = "swiftylover99"
             object.email = "swiftylover99@hotmail.com"
 
@@ -117,8 +117,8 @@ class DatabaseTests: BaseTestCase {
 
     func testThatUpdatingWorks() {
         async { (exp) in
-            let object = UpdatingUser()
-            object.id = "qwertyuiop"
+            var object = UpdatingUser()
+            object._id = "qwertyuiop"
             object.username = "swiftylover99"
             object.email = "swiftylover99@hotmail.com"
 

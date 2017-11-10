@@ -341,7 +341,7 @@ extension Database {
     ///   - object:     The object to be added to the Database
     ///   - callback:   The document infomation if the request was sucessful
     ///                 or the error that has occured
-    public func add<Object: DBObjectBase>(_ object: Object, callback: @escaping CouchDBResponse) {
+    public func add<Document: DBDocument>(_ object: Document, callback: @escaping CouchDBResponse) {
         do {
             let data = try Utils.encoder.encode(object)
             self.add(JSON(data: data), callback: callback)

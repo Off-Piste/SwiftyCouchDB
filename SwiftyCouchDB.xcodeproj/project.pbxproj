@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		C8103A521FB5B66B00845295 /* JSON+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8103A511FB5B66A00845295 /* JSON+Codable.swift */; };
 		OBJ_100 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* Package.swift */; };
 		OBJ_106 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_64 /* Package.swift */; };
 		OBJ_112 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_68 /* Package.swift */; };
@@ -180,6 +181,7 @@
 
 /* Begin PBXFileReference section */
 		"Alamofire::Alamofire::Product" /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C8103A511FB5B66A00845295 /* JSON+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON+Codable.swift"; sourceTree = "<group>"; };
 		"CodableCollection::CodableCollection::Product" /* CodableCollection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CodableCollection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"HeliumLogger::HeliumLogger::Product" /* HeliumLogger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = HeliumLogger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"LoggerAPI::LoggerAPI::Product" /* LoggerAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LoggerAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -308,6 +310,7 @@
 				OBJ_16 /* CouchDB+Alamofire.swift */,
 				OBJ_17 /* CouchDBRequests.swift */,
 				OBJ_18 /* String+Regex.swift */,
+				C8103A511FB5B66A00845295 /* JSON+Codable.swift */,
 			);
 			path = Internal;
 			sourceTree = "<group>";
@@ -411,7 +414,7 @@
 			path = ".build/checkouts/Alamofire.git-6801331143877184500/Source";
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -420,7 +423,6 @@
 				OBJ_28 /* Dependencies */,
 				OBJ_69 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_60 /* HeliumLogger 1.7.1 */ = {
@@ -716,7 +718,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_69 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -770,6 +772,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				C8103A521FB5B66B00845295 /* JSON+Codable.swift in Sources */,
 				OBJ_144 /* CouchDB.swift in Sources */,
 				OBJ_145 /* DBConfiguration.swift in Sources */,
 				OBJ_146 /* DBError.swift in Sources */,
