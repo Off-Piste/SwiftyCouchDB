@@ -87,91 +87,91 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		C88395051FB70831009242A9 /* PBXContainerItemProxy */ = {
+		C88395121FB71BA7009242A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "LoggerAPI::LoggerAPI";
+			remoteInfo = LoggerAPI;
+		};
+		C88395131FB71BA7009242A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "CodableCollection::CodableCollection";
+			remoteInfo = CodableCollection;
+		};
+		C88395141FB71BA7009242A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "SwiftyJSON::SwiftyJSON";
+			remoteInfo = SwiftyJSON;
+		};
+		C88395151FB71BA7009242A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Alamofire::Alamofire";
+			remoteInfo = Alamofire;
+		};
+		C88395161FB71BA7009242A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "HeliumLogger::HeliumLogger";
+			remoteInfo = HeliumLogger;
+		};
+		C88395171FB71BA7009242A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "LoggerAPI::LoggerAPI";
+			remoteInfo = LoggerAPI;
+		};
+		C88395181FB71BA7009242A9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "SwiftyCouchDB::SwiftyCouchDB";
 			remoteInfo = SwiftyCouchDB;
 		};
-		C88395061FB70831009242A9 /* PBXContainerItemProxy */ = {
+		C88395191FB71BA7009242A9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "CodableCollection::CodableCollection";
 			remoteInfo = CodableCollection;
 		};
-		C88395071FB70831009242A9 /* PBXContainerItemProxy */ = {
+		C883951A1FB71BA7009242A9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "SwiftyJSON::SwiftyJSON";
 			remoteInfo = SwiftyJSON;
 		};
-		C88395081FB70831009242A9 /* PBXContainerItemProxy */ = {
+		C883951B1FB71BA7009242A9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Alamofire::Alamofire";
 			remoteInfo = Alamofire;
 		};
-		C88395091FB70831009242A9 /* PBXContainerItemProxy */ = {
+		C883951C1FB71BA7009242A9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "HeliumLogger::HeliumLogger";
 			remoteInfo = HeliumLogger;
 		};
-		C883950A1FB70831009242A9 /* PBXContainerItemProxy */ = {
+		C883951D1FB71BA7009242A9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "LoggerAPI::LoggerAPI";
 			remoteInfo = LoggerAPI;
 		};
-		C883950B1FB70831009242A9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "LoggerAPI::LoggerAPI";
-			remoteInfo = LoggerAPI;
-		};
-		C883950C1FB70831009242A9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "CodableCollection::CodableCollection";
-			remoteInfo = CodableCollection;
-		};
-		C883950D1FB70831009242A9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "SwiftyJSON::SwiftyJSON";
-			remoteInfo = SwiftyJSON;
-		};
-		C883950E1FB70831009242A9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Alamofire::Alamofire";
-			remoteInfo = Alamofire;
-		};
-		C883950F1FB70831009242A9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "HeliumLogger::HeliumLogger";
-			remoteInfo = HeliumLogger;
-		};
-		C88395101FB70831009242A9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "LoggerAPI::LoggerAPI";
-			remoteInfo = LoggerAPI;
-		};
-		C88395111FB70831009242A9 /* PBXContainerItemProxy */ = {
+		C883951E1FB71BA8009242A9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
@@ -236,7 +236,7 @@
 		OBJ_70 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/harrywright/Frameworks/Off Piste/Cocoapod/SwiftyCouchCB/.build/checkouts/LoggerAPI.git--6449715459278086880/Package.swift"; sourceTree = "<group>"; };
 		OBJ_8 /* CodableUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableUtils.swift; sourceTree = "<group>"; };
 		OBJ_9 /* CouchDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouchDB.swift; sourceTree = "<group>"; };
-		"SwiftyCouchDB::SwiftyCouchDB::Product" /* SwiftyCouchDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyCouchDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"SwiftyCouchDB::SwiftyCouchDB::Product" /* SwiftyCouchDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftyCouchDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"SwiftyCouchDB::SwiftyCouchDBTests::Product" /* SwiftyCouchDBTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = SwiftyCouchDBTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		"SwiftyJSON::SwiftyJSON::Product" /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -894,67 +894,67 @@
 		OBJ_131 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "SwiftyCouchDB::SwiftyCouchDB" /* SwiftyCouchDB */;
-			targetProxy = C88395051FB70831009242A9 /* PBXContainerItemProxy */;
+			targetProxy = C88395181FB71BA7009242A9 /* PBXContainerItemProxy */;
 		};
 		OBJ_133 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "CodableCollection::CodableCollection" /* CodableCollection */;
-			targetProxy = C883950C1FB70831009242A9 /* PBXContainerItemProxy */;
+			targetProxy = C88395191FB71BA7009242A9 /* PBXContainerItemProxy */;
 		};
 		OBJ_135 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "SwiftyJSON::SwiftyJSON" /* SwiftyJSON */;
-			targetProxy = C883950D1FB70831009242A9 /* PBXContainerItemProxy */;
+			targetProxy = C883951A1FB71BA7009242A9 /* PBXContainerItemProxy */;
 		};
 		OBJ_137 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Alamofire::Alamofire" /* Alamofire */;
-			targetProxy = C883950E1FB70831009242A9 /* PBXContainerItemProxy */;
+			targetProxy = C883951B1FB71BA7009242A9 /* PBXContainerItemProxy */;
 		};
 		OBJ_139 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "HeliumLogger::HeliumLogger" /* HeliumLogger */;
-			targetProxy = C883950F1FB70831009242A9 /* PBXContainerItemProxy */;
+			targetProxy = C883951C1FB71BA7009242A9 /* PBXContainerItemProxy */;
 		};
 		OBJ_141 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "LoggerAPI::LoggerAPI" /* LoggerAPI */;
-			targetProxy = C88395101FB70831009242A9 /* PBXContainerItemProxy */;
+			targetProxy = C883951D1FB71BA7009242A9 /* PBXContainerItemProxy */;
 		};
 		OBJ_168 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "CodableCollection::CodableCollection" /* CodableCollection */;
-			targetProxy = C88395061FB70831009242A9 /* PBXContainerItemProxy */;
+			targetProxy = C88395131FB71BA7009242A9 /* PBXContainerItemProxy */;
 		};
 		OBJ_169 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "SwiftyJSON::SwiftyJSON" /* SwiftyJSON */;
-			targetProxy = C88395071FB70831009242A9 /* PBXContainerItemProxy */;
+			targetProxy = C88395141FB71BA7009242A9 /* PBXContainerItemProxy */;
 		};
 		OBJ_170 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Alamofire::Alamofire" /* Alamofire */;
-			targetProxy = C88395081FB70831009242A9 /* PBXContainerItemProxy */;
+			targetProxy = C88395151FB71BA7009242A9 /* PBXContainerItemProxy */;
 		};
 		OBJ_171 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "HeliumLogger::HeliumLogger" /* HeliumLogger */;
-			targetProxy = C88395091FB70831009242A9 /* PBXContainerItemProxy */;
+			targetProxy = C88395161FB71BA7009242A9 /* PBXContainerItemProxy */;
 		};
 		OBJ_172 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "LoggerAPI::LoggerAPI" /* LoggerAPI */;
-			targetProxy = C883950B1FB70831009242A9 /* PBXContainerItemProxy */;
+			targetProxy = C88395171FB71BA7009242A9 /* PBXContainerItemProxy */;
 		};
 		OBJ_219 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "LoggerAPI::LoggerAPI" /* LoggerAPI */;
-			targetProxy = C883950A1FB70831009242A9 /* PBXContainerItemProxy */;
+			targetProxy = C88395121FB71BA7009242A9 /* PBXContainerItemProxy */;
 		};
 		OBJ_230 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "SwiftyCouchDB::SwiftyCouchDBTests" /* SwiftyCouchDBTests */;
-			targetProxy = C88395111FB70831009242A9 /* PBXContainerItemProxy */;
+			targetProxy = C883951E1FB71BA8009242A9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
