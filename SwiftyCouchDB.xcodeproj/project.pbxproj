@@ -9,11 +9,11 @@
 /* Begin PBXAggregateTarget section */
 		"SwiftyCouchDB::SwiftyCouchDBPackageTests::ProductTarget" /* SwiftyCouchDBPackageTests */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = OBJ_223 /* Build configuration list for PBXAggregateTarget "SwiftyCouchDBPackageTests" */;
+			buildConfigurationList = OBJ_227 /* Build configuration list for PBXAggregateTarget "SwiftyCouchDBPackageTests" */;
 			buildPhases = (
 			);
 			dependencies = (
-				OBJ_226 /* PBXTargetDependency */,
+				OBJ_230 /* PBXTargetDependency */,
 			);
 			name = SwiftyCouchDBPackageTests;
 			productName = SwiftyCouchDBPackageTests;
@@ -21,157 +21,157 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		C8103A521FB5B66B00845295 /* JSON+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8103A511FB5B66A00845295 /* JSON+Codable.swift */; };
-		C8BC3B351FB5D30300B15585 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BC3B341FB5D30300B15585 /* Document.swift */; };
-		OBJ_100 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* Package.swift */; };
-		OBJ_106 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_64 /* Package.swift */; };
-		OBJ_112 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_68 /* Package.swift */; };
-		OBJ_118 /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* BaseTestCase.swift */; };
-		OBJ_119 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* Database.swift */; };
-		OBJ_120 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* Models.swift */; };
-		OBJ_122 /* SwiftyCouchDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SwiftyCouchDB::SwiftyCouchDB::Product" /* SwiftyCouchDB.framework */; };
-		OBJ_123 /* CodableCollection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "CodableCollection::CodableCollection::Product" /* CodableCollection.framework */; };
-		OBJ_124 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SwiftyJSON::SwiftyJSON::Product" /* SwiftyJSON.framework */; };
-		OBJ_125 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Alamofire::Alamofire::Product" /* Alamofire.framework */; };
-		OBJ_126 /* HeliumLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "HeliumLogger::HeliumLogger::Product" /* HeliumLogger.framework */; };
-		OBJ_127 /* LoggerAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "LoggerAPI::LoggerAPI::Product" /* LoggerAPI.framework */; };
-		OBJ_144 /* CouchDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_8 /* CouchDB.swift */; };
-		OBJ_145 /* DBConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* DBConfiguration.swift */; };
-		OBJ_146 /* DBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* DBError.swift */; };
-		OBJ_147 /* DBDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* DBDocument.swift */; };
-		OBJ_148 /* CodableUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* CodableUtils.swift */; };
-		OBJ_149 /* DBObjectChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* DBObjectChanges.swift */; };
-		OBJ_150 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* Database.swift */; };
-		OBJ_151 /* CouchDB+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* CouchDB+Alamofire.swift */; };
-		OBJ_152 /* CouchDBRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* CouchDBRequests.swift */; };
-		OBJ_153 /* String+Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* String+Regex.swift */; };
-		OBJ_154 /* Apply.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* Apply.swift */; };
-		OBJ_155 /* BasicPromise.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* BasicPromise.swift */; };
-		OBJ_156 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* Promise.swift */; };
-		OBJ_157 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* Result.swift */; };
-		OBJ_159 /* CodableCollection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "CodableCollection::CodableCollection::Product" /* CodableCollection.framework */; };
-		OBJ_160 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SwiftyJSON::SwiftyJSON::Product" /* SwiftyJSON.framework */; };
-		OBJ_161 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Alamofire::Alamofire::Product" /* Alamofire.framework */; };
-		OBJ_162 /* HeliumLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "HeliumLogger::HeliumLogger::Product" /* HeliumLogger.framework */; };
-		OBJ_163 /* LoggerAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "LoggerAPI::LoggerAPI::Product" /* LoggerAPI.framework */; };
-		OBJ_173 /* AnyCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* AnyCodable.swift */; };
-		OBJ_174 /* CodableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* CodableArray.swift */; };
-		OBJ_175 /* CodableDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* CodableDictionary.swift */; };
-		OBJ_176 /* UnkeyedCodableDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* UnkeyedCodableDictionary.swift */; };
-		OBJ_182 /* LclJSONSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* LclJSONSerialization.swift */; };
-		OBJ_183 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* SwiftyJSON.swift */; };
-		OBJ_189 /* AFError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_43 /* AFError.swift */; };
-		OBJ_190 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_44 /* Alamofire.swift */; };
-		OBJ_191 /* DispatchQueue+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_45 /* DispatchQueue+Alamofire.swift */; };
-		OBJ_192 /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* MultipartFormData.swift */; };
-		OBJ_193 /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_47 /* NetworkReachabilityManager.swift */; };
-		OBJ_194 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* Notifications.swift */; };
-		OBJ_195 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_49 /* ParameterEncoding.swift */; };
-		OBJ_196 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_50 /* Request.swift */; };
-		OBJ_197 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* Response.swift */; };
-		OBJ_198 /* ResponseSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_52 /* ResponseSerialization.swift */; };
-		OBJ_199 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* Result.swift */; };
-		OBJ_200 /* ServerTrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_54 /* ServerTrustPolicy.swift */; };
-		OBJ_201 /* SessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* SessionDelegate.swift */; };
-		OBJ_202 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_56 /* SessionManager.swift */; };
-		OBJ_203 /* TaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_57 /* TaskDelegate.swift */; };
-		OBJ_204 /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* Timeline.swift */; };
-		OBJ_205 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_59 /* Validation.swift */; };
-		OBJ_211 /* HeliumLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_62 /* HeliumLogger.swift */; };
-		OBJ_212 /* HeliumStreamLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_63 /* HeliumStreamLogger.swift */; };
-		OBJ_214 /* LoggerAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "LoggerAPI::LoggerAPI::Product" /* LoggerAPI.framework */; };
-		OBJ_220 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_67 /* Logger.swift */; };
-		OBJ_82 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
-		OBJ_88 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* Package.swift */; };
-		OBJ_94 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* Package.swift */; };
+		OBJ_102 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_44 /* Package.swift */; };
+		OBJ_108 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_66 /* Package.swift */; };
+		OBJ_114 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_70 /* Package.swift */; };
+		OBJ_120 /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* BaseTestCase.swift */; };
+		OBJ_121 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* Database.swift */; };
+		OBJ_122 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* Document.swift */; };
+		OBJ_123 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* Models.swift */; };
+		OBJ_125 /* SwiftyCouchDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SwiftyCouchDB::SwiftyCouchDB::Product" /* SwiftyCouchDB.framework */; };
+		OBJ_126 /* CodableCollection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "CodableCollection::CodableCollection::Product" /* CodableCollection.framework */; };
+		OBJ_127 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SwiftyJSON::SwiftyJSON::Product" /* SwiftyJSON.framework */; };
+		OBJ_128 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Alamofire::Alamofire::Product" /* Alamofire.framework */; };
+		OBJ_129 /* HeliumLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "HeliumLogger::HeliumLogger::Product" /* HeliumLogger.framework */; };
+		OBJ_130 /* LoggerAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "LoggerAPI::LoggerAPI::Product" /* LoggerAPI.framework */; };
+		OBJ_147 /* CodableUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_8 /* CodableUtils.swift */; };
+		OBJ_148 /* CouchDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* CouchDB.swift */; };
+		OBJ_149 /* DBConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* DBConfiguration.swift */; };
+		OBJ_150 /* DBDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* DBDocument.swift */; };
+		OBJ_151 /* DBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* DBError.swift */; };
+		OBJ_152 /* DBObjectChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* DBObjectChanges.swift */; };
+		OBJ_153 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* Database.swift */; };
+		OBJ_154 /* CouchDB+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* CouchDB+Alamofire.swift */; };
+		OBJ_155 /* CouchDBRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* CouchDBRequests.swift */; };
+		OBJ_156 /* JSON+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* JSON+Codable.swift */; };
+		OBJ_157 /* String+Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* String+Regex.swift */; };
+		OBJ_158 /* Apply.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* Apply.swift */; };
+		OBJ_159 /* BasicPromise.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* BasicPromise.swift */; };
+		OBJ_160 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* Promise.swift */; };
+		OBJ_161 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* Result.swift */; };
+		OBJ_163 /* CodableCollection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "CodableCollection::CodableCollection::Product" /* CodableCollection.framework */; };
+		OBJ_164 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SwiftyJSON::SwiftyJSON::Product" /* SwiftyJSON.framework */; };
+		OBJ_165 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Alamofire::Alamofire::Product" /* Alamofire.framework */; };
+		OBJ_166 /* HeliumLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "HeliumLogger::HeliumLogger::Product" /* HeliumLogger.framework */; };
+		OBJ_167 /* LoggerAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "LoggerAPI::LoggerAPI::Product" /* LoggerAPI.framework */; };
+		OBJ_177 /* AnyCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* AnyCodable.swift */; };
+		OBJ_178 /* CodableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* CodableArray.swift */; };
+		OBJ_179 /* CodableDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* CodableDictionary.swift */; };
+		OBJ_180 /* UnkeyedCodableDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* UnkeyedCodableDictionary.swift */; };
+		OBJ_186 /* LclJSONSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* LclJSONSerialization.swift */; };
+		OBJ_187 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* SwiftyJSON.swift */; };
+		OBJ_193 /* AFError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_45 /* AFError.swift */; };
+		OBJ_194 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* Alamofire.swift */; };
+		OBJ_195 /* DispatchQueue+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_47 /* DispatchQueue+Alamofire.swift */; };
+		OBJ_196 /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* MultipartFormData.swift */; };
+		OBJ_197 /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_49 /* NetworkReachabilityManager.swift */; };
+		OBJ_198 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_50 /* Notifications.swift */; };
+		OBJ_199 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* ParameterEncoding.swift */; };
+		OBJ_200 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_52 /* Request.swift */; };
+		OBJ_201 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* Response.swift */; };
+		OBJ_202 /* ResponseSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_54 /* ResponseSerialization.swift */; };
+		OBJ_203 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* Result.swift */; };
+		OBJ_204 /* ServerTrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_56 /* ServerTrustPolicy.swift */; };
+		OBJ_205 /* SessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_57 /* SessionDelegate.swift */; };
+		OBJ_206 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* SessionManager.swift */; };
+		OBJ_207 /* TaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_59 /* TaskDelegate.swift */; };
+		OBJ_208 /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_60 /* Timeline.swift */; };
+		OBJ_209 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_61 /* Validation.swift */; };
+		OBJ_215 /* HeliumLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_64 /* HeliumLogger.swift */; };
+		OBJ_216 /* HeliumStreamLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_65 /* HeliumStreamLogger.swift */; };
+		OBJ_218 /* LoggerAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "LoggerAPI::LoggerAPI::Product" /* LoggerAPI.framework */; };
+		OBJ_224 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_69 /* Logger.swift */; };
+		OBJ_84 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
+		OBJ_90 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* Package.swift */; };
+		OBJ_96 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* Package.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		C8103A1C1FB5A01A00845295 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "LoggerAPI::LoggerAPI";
-			remoteInfo = LoggerAPI;
-		};
-		C8103A1D1FB5A01A00845295 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "CodableCollection::CodableCollection";
-			remoteInfo = CodableCollection;
-		};
-		C8103A1E1FB5A01A00845295 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "SwiftyJSON::SwiftyJSON";
-			remoteInfo = SwiftyJSON;
-		};
-		C8103A1F1FB5A01A00845295 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Alamofire::Alamofire";
-			remoteInfo = Alamofire;
-		};
-		C8103A201FB5A01A00845295 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "HeliumLogger::HeliumLogger";
-			remoteInfo = HeliumLogger;
-		};
-		C8103A211FB5A01A00845295 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "LoggerAPI::LoggerAPI";
-			remoteInfo = LoggerAPI;
-		};
-		C8103A221FB5A01A00845295 /* PBXContainerItemProxy */ = {
+		C88395051FB70831009242A9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "SwiftyCouchDB::SwiftyCouchDB";
 			remoteInfo = SwiftyCouchDB;
 		};
-		C8103A231FB5A01A00845295 /* PBXContainerItemProxy */ = {
+		C88395061FB70831009242A9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "CodableCollection::CodableCollection";
 			remoteInfo = CodableCollection;
 		};
-		C8103A241FB5A01A00845295 /* PBXContainerItemProxy */ = {
+		C88395071FB70831009242A9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "SwiftyJSON::SwiftyJSON";
 			remoteInfo = SwiftyJSON;
 		};
-		C8103A251FB5A01A00845295 /* PBXContainerItemProxy */ = {
+		C88395081FB70831009242A9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Alamofire::Alamofire";
 			remoteInfo = Alamofire;
 		};
-		C8103A261FB5A01A00845295 /* PBXContainerItemProxy */ = {
+		C88395091FB70831009242A9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "HeliumLogger::HeliumLogger";
 			remoteInfo = HeliumLogger;
 		};
-		C8103A271FB5A01A00845295 /* PBXContainerItemProxy */ = {
+		C883950A1FB70831009242A9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "LoggerAPI::LoggerAPI";
 			remoteInfo = LoggerAPI;
 		};
-		C8103A281FB5A01B00845295 /* PBXContainerItemProxy */ = {
+		C883950B1FB70831009242A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "LoggerAPI::LoggerAPI";
+			remoteInfo = LoggerAPI;
+		};
+		C883950C1FB70831009242A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "CodableCollection::CodableCollection";
+			remoteInfo = CodableCollection;
+		};
+		C883950D1FB70831009242A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "SwiftyJSON::SwiftyJSON";
+			remoteInfo = SwiftyJSON;
+		};
+		C883950E1FB70831009242A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Alamofire::Alamofire";
+			remoteInfo = Alamofire;
+		};
+		C883950F1FB70831009242A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "HeliumLogger::HeliumLogger";
+			remoteInfo = HeliumLogger;
+		};
+		C88395101FB70831009242A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "LoggerAPI::LoggerAPI";
+			remoteInfo = LoggerAPI;
+		};
+		C88395111FB70831009242A9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
@@ -182,121 +182,121 @@
 
 /* Begin PBXFileReference section */
 		"Alamofire::Alamofire::Product" /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C8103A511FB5B66A00845295 /* JSON+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON+Codable.swift"; sourceTree = "<group>"; };
-		C8BC3B341FB5D30300B15585 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		"CodableCollection::CodableCollection::Product" /* CodableCollection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CodableCollection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"HeliumLogger::HeliumLogger::Product" /* HeliumLogger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = HeliumLogger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"LoggerAPI::LoggerAPI::Product" /* LoggerAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LoggerAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		OBJ_10 /* DBError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBError.swift; sourceTree = "<group>"; };
+		OBJ_10 /* DBConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBConfiguration.swift; sourceTree = "<group>"; };
 		OBJ_11 /* DBDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBDocument.swift; sourceTree = "<group>"; };
-		OBJ_12 /* CodableUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableUtils.swift; sourceTree = "<group>"; };
+		OBJ_12 /* DBError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBError.swift; sourceTree = "<group>"; };
 		OBJ_13 /* DBObjectChanges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBObjectChanges.swift; sourceTree = "<group>"; };
 		OBJ_14 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		OBJ_16 /* CouchDB+Alamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CouchDB+Alamofire.swift"; sourceTree = "<group>"; };
 		OBJ_17 /* CouchDBRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouchDBRequests.swift; sourceTree = "<group>"; };
-		OBJ_18 /* String+Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Regex.swift"; sourceTree = "<group>"; };
-		OBJ_20 /* Apply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Apply.swift; sourceTree = "<group>"; };
-		OBJ_21 /* BasicPromise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicPromise.swift; sourceTree = "<group>"; };
-		OBJ_22 /* Promise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Promise.swift; sourceTree = "<group>"; };
-		OBJ_23 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
-		OBJ_25 /* BaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
-		OBJ_26 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
-		OBJ_27 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
-		OBJ_31 /* AnyCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCodable.swift; sourceTree = "<group>"; };
-		OBJ_32 /* CodableArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableArray.swift; sourceTree = "<group>"; };
-		OBJ_33 /* CodableDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableDictionary.swift; sourceTree = "<group>"; };
-		OBJ_34 /* UnkeyedCodableDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnkeyedCodableDictionary.swift; sourceTree = "<group>"; };
-		OBJ_35 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = ".build/checkouts/CodableCollection.git--5931611610300298364/Package.swift"; sourceTree = "<group>"; };
-		OBJ_38 /* LclJSONSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LclJSONSerialization.swift; sourceTree = "<group>"; };
-		OBJ_39 /* SwiftyJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
-		OBJ_40 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/harrywright/Frameworks/Off Piste/Cocoapod/SwiftyCouchCB/.build/checkouts/SwiftyJSON.git--6955445084174387031/Package.swift"; sourceTree = "<group>"; };
-		OBJ_42 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/harrywright/Frameworks/Off Piste/Cocoapod/SwiftyCouchCB/.build/checkouts/Alamofire.git-6801331143877184500/Package.swift"; sourceTree = "<group>"; };
-		OBJ_43 /* AFError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AFError.swift; sourceTree = "<group>"; };
-		OBJ_44 /* Alamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
-		OBJ_45 /* DispatchQueue+Alamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Alamofire.swift"; sourceTree = "<group>"; };
-		OBJ_46 /* MultipartFormData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartFormData.swift; sourceTree = "<group>"; };
-		OBJ_47 /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReachabilityManager.swift; sourceTree = "<group>"; };
-		OBJ_48 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
-		OBJ_49 /* ParameterEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterEncoding.swift; sourceTree = "<group>"; };
-		OBJ_50 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
-		OBJ_51 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
-		OBJ_52 /* ResponseSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseSerialization.swift; sourceTree = "<group>"; };
-		OBJ_53 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
-		OBJ_54 /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerTrustPolicy.swift; sourceTree = "<group>"; };
-		OBJ_55 /* SessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDelegate.swift; sourceTree = "<group>"; };
-		OBJ_56 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
-		OBJ_57 /* TaskDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDelegate.swift; sourceTree = "<group>"; };
-		OBJ_58 /* Timeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline.swift; sourceTree = "<group>"; };
-		OBJ_59 /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
+		OBJ_18 /* JSON+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON+Codable.swift"; sourceTree = "<group>"; };
+		OBJ_19 /* String+Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Regex.swift"; sourceTree = "<group>"; };
+		OBJ_21 /* Apply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Apply.swift; sourceTree = "<group>"; };
+		OBJ_22 /* BasicPromise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicPromise.swift; sourceTree = "<group>"; };
+		OBJ_23 /* Promise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Promise.swift; sourceTree = "<group>"; };
+		OBJ_24 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		OBJ_26 /* BaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
+		OBJ_27 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		OBJ_28 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		OBJ_29 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		OBJ_33 /* AnyCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCodable.swift; sourceTree = "<group>"; };
+		OBJ_34 /* CodableArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableArray.swift; sourceTree = "<group>"; };
+		OBJ_35 /* CodableDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableDictionary.swift; sourceTree = "<group>"; };
+		OBJ_36 /* UnkeyedCodableDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnkeyedCodableDictionary.swift; sourceTree = "<group>"; };
+		OBJ_37 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/harrywright/Frameworks/Off Piste/Cocoapod/SwiftyCouchCB/.build/checkouts/CodableCollection.git--5931611610300298364/Package.swift"; sourceTree = "<group>"; };
+		OBJ_40 /* LclJSONSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LclJSONSerialization.swift; sourceTree = "<group>"; };
+		OBJ_41 /* SwiftyJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		OBJ_42 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/harrywright/Frameworks/Off Piste/Cocoapod/SwiftyCouchCB/.build/checkouts/SwiftyJSON.git--6955445084174387031/Package.swift"; sourceTree = "<group>"; };
+		OBJ_44 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/harrywright/Frameworks/Off Piste/Cocoapod/SwiftyCouchCB/.build/checkouts/Alamofire.git-6801331143877184500/Package.swift"; sourceTree = "<group>"; };
+		OBJ_45 /* AFError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AFError.swift; sourceTree = "<group>"; };
+		OBJ_46 /* Alamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
+		OBJ_47 /* DispatchQueue+Alamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Alamofire.swift"; sourceTree = "<group>"; };
+		OBJ_48 /* MultipartFormData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartFormData.swift; sourceTree = "<group>"; };
+		OBJ_49 /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReachabilityManager.swift; sourceTree = "<group>"; };
+		OBJ_50 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		OBJ_51 /* ParameterEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterEncoding.swift; sourceTree = "<group>"; };
+		OBJ_52 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		OBJ_53 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		OBJ_54 /* ResponseSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseSerialization.swift; sourceTree = "<group>"; };
+		OBJ_55 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		OBJ_56 /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerTrustPolicy.swift; sourceTree = "<group>"; };
+		OBJ_57 /* SessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDelegate.swift; sourceTree = "<group>"; };
+		OBJ_58 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		OBJ_59 /* TaskDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDelegate.swift; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-		OBJ_62 /* HeliumLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeliumLogger.swift; sourceTree = "<group>"; };
-		OBJ_63 /* HeliumStreamLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeliumStreamLogger.swift; sourceTree = "<group>"; };
-		OBJ_64 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/harrywright/Frameworks/Off Piste/Cocoapod/SwiftyCouchCB/.build/checkouts/HeliumLogger.git-2106793442615829935/Package.swift"; sourceTree = "<group>"; };
-		OBJ_67 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		OBJ_68 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/harrywright/Frameworks/Off Piste/Cocoapod/SwiftyCouchCB/.build/checkouts/LoggerAPI.git--6449715459278086880/Package.swift"; sourceTree = "<group>"; };
-		OBJ_8 /* CouchDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouchDB.swift; sourceTree = "<group>"; };
-		OBJ_9 /* DBConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBConfiguration.swift; sourceTree = "<group>"; };
+		OBJ_60 /* Timeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline.swift; sourceTree = "<group>"; };
+		OBJ_61 /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
+		OBJ_64 /* HeliumLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeliumLogger.swift; sourceTree = "<group>"; };
+		OBJ_65 /* HeliumStreamLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeliumStreamLogger.swift; sourceTree = "<group>"; };
+		OBJ_66 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/harrywright/Frameworks/Off Piste/Cocoapod/SwiftyCouchCB/.build/checkouts/HeliumLogger.git-2106793442615829935/Package.swift"; sourceTree = "<group>"; };
+		OBJ_69 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		OBJ_70 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/harrywright/Frameworks/Off Piste/Cocoapod/SwiftyCouchCB/.build/checkouts/LoggerAPI.git--6449715459278086880/Package.swift"; sourceTree = "<group>"; };
+		OBJ_8 /* CodableUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableUtils.swift; sourceTree = "<group>"; };
+		OBJ_9 /* CouchDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouchDB.swift; sourceTree = "<group>"; };
 		"SwiftyCouchDB::SwiftyCouchDB::Product" /* SwiftyCouchDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyCouchDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"SwiftyCouchDB::SwiftyCouchDBTests::Product" /* SwiftyCouchDBTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = SwiftyCouchDBTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		"SwiftyJSON::SwiftyJSON::Product" /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		OBJ_121 /* Frameworks */ = {
+		OBJ_124 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_122 /* SwiftyCouchDB.framework in Frameworks */,
-				OBJ_123 /* CodableCollection.framework in Frameworks */,
-				OBJ_124 /* SwiftyJSON.framework in Frameworks */,
-				OBJ_125 /* Alamofire.framework in Frameworks */,
-				OBJ_126 /* HeliumLogger.framework in Frameworks */,
-				OBJ_127 /* LoggerAPI.framework in Frameworks */,
+				OBJ_125 /* SwiftyCouchDB.framework in Frameworks */,
+				OBJ_126 /* CodableCollection.framework in Frameworks */,
+				OBJ_127 /* SwiftyJSON.framework in Frameworks */,
+				OBJ_128 /* Alamofire.framework in Frameworks */,
+				OBJ_129 /* HeliumLogger.framework in Frameworks */,
+				OBJ_130 /* LoggerAPI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_158 /* Frameworks */ = {
+		OBJ_162 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_159 /* CodableCollection.framework in Frameworks */,
-				OBJ_160 /* SwiftyJSON.framework in Frameworks */,
-				OBJ_161 /* Alamofire.framework in Frameworks */,
-				OBJ_162 /* HeliumLogger.framework in Frameworks */,
-				OBJ_163 /* LoggerAPI.framework in Frameworks */,
+				OBJ_163 /* CodableCollection.framework in Frameworks */,
+				OBJ_164 /* SwiftyJSON.framework in Frameworks */,
+				OBJ_165 /* Alamofire.framework in Frameworks */,
+				OBJ_166 /* HeliumLogger.framework in Frameworks */,
+				OBJ_167 /* LoggerAPI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_177 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		OBJ_184 /* Frameworks */ = {
+		OBJ_181 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_206 /* Frameworks */ = {
+		OBJ_188 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_213 /* Frameworks */ = {
+		OBJ_210 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_214 /* LoggerAPI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_221 /* Frameworks */ = {
+		OBJ_217 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_218 /* LoggerAPI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_225 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
@@ -311,161 +311,178 @@
 			children = (
 				OBJ_16 /* CouchDB+Alamofire.swift */,
 				OBJ_17 /* CouchDBRequests.swift */,
-				OBJ_18 /* String+Regex.swift */,
-				C8103A511FB5B66A00845295 /* JSON+Codable.swift */,
+				OBJ_18 /* JSON+Codable.swift */,
+				OBJ_19 /* String+Regex.swift */,
 			);
 			path = Internal;
 			sourceTree = "<group>";
 		};
-		OBJ_19 /* MiniPromiseKit */ = {
+		OBJ_20 /* MiniPromiseKit */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_20 /* Apply.swift */,
-				OBJ_21 /* BasicPromise.swift */,
-				OBJ_22 /* Promise.swift */,
-				OBJ_23 /* Result.swift */,
+				OBJ_21 /* Apply.swift */,
+				OBJ_22 /* BasicPromise.swift */,
+				OBJ_23 /* Promise.swift */,
+				OBJ_24 /* Result.swift */,
 			);
 			path = MiniPromiseKit;
 			sourceTree = "<group>";
 		};
-		OBJ_24 /* Tests */ = {
+		OBJ_25 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_25 /* BaseTestCase.swift */,
-				OBJ_26 /* Database.swift */,
-				C8BC3B341FB5D30300B15585 /* Document.swift */,
-				OBJ_27 /* Models.swift */,
+				OBJ_26 /* BaseTestCase.swift */,
+				OBJ_27 /* Database.swift */,
+				OBJ_28 /* Document.swift */,
+				OBJ_29 /* Models.swift */,
 			);
 			path = Tests;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_28 /* Dependencies */ = {
+		OBJ_30 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_29 /* CodableCollection */,
-				OBJ_36 /* SwiftyJSON 17.0.0 */,
-				OBJ_41 /* Alamofire 4.5.1 */,
-				OBJ_60 /* HeliumLogger 1.7.1 */,
-				OBJ_65 /* LoggerAPI 1.7.1 */,
+				OBJ_31 /* CodableCollection */,
+				OBJ_38 /* SwiftyJSON 17.0.0 */,
+				OBJ_43 /* Alamofire 4.5.1 */,
+				OBJ_62 /* HeliumLogger 1.7.1 */,
+				OBJ_67 /* LoggerAPI 1.7.1 */,
 			);
 			name = Dependencies;
 			sourceTree = "<group>";
 		};
-		OBJ_29 /* CodableCollection */ = {
+		OBJ_31 /* CodableCollection */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_30 /* CodableCollection */,
-				OBJ_35 /* Package.swift */,
+				OBJ_32 /* CodableCollection */,
+				OBJ_37 /* Package.swift */,
 			);
 			name = CodableCollection;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_30 /* CodableCollection */ = {
+		OBJ_32 /* CodableCollection */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_31 /* AnyCodable.swift */,
-				OBJ_32 /* CodableArray.swift */,
-				OBJ_33 /* CodableDictionary.swift */,
-				OBJ_34 /* UnkeyedCodableDictionary.swift */,
+				OBJ_33 /* AnyCodable.swift */,
+				OBJ_34 /* CodableArray.swift */,
+				OBJ_35 /* CodableDictionary.swift */,
+				OBJ_36 /* UnkeyedCodableDictionary.swift */,
 			);
 			name = CodableCollection;
 			path = ".build/checkouts/CodableCollection.git--5931611610300298364/Sources/CodableCollection";
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_36 /* SwiftyJSON 17.0.0 */ = {
+		OBJ_38 /* SwiftyJSON 17.0.0 */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_37 /* SwiftyJSON */,
-				OBJ_40 /* Package.swift */,
+				OBJ_39 /* SwiftyJSON */,
+				OBJ_42 /* Package.swift */,
 			);
 			name = "SwiftyJSON 17.0.0";
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_37 /* SwiftyJSON */ = {
+		OBJ_39 /* SwiftyJSON */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_38 /* LclJSONSerialization.swift */,
-				OBJ_39 /* SwiftyJSON.swift */,
+				OBJ_40 /* LclJSONSerialization.swift */,
+				OBJ_41 /* SwiftyJSON.swift */,
 			);
 			name = SwiftyJSON;
 			path = ".build/checkouts/SwiftyJSON.git--6955445084174387031/Sources/SwiftyJSON";
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_41 /* Alamofire 4.5.1 */ = {
+		OBJ_43 /* Alamofire 4.5.1 */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_42 /* Package.swift */,
-				OBJ_43 /* AFError.swift */,
-				OBJ_44 /* Alamofire.swift */,
-				OBJ_45 /* DispatchQueue+Alamofire.swift */,
-				OBJ_46 /* MultipartFormData.swift */,
-				OBJ_47 /* NetworkReachabilityManager.swift */,
-				OBJ_48 /* Notifications.swift */,
-				OBJ_49 /* ParameterEncoding.swift */,
-				OBJ_50 /* Request.swift */,
-				OBJ_51 /* Response.swift */,
-				OBJ_52 /* ResponseSerialization.swift */,
-				OBJ_53 /* Result.swift */,
-				OBJ_54 /* ServerTrustPolicy.swift */,
-				OBJ_55 /* SessionDelegate.swift */,
-				OBJ_56 /* SessionManager.swift */,
-				OBJ_57 /* TaskDelegate.swift */,
-				OBJ_58 /* Timeline.swift */,
-				OBJ_59 /* Validation.swift */,
+				OBJ_44 /* Package.swift */,
+				OBJ_45 /* AFError.swift */,
+				OBJ_46 /* Alamofire.swift */,
+				OBJ_47 /* DispatchQueue+Alamofire.swift */,
+				OBJ_48 /* MultipartFormData.swift */,
+				OBJ_49 /* NetworkReachabilityManager.swift */,
+				OBJ_50 /* Notifications.swift */,
+				OBJ_51 /* ParameterEncoding.swift */,
+				OBJ_52 /* Request.swift */,
+				OBJ_53 /* Response.swift */,
+				OBJ_54 /* ResponseSerialization.swift */,
+				OBJ_55 /* Result.swift */,
+				OBJ_56 /* ServerTrustPolicy.swift */,
+				OBJ_57 /* SessionDelegate.swift */,
+				OBJ_58 /* SessionManager.swift */,
+				OBJ_59 /* TaskDelegate.swift */,
+				OBJ_60 /* Timeline.swift */,
+				OBJ_61 /* Validation.swift */,
 			);
 			name = "Alamofire 4.5.1";
 			path = ".build/checkouts/Alamofire.git-6801331143877184500/Source";
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_5 = {
+		OBJ_5 /*  */ = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
 				OBJ_7 /* Sources */,
-				OBJ_24 /* Tests */,
-				OBJ_28 /* Dependencies */,
-				OBJ_69 /* Products */,
+				OBJ_25 /* Tests */,
+				OBJ_30 /* Dependencies */,
+				OBJ_71 /* Products */,
 			);
+			name = "";
 			sourceTree = "<group>";
 		};
-		OBJ_60 /* HeliumLogger 1.7.1 */ = {
+		OBJ_62 /* HeliumLogger 1.7.1 */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_61 /* HeliumLogger */,
-				OBJ_64 /* Package.swift */,
+				OBJ_63 /* HeliumLogger */,
+				OBJ_66 /* Package.swift */,
 			);
 			name = "HeliumLogger 1.7.1";
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_61 /* HeliumLogger */ = {
+		OBJ_63 /* HeliumLogger */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_62 /* HeliumLogger.swift */,
-				OBJ_63 /* HeliumStreamLogger.swift */,
+				OBJ_64 /* HeliumLogger.swift */,
+				OBJ_65 /* HeliumStreamLogger.swift */,
 			);
 			name = HeliumLogger;
 			path = ".build/checkouts/HeliumLogger.git-2106793442615829935/Sources/HeliumLogger";
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_65 /* LoggerAPI 1.7.1 */ = {
+		OBJ_67 /* LoggerAPI 1.7.1 */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_66 /* LoggerAPI */,
-				OBJ_68 /* Package.swift */,
+				OBJ_68 /* LoggerAPI */,
+				OBJ_70 /* Package.swift */,
 			);
 			name = "LoggerAPI 1.7.1";
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_66 /* LoggerAPI */ = {
+		OBJ_68 /* LoggerAPI */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_67 /* Logger.swift */,
+				OBJ_69 /* Logger.swift */,
 			);
 			name = LoggerAPI;
 			path = ".build/checkouts/LoggerAPI.git--6449715459278086880/Sources/LoggerAPI";
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_69 /* Products */ = {
+		OBJ_7 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_8 /* CodableUtils.swift */,
+				OBJ_9 /* CouchDB.swift */,
+				OBJ_10 /* DBConfiguration.swift */,
+				OBJ_11 /* DBDocument.swift */,
+				OBJ_12 /* DBError.swift */,
+				OBJ_13 /* DBObjectChanges.swift */,
+				OBJ_14 /* Database.swift */,
+				OBJ_15 /* Internal */,
+				OBJ_20 /* MiniPromiseKit */,
+			);
+			path = Sources;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_71 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				"SwiftyCouchDB::SwiftyCouchDBTests::Product" /* SwiftyCouchDBTests.xctest */,
@@ -479,31 +496,15 @@
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		OBJ_7 /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_8 /* CouchDB.swift */,
-				OBJ_9 /* DBConfiguration.swift */,
-				OBJ_10 /* DBError.swift */,
-				OBJ_11 /* DBDocument.swift */,
-				OBJ_12 /* CodableUtils.swift */,
-				OBJ_13 /* DBObjectChanges.swift */,
-				OBJ_14 /* Database.swift */,
-				OBJ_15 /* Internal */,
-				OBJ_19 /* MiniPromiseKit */,
-			);
-			path = Sources;
-			sourceTree = SOURCE_ROOT;
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
 		"Alamofire::Alamofire" /* Alamofire */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_185 /* Build configuration list for PBXNativeTarget "Alamofire" */;
+			buildConfigurationList = OBJ_189 /* Build configuration list for PBXNativeTarget "Alamofire" */;
 			buildPhases = (
-				OBJ_188 /* Sources */,
-				OBJ_206 /* Frameworks */,
+				OBJ_192 /* Sources */,
+				OBJ_210 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -516,9 +517,9 @@
 		};
 		"Alamofire::SwiftPMPackageDescription" /* AlamofirePackageDescription */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_96 /* Build configuration list for PBXNativeTarget "AlamofirePackageDescription" */;
+			buildConfigurationList = OBJ_98 /* Build configuration list for PBXNativeTarget "AlamofirePackageDescription" */;
 			buildPhases = (
-				OBJ_99 /* Sources */,
+				OBJ_101 /* Sources */,
 			);
 			buildRules = (
 			);
@@ -530,10 +531,10 @@
 		};
 		"CodableCollection::CodableCollection" /* CodableCollection */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_169 /* Build configuration list for PBXNativeTarget "CodableCollection" */;
+			buildConfigurationList = OBJ_173 /* Build configuration list for PBXNativeTarget "CodableCollection" */;
 			buildPhases = (
-				OBJ_172 /* Sources */,
-				OBJ_177 /* Frameworks */,
+				OBJ_176 /* Sources */,
+				OBJ_181 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -546,9 +547,9 @@
 		};
 		"CodableCollection::SwiftPMPackageDescription" /* CodableCollectionPackageDescription */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_84 /* Build configuration list for PBXNativeTarget "CodableCollectionPackageDescription" */;
+			buildConfigurationList = OBJ_86 /* Build configuration list for PBXNativeTarget "CodableCollectionPackageDescription" */;
 			buildPhases = (
-				OBJ_87 /* Sources */,
+				OBJ_89 /* Sources */,
 			);
 			buildRules = (
 			);
@@ -560,15 +561,15 @@
 		};
 		"HeliumLogger::HeliumLogger" /* HeliumLogger */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_207 /* Build configuration list for PBXNativeTarget "HeliumLogger" */;
+			buildConfigurationList = OBJ_211 /* Build configuration list for PBXNativeTarget "HeliumLogger" */;
 			buildPhases = (
-				OBJ_210 /* Sources */,
-				OBJ_213 /* Frameworks */,
+				OBJ_214 /* Sources */,
+				OBJ_217 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				OBJ_215 /* PBXTargetDependency */,
+				OBJ_219 /* PBXTargetDependency */,
 			);
 			name = HeliumLogger;
 			productName = HeliumLogger;
@@ -577,9 +578,9 @@
 		};
 		"HeliumLogger::SwiftPMPackageDescription" /* HeliumLoggerPackageDescription */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_102 /* Build configuration list for PBXNativeTarget "HeliumLoggerPackageDescription" */;
+			buildConfigurationList = OBJ_104 /* Build configuration list for PBXNativeTarget "HeliumLoggerPackageDescription" */;
 			buildPhases = (
-				OBJ_105 /* Sources */,
+				OBJ_107 /* Sources */,
 			);
 			buildRules = (
 			);
@@ -591,10 +592,10 @@
 		};
 		"LoggerAPI::LoggerAPI" /* LoggerAPI */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_216 /* Build configuration list for PBXNativeTarget "LoggerAPI" */;
+			buildConfigurationList = OBJ_220 /* Build configuration list for PBXNativeTarget "LoggerAPI" */;
 			buildPhases = (
-				OBJ_219 /* Sources */,
-				OBJ_221 /* Frameworks */,
+				OBJ_223 /* Sources */,
+				OBJ_225 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -607,9 +608,9 @@
 		};
 		"LoggerAPI::SwiftPMPackageDescription" /* LoggerAPIPackageDescription */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_108 /* Build configuration list for PBXNativeTarget "LoggerAPIPackageDescription" */;
+			buildConfigurationList = OBJ_110 /* Build configuration list for PBXNativeTarget "LoggerAPIPackageDescription" */;
 			buildPhases = (
-				OBJ_111 /* Sources */,
+				OBJ_113 /* Sources */,
 			);
 			buildRules = (
 			);
@@ -621,9 +622,9 @@
 		};
 		"SwiftyCouchDB::SwiftPMPackageDescription" /* SwiftyCouchDBPackageDescription */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_78 /* Build configuration list for PBXNativeTarget "SwiftyCouchDBPackageDescription" */;
+			buildConfigurationList = OBJ_80 /* Build configuration list for PBXNativeTarget "SwiftyCouchDBPackageDescription" */;
 			buildPhases = (
-				OBJ_81 /* Sources */,
+				OBJ_83 /* Sources */,
 			);
 			buildRules = (
 			);
@@ -635,19 +636,19 @@
 		};
 		"SwiftyCouchDB::SwiftyCouchDB" /* SwiftyCouchDB */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_140 /* Build configuration list for PBXNativeTarget "SwiftyCouchDB" */;
+			buildConfigurationList = OBJ_143 /* Build configuration list for PBXNativeTarget "SwiftyCouchDB" */;
 			buildPhases = (
-				OBJ_143 /* Sources */,
-				OBJ_158 /* Frameworks */,
+				OBJ_146 /* Sources */,
+				OBJ_162 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				OBJ_164 /* PBXTargetDependency */,
-				OBJ_165 /* PBXTargetDependency */,
-				OBJ_166 /* PBXTargetDependency */,
-				OBJ_167 /* PBXTargetDependency */,
 				OBJ_168 /* PBXTargetDependency */,
+				OBJ_169 /* PBXTargetDependency */,
+				OBJ_170 /* PBXTargetDependency */,
+				OBJ_171 /* PBXTargetDependency */,
+				OBJ_172 /* PBXTargetDependency */,
 			);
 			name = SwiftyCouchDB;
 			productName = SwiftyCouchDB;
@@ -656,20 +657,20 @@
 		};
 		"SwiftyCouchDB::SwiftyCouchDBTests" /* SwiftyCouchDBTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_114 /* Build configuration list for PBXNativeTarget "SwiftyCouchDBTests" */;
+			buildConfigurationList = OBJ_116 /* Build configuration list for PBXNativeTarget "SwiftyCouchDBTests" */;
 			buildPhases = (
-				OBJ_117 /* Sources */,
-				OBJ_121 /* Frameworks */,
+				OBJ_119 /* Sources */,
+				OBJ_124 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				OBJ_128 /* PBXTargetDependency */,
-				OBJ_130 /* PBXTargetDependency */,
-				OBJ_132 /* PBXTargetDependency */,
-				OBJ_134 /* PBXTargetDependency */,
-				OBJ_136 /* PBXTargetDependency */,
-				OBJ_138 /* PBXTargetDependency */,
+				OBJ_131 /* PBXTargetDependency */,
+				OBJ_133 /* PBXTargetDependency */,
+				OBJ_135 /* PBXTargetDependency */,
+				OBJ_137 /* PBXTargetDependency */,
+				OBJ_139 /* PBXTargetDependency */,
+				OBJ_141 /* PBXTargetDependency */,
 			);
 			name = SwiftyCouchDBTests;
 			productName = SwiftyCouchDBTests;
@@ -678,9 +679,9 @@
 		};
 		"SwiftyJSON::SwiftPMPackageDescription" /* SwiftyJSONPackageDescription */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_90 /* Build configuration list for PBXNativeTarget "SwiftyJSONPackageDescription" */;
+			buildConfigurationList = OBJ_92 /* Build configuration list for PBXNativeTarget "SwiftyJSONPackageDescription" */;
 			buildPhases = (
-				OBJ_93 /* Sources */,
+				OBJ_95 /* Sources */,
 			);
 			buildRules = (
 			);
@@ -692,10 +693,10 @@
 		};
 		"SwiftyJSON::SwiftyJSON" /* SwiftyJSON */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_178 /* Build configuration list for PBXNativeTarget "SwiftyJSON" */;
+			buildConfigurationList = OBJ_182 /* Build configuration list for PBXNativeTarget "SwiftyJSON" */;
 			buildPhases = (
-				OBJ_181 /* Sources */,
-				OBJ_184 /* Frameworks */,
+				OBJ_185 /* Sources */,
+				OBJ_188 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -721,8 +722,8 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5;
-			productRefGroup = OBJ_69 /* Products */;
+			mainGroup = OBJ_5 /*  */;
+			productRefGroup = OBJ_71 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -745,220 +746,229 @@
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		OBJ_105 /* Sources */ = {
+		OBJ_101 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_106 /* Package.swift in Sources */,
+				OBJ_102 /* Package.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_111 /* Sources */ = {
+		OBJ_107 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_112 /* Package.swift in Sources */,
+				OBJ_108 /* Package.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_117 /* Sources */ = {
+		OBJ_113 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				C8BC3B351FB5D30300B15585 /* Document.swift in Sources */,
-				OBJ_118 /* BaseTestCase.swift in Sources */,
-				OBJ_119 /* Database.swift in Sources */,
-				OBJ_120 /* Models.swift in Sources */,
+				OBJ_114 /* Package.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_143 /* Sources */ = {
+		OBJ_119 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				C8103A521FB5B66B00845295 /* JSON+Codable.swift in Sources */,
-				OBJ_144 /* CouchDB.swift in Sources */,
-				OBJ_145 /* DBConfiguration.swift in Sources */,
-				OBJ_146 /* DBError.swift in Sources */,
-				OBJ_147 /* DBDocument.swift in Sources */,
-				OBJ_148 /* CodableUtils.swift in Sources */,
-				OBJ_149 /* DBObjectChanges.swift in Sources */,
-				OBJ_150 /* Database.swift in Sources */,
-				OBJ_151 /* CouchDB+Alamofire.swift in Sources */,
-				OBJ_152 /* CouchDBRequests.swift in Sources */,
-				OBJ_153 /* String+Regex.swift in Sources */,
-				OBJ_154 /* Apply.swift in Sources */,
-				OBJ_155 /* BasicPromise.swift in Sources */,
-				OBJ_156 /* Promise.swift in Sources */,
-				OBJ_157 /* Result.swift in Sources */,
+				OBJ_120 /* BaseTestCase.swift in Sources */,
+				OBJ_121 /* Database.swift in Sources */,
+				OBJ_122 /* Document.swift in Sources */,
+				OBJ_123 /* Models.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_172 /* Sources */ = {
+		OBJ_146 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_173 /* AnyCodable.swift in Sources */,
-				OBJ_174 /* CodableArray.swift in Sources */,
-				OBJ_175 /* CodableDictionary.swift in Sources */,
-				OBJ_176 /* UnkeyedCodableDictionary.swift in Sources */,
+				OBJ_147 /* CodableUtils.swift in Sources */,
+				OBJ_148 /* CouchDB.swift in Sources */,
+				OBJ_149 /* DBConfiguration.swift in Sources */,
+				OBJ_150 /* DBDocument.swift in Sources */,
+				OBJ_151 /* DBError.swift in Sources */,
+				OBJ_152 /* DBObjectChanges.swift in Sources */,
+				OBJ_153 /* Database.swift in Sources */,
+				OBJ_154 /* CouchDB+Alamofire.swift in Sources */,
+				OBJ_155 /* CouchDBRequests.swift in Sources */,
+				OBJ_156 /* JSON+Codable.swift in Sources */,
+				OBJ_157 /* String+Regex.swift in Sources */,
+				OBJ_158 /* Apply.swift in Sources */,
+				OBJ_159 /* BasicPromise.swift in Sources */,
+				OBJ_160 /* Promise.swift in Sources */,
+				OBJ_161 /* Result.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_181 /* Sources */ = {
+		OBJ_176 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_182 /* LclJSONSerialization.swift in Sources */,
-				OBJ_183 /* SwiftyJSON.swift in Sources */,
+				OBJ_177 /* AnyCodable.swift in Sources */,
+				OBJ_178 /* CodableArray.swift in Sources */,
+				OBJ_179 /* CodableDictionary.swift in Sources */,
+				OBJ_180 /* UnkeyedCodableDictionary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_188 /* Sources */ = {
+		OBJ_185 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_189 /* AFError.swift in Sources */,
-				OBJ_190 /* Alamofire.swift in Sources */,
-				OBJ_191 /* DispatchQueue+Alamofire.swift in Sources */,
-				OBJ_192 /* MultipartFormData.swift in Sources */,
-				OBJ_193 /* NetworkReachabilityManager.swift in Sources */,
-				OBJ_194 /* Notifications.swift in Sources */,
-				OBJ_195 /* ParameterEncoding.swift in Sources */,
-				OBJ_196 /* Request.swift in Sources */,
-				OBJ_197 /* Response.swift in Sources */,
-				OBJ_198 /* ResponseSerialization.swift in Sources */,
-				OBJ_199 /* Result.swift in Sources */,
-				OBJ_200 /* ServerTrustPolicy.swift in Sources */,
-				OBJ_201 /* SessionDelegate.swift in Sources */,
-				OBJ_202 /* SessionManager.swift in Sources */,
-				OBJ_203 /* TaskDelegate.swift in Sources */,
-				OBJ_204 /* Timeline.swift in Sources */,
-				OBJ_205 /* Validation.swift in Sources */,
+				OBJ_186 /* LclJSONSerialization.swift in Sources */,
+				OBJ_187 /* SwiftyJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_210 /* Sources */ = {
+		OBJ_192 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_211 /* HeliumLogger.swift in Sources */,
-				OBJ_212 /* HeliumStreamLogger.swift in Sources */,
+				OBJ_193 /* AFError.swift in Sources */,
+				OBJ_194 /* Alamofire.swift in Sources */,
+				OBJ_195 /* DispatchQueue+Alamofire.swift in Sources */,
+				OBJ_196 /* MultipartFormData.swift in Sources */,
+				OBJ_197 /* NetworkReachabilityManager.swift in Sources */,
+				OBJ_198 /* Notifications.swift in Sources */,
+				OBJ_199 /* ParameterEncoding.swift in Sources */,
+				OBJ_200 /* Request.swift in Sources */,
+				OBJ_201 /* Response.swift in Sources */,
+				OBJ_202 /* ResponseSerialization.swift in Sources */,
+				OBJ_203 /* Result.swift in Sources */,
+				OBJ_204 /* ServerTrustPolicy.swift in Sources */,
+				OBJ_205 /* SessionDelegate.swift in Sources */,
+				OBJ_206 /* SessionManager.swift in Sources */,
+				OBJ_207 /* TaskDelegate.swift in Sources */,
+				OBJ_208 /* Timeline.swift in Sources */,
+				OBJ_209 /* Validation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_219 /* Sources */ = {
+		OBJ_214 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_220 /* Logger.swift in Sources */,
+				OBJ_215 /* HeliumLogger.swift in Sources */,
+				OBJ_216 /* HeliumStreamLogger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_81 /* Sources */ = {
+		OBJ_223 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_82 /* Package.swift in Sources */,
+				OBJ_224 /* Logger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_87 /* Sources */ = {
+		OBJ_83 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_88 /* Package.swift in Sources */,
+				OBJ_84 /* Package.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_93 /* Sources */ = {
+		OBJ_89 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_94 /* Package.swift in Sources */,
+				OBJ_90 /* Package.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_99 /* Sources */ = {
+		OBJ_95 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_100 /* Package.swift in Sources */,
+				OBJ_96 /* Package.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		OBJ_128 /* PBXTargetDependency */ = {
+		OBJ_131 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "SwiftyCouchDB::SwiftyCouchDB" /* SwiftyCouchDB */;
-			targetProxy = C8103A221FB5A01A00845295 /* PBXContainerItemProxy */;
+			targetProxy = C88395051FB70831009242A9 /* PBXContainerItemProxy */;
 		};
-		OBJ_130 /* PBXTargetDependency */ = {
+		OBJ_133 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "CodableCollection::CodableCollection" /* CodableCollection */;
-			targetProxy = C8103A231FB5A01A00845295 /* PBXContainerItemProxy */;
+			targetProxy = C883950C1FB70831009242A9 /* PBXContainerItemProxy */;
 		};
-		OBJ_132 /* PBXTargetDependency */ = {
+		OBJ_135 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "SwiftyJSON::SwiftyJSON" /* SwiftyJSON */;
-			targetProxy = C8103A241FB5A01A00845295 /* PBXContainerItemProxy */;
+			targetProxy = C883950D1FB70831009242A9 /* PBXContainerItemProxy */;
 		};
-		OBJ_134 /* PBXTargetDependency */ = {
+		OBJ_137 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Alamofire::Alamofire" /* Alamofire */;
-			targetProxy = C8103A251FB5A01A00845295 /* PBXContainerItemProxy */;
+			targetProxy = C883950E1FB70831009242A9 /* PBXContainerItemProxy */;
 		};
-		OBJ_136 /* PBXTargetDependency */ = {
+		OBJ_139 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "HeliumLogger::HeliumLogger" /* HeliumLogger */;
-			targetProxy = C8103A261FB5A01A00845295 /* PBXContainerItemProxy */;
+			targetProxy = C883950F1FB70831009242A9 /* PBXContainerItemProxy */;
 		};
-		OBJ_138 /* PBXTargetDependency */ = {
+		OBJ_141 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "LoggerAPI::LoggerAPI" /* LoggerAPI */;
-			targetProxy = C8103A271FB5A01A00845295 /* PBXContainerItemProxy */;
-		};
-		OBJ_164 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "CodableCollection::CodableCollection" /* CodableCollection */;
-			targetProxy = C8103A1D1FB5A01A00845295 /* PBXContainerItemProxy */;
-		};
-		OBJ_165 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "SwiftyJSON::SwiftyJSON" /* SwiftyJSON */;
-			targetProxy = C8103A1E1FB5A01A00845295 /* PBXContainerItemProxy */;
-		};
-		OBJ_166 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "Alamofire::Alamofire" /* Alamofire */;
-			targetProxy = C8103A1F1FB5A01A00845295 /* PBXContainerItemProxy */;
-		};
-		OBJ_167 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "HeliumLogger::HeliumLogger" /* HeliumLogger */;
-			targetProxy = C8103A201FB5A01A00845295 /* PBXContainerItemProxy */;
+			targetProxy = C88395101FB70831009242A9 /* PBXContainerItemProxy */;
 		};
 		OBJ_168 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = "LoggerAPI::LoggerAPI" /* LoggerAPI */;
-			targetProxy = C8103A211FB5A01A00845295 /* PBXContainerItemProxy */;
+			target = "CodableCollection::CodableCollection" /* CodableCollection */;
+			targetProxy = C88395061FB70831009242A9 /* PBXContainerItemProxy */;
 		};
-		OBJ_215 /* PBXTargetDependency */ = {
+		OBJ_169 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "SwiftyJSON::SwiftyJSON" /* SwiftyJSON */;
+			targetProxy = C88395071FB70831009242A9 /* PBXContainerItemProxy */;
+		};
+		OBJ_170 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Alamofire::Alamofire" /* Alamofire */;
+			targetProxy = C88395081FB70831009242A9 /* PBXContainerItemProxy */;
+		};
+		OBJ_171 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "HeliumLogger::HeliumLogger" /* HeliumLogger */;
+			targetProxy = C88395091FB70831009242A9 /* PBXContainerItemProxy */;
+		};
+		OBJ_172 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "LoggerAPI::LoggerAPI" /* LoggerAPI */;
-			targetProxy = C8103A1C1FB5A01A00845295 /* PBXContainerItemProxy */;
+			targetProxy = C883950B1FB70831009242A9 /* PBXContainerItemProxy */;
 		};
-		OBJ_226 /* PBXTargetDependency */ = {
+		OBJ_219 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "LoggerAPI::LoggerAPI" /* LoggerAPI */;
+			targetProxy = C883950A1FB70831009242A9 /* PBXContainerItemProxy */;
+		};
+		OBJ_230 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "SwiftyCouchDB::SwiftyCouchDBTests" /* SwiftyCouchDBTests */;
-			targetProxy = C8103A281FB5A01B00845295 /* PBXContainerItemProxy */;
+			targetProxy = C88395111FB70831009242A9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		OBJ_103 /* Debug */ = {
+		OBJ_100 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 3 -I /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/pm/3 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		OBJ_105 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -967,7 +977,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_104 /* Release */ = {
+		OBJ_106 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -976,7 +986,7 @@
 			};
 			name = Release;
 		};
-		OBJ_109 /* Debug */ = {
+		OBJ_111 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -985,7 +995,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_110 /* Release */ = {
+		OBJ_112 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -994,7 +1004,7 @@
 			};
 			name = Release;
 		};
-		OBJ_115 /* Debug */ = {
+		OBJ_117 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -1012,7 +1022,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_116 /* Release */ = {
+		OBJ_118 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -1030,7 +1040,7 @@
 			};
 			name = Release;
 		};
-		OBJ_141 /* Debug */ = {
+		OBJ_144 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -1052,7 +1062,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_142 /* Release */ = {
+		OBJ_145 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -1074,7 +1084,7 @@
 			};
 			name = Release;
 		};
-		OBJ_170 /* Debug */ = {
+		OBJ_174 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -1096,7 +1106,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_171 /* Release */ = {
+		OBJ_175 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -1118,7 +1128,7 @@
 			};
 			name = Release;
 		};
-		OBJ_179 /* Debug */ = {
+		OBJ_183 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -1140,7 +1150,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_180 /* Release */ = {
+		OBJ_184 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -1162,7 +1172,7 @@
 			};
 			name = Release;
 		};
-		OBJ_186 /* Debug */ = {
+		OBJ_190 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -1184,7 +1194,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_187 /* Release */ = {
+		OBJ_191 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -1206,7 +1216,7 @@
 			};
 			name = Release;
 		};
-		OBJ_208 /* Debug */ = {
+		OBJ_212 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -1228,7 +1238,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_209 /* Release */ = {
+		OBJ_213 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -1250,7 +1260,7 @@
 			};
 			name = Release;
 		};
-		OBJ_217 /* Debug */ = {
+		OBJ_221 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -1272,7 +1282,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_218 /* Release */ = {
+		OBJ_222 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -1294,13 +1304,13 @@
 			};
 			name = Release;
 		};
-		OBJ_224 /* Debug */ = {
+		OBJ_228 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 			};
 			name = Debug;
 		};
-		OBJ_225 /* Release */ = {
+		OBJ_229 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 			};
@@ -1348,7 +1358,7 @@
 			};
 			name = Release;
 		};
-		OBJ_79 /* Debug */ = {
+		OBJ_81 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -1357,7 +1367,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_80 /* Release */ = {
+		OBJ_82 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -1366,7 +1376,7 @@
 			};
 			name = Release;
 		};
-		OBJ_85 /* Debug */ = {
+		OBJ_87 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -1375,7 +1385,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_86 /* Release */ = {
+		OBJ_88 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -1384,7 +1394,7 @@
 			};
 			name = Release;
 		};
-		OBJ_91 /* Debug */ = {
+		OBJ_93 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -1393,7 +1403,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_92 /* Release */ = {
+		OBJ_94 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -1402,7 +1412,7 @@
 			};
 			name = Release;
 		};
-		OBJ_97 /* Debug */ = {
+		OBJ_99 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -1410,78 +1420,69 @@
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
-		};
-		OBJ_98 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				LD = /usr/bin/true;
-				OTHER_SWIFT_FLAGS = "-swift-version 3 -I /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/pm/3 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		OBJ_102 /* Build configuration list for PBXNativeTarget "HeliumLoggerPackageDescription" */ = {
+		OBJ_104 /* Build configuration list for PBXNativeTarget "HeliumLoggerPackageDescription" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_103 /* Debug */,
-				OBJ_104 /* Release */,
+				OBJ_105 /* Debug */,
+				OBJ_106 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_108 /* Build configuration list for PBXNativeTarget "LoggerAPIPackageDescription" */ = {
+		OBJ_110 /* Build configuration list for PBXNativeTarget "LoggerAPIPackageDescription" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_109 /* Debug */,
-				OBJ_110 /* Release */,
+				OBJ_111 /* Debug */,
+				OBJ_112 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_114 /* Build configuration list for PBXNativeTarget "SwiftyCouchDBTests" */ = {
+		OBJ_116 /* Build configuration list for PBXNativeTarget "SwiftyCouchDBTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_115 /* Debug */,
-				OBJ_116 /* Release */,
+				OBJ_117 /* Debug */,
+				OBJ_118 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_140 /* Build configuration list for PBXNativeTarget "SwiftyCouchDB" */ = {
+		OBJ_143 /* Build configuration list for PBXNativeTarget "SwiftyCouchDB" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_141 /* Debug */,
-				OBJ_142 /* Release */,
+				OBJ_144 /* Debug */,
+				OBJ_145 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_169 /* Build configuration list for PBXNativeTarget "CodableCollection" */ = {
+		OBJ_173 /* Build configuration list for PBXNativeTarget "CodableCollection" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_170 /* Debug */,
-				OBJ_171 /* Release */,
+				OBJ_174 /* Debug */,
+				OBJ_175 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_178 /* Build configuration list for PBXNativeTarget "SwiftyJSON" */ = {
+		OBJ_182 /* Build configuration list for PBXNativeTarget "SwiftyJSON" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_179 /* Debug */,
-				OBJ_180 /* Release */,
+				OBJ_183 /* Debug */,
+				OBJ_184 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_185 /* Build configuration list for PBXNativeTarget "Alamofire" */ = {
+		OBJ_189 /* Build configuration list for PBXNativeTarget "Alamofire" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_186 /* Debug */,
-				OBJ_187 /* Release */,
+				OBJ_190 /* Debug */,
+				OBJ_191 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
@@ -1495,65 +1496,65 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_207 /* Build configuration list for PBXNativeTarget "HeliumLogger" */ = {
+		OBJ_211 /* Build configuration list for PBXNativeTarget "HeliumLogger" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_208 /* Debug */,
-				OBJ_209 /* Release */,
+				OBJ_212 /* Debug */,
+				OBJ_213 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_216 /* Build configuration list for PBXNativeTarget "LoggerAPI" */ = {
+		OBJ_220 /* Build configuration list for PBXNativeTarget "LoggerAPI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_217 /* Debug */,
-				OBJ_218 /* Release */,
+				OBJ_221 /* Debug */,
+				OBJ_222 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_223 /* Build configuration list for PBXAggregateTarget "SwiftyCouchDBPackageTests" */ = {
+		OBJ_227 /* Build configuration list for PBXAggregateTarget "SwiftyCouchDBPackageTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_224 /* Debug */,
-				OBJ_225 /* Release */,
+				OBJ_228 /* Debug */,
+				OBJ_229 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_78 /* Build configuration list for PBXNativeTarget "SwiftyCouchDBPackageDescription" */ = {
+		OBJ_80 /* Build configuration list for PBXNativeTarget "SwiftyCouchDBPackageDescription" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_79 /* Debug */,
-				OBJ_80 /* Release */,
+				OBJ_81 /* Debug */,
+				OBJ_82 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_84 /* Build configuration list for PBXNativeTarget "CodableCollectionPackageDescription" */ = {
+		OBJ_86 /* Build configuration list for PBXNativeTarget "CodableCollectionPackageDescription" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_85 /* Debug */,
-				OBJ_86 /* Release */,
+				OBJ_87 /* Debug */,
+				OBJ_88 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_90 /* Build configuration list for PBXNativeTarget "SwiftyJSONPackageDescription" */ = {
+		OBJ_92 /* Build configuration list for PBXNativeTarget "SwiftyJSONPackageDescription" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_91 /* Debug */,
-				OBJ_92 /* Release */,
+				OBJ_93 /* Debug */,
+				OBJ_94 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_96 /* Build configuration list for PBXNativeTarget "AlamofirePackageDescription" */ = {
+		OBJ_98 /* Build configuration list for PBXNativeTarget "AlamofirePackageDescription" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_97 /* Debug */,
-				OBJ_98 /* Release */,
+				OBJ_99 /* Debug */,
+				OBJ_100 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

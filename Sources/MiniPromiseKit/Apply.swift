@@ -21,6 +21,6 @@ precedencegroup LeftFunctionalApply {
 
 infix operator |> : LeftFunctionalApply
 
-internal func |>  <A, B> ( x: A, f: (A) throws -> B ) rethrows  -> B {
+internal func |>  <A, B> (x: A, f: (A) throws -> B ) rethrows  -> B {
     return try f(x)
 }
