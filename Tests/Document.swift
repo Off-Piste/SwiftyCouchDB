@@ -10,7 +10,7 @@ import SwiftyCouchDB
 
 class DocumentTest: BaseTestCase {
 
-    func testThatAddingPasses() {
+    func testThatAddingToArrayPasses() {
         self.async { (exp) in
             let userList = UserList(_id: "qwertyuiop", list: CodableArray<User>())
             let user = User(_id: "qwertyuiop", username: "qwertyuiop", email: "qwertyuiop@email.com")

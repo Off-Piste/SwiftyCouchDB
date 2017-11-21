@@ -50,7 +50,12 @@ extension DBDocument {
     /// - Parameters:
     ///   - id: The ID of the object
     ///   - callback: The decoded object if the request is sucessful or the error if not
-    public static func retrieve(_ id: String, callback: @escaping (Self?, Error?) -> Void) {
+    public static func retrieve(
+        _ id: String,
+        decoder: JSONDecoder = CodableUtils.decoder,
+        callback: @escaping (Self?, Error?) -> Void
+        )
+    {
         guard let database = self.database else {
             callback(nil, createDBError(.invalidDatabase, reason: "Database is nil"))
             return
@@ -62,7 +67,7 @@ extension DBDocument {
             } else {
                 do {
                     let data = try info!.json.rawData()
-                    let object = try CodableUtils.decoder.decode(self, from: data)
+                    let object = try decoder.decode(self, from: data)
                     callback(object, nil)
                 } catch {
                     callback(nil, error)
@@ -74,13 +79,17 @@ extension DBDocument {
     /// <#Description#>
     ///
     /// - Parameter callback: <#callback description#>
-    public func add(callback: @escaping (Bool, Swift.Error?) -> Void) {
+    public func add(
+        encoder: JSONEncoder = CodableUtils.encoder,
+        callback: @escaping (Bool, Swift.Error?) -> Void
+        )
+    {
         guard let database = type(of: self).database else {
             callback(false, createDBError(.invalidDatabase, reason: "Database is nil"))
             return
         }
         
-        database.add(self, callback: { (info, error) in
+        database.add(self, encoder: encoder, callback: { (info, error) in
             if let error = error {
                 callback(false, error)
             } else {
@@ -104,7 +113,11 @@ extension DBDocument {
     /// <#Description#>
     ///
     /// - Parameter callback: <#callback description#>
-    public func update(callback: @escaping (DBObjectChange) -> Void) {
+    public func update(
+        encoder: JSONEncoder = CodableUtils.encoder,
+        callback: @escaping (DBObjectChange) -> Void
+        )
+    {
         guard let db = type(of: self).database else {
             callback(.error(createDBError(.invalidDatabase, reason: "Database is nil")))
             return
@@ -112,7 +125,7 @@ extension DBDocument {
         
         do {
             let object = self
-            let newJSON = try CodableUtils.encoder.encodeJSON(object)
+            let newJSON = try encoder.encodeJSON(object)
             
             db.update(object._id, with: newJSON, callback: callback)
         } catch {
