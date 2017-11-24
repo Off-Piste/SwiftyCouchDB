@@ -322,6 +322,8 @@ extension Database {
 
     }
 
+    internal typealias StringDict = [String: String]
+
     /// Method used to add
     ///
     /// - Parameters:
@@ -336,7 +338,7 @@ extension Database {
     {
         self.retrieve(design.rawValue) { (info, error) in
             var json: JSON
-            var functionsDictionary: [String: [String: String]] = [:]
+            var functionsDictionary: [String: StringDict] = [:]
 
             for function in functions {
                 var nestedDictionary: [String: String] = [:]
@@ -364,7 +366,10 @@ extension Database {
                 callback(.error(error)); return
             } else {
                 json = info!.json
-                json["views"].arrayObject?.append(JSON(functionsDictionary))
+
+                var dict = json["views"].dictionaryObject?.mapValues { $0 as! StringDict }
+                dict?.merge(functionsDictionary) { (_, new) -> StringDict in new }
+                json["views"].dictionaryObject = dict
 
                 self.update(design.rawValue, with: json, callback: callback)
             }

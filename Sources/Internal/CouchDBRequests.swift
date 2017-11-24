@@ -177,7 +177,7 @@ extension CouchDBRequests {
     {
         let request = CouchDBRequest(
             databaseConfiguration,
-            path: "\(databaseName.escaped)/\(id.escaped)",
+            path: "\(databaseName.escaped)/\(id.contains("/") ? id : id.escaped)",
             method: .get,
             parameters: parameters
         )
@@ -198,7 +198,7 @@ extension CouchDBRequests {
     func doc_delete(_ id: String, callback: @escaping (Bool, Error?) -> Void) {
         let request = CouchDBRequest(
             databaseConfiguration,
-            path: "\(databaseName.escaped)/\(id.escaped)",
+            path: "\(databaseName.escaped)/\(id.contains("/") ? id : id.escaped)",
             method: .delete
         )
 
@@ -224,7 +224,7 @@ extension CouchDBRequests {
 
         let request = CouchDBRequest(
             databaseConfiguration,
-            path: "\(databaseName.escaped)/\(id.escaped)",
+            path: "\(databaseName.escaped)/\(id.contains("/") ? id : id.escaped)",
             method: .put,
             parameters: ["rev":rev]
         )
