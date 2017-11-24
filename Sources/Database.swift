@@ -355,14 +355,21 @@ extension Database {
                     "language" : "javascript",
                     "views" : functionsDictionary
                 ]
+
+                self.add(json, callback: { (info, error) in
+                    if let error = error { callback(.error(error)) }
+                    else { callback(.addition) }
+                })
             } else if let error = error {
                 callback(.error(error)); return
             } else {
                 json = info!.json
                 json["views"].arrayObject?.append(JSON(functionsDictionary))
+
+                self.update(design.rawValue, with: json, callback: callback)
             }
 
-            self.update(design.rawValue, with: json, callback: callback)
+
         }
     }
 
