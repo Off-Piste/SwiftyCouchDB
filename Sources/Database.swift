@@ -248,6 +248,142 @@ extension Database: Hashable, CustomStringConvertible {
 
 }
 
+/// <#Description#>
+///
+/// - map: <#map description#>
+/// - reduce: <#reduce description#>
+public enum DBDesignViewFunction {
+    case map(String)
+    case reduce(String)
+}
+
+/// <#Description#>
+public struct DBDesignView {
+
+    /// <#Description#>
+    public var name: String
+
+    /// <#Description#>
+    public var functions: [DBDesignViewFunction]
+
+    public init(_ name: String) {
+        self.init(name: name, functions: [])
+    }
+
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - name: <#name description#>
+    ///   - function: <#function description#>
+    public init(name: String, function: DBDesignViewFunction) {
+        self.init(name: name, functions: [function])
+    }
+
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - name: <#name description#>
+    ///   - functions: <#functions description#>
+    public init(name: String, functions: [DBDesignViewFunction]) {
+        self.name = name
+        self.functions = functions
+    }
+
+}
+
+extension Database {
+
+    /// <#Description#>
+    public struct Design: RawRepresentable, _SwiftNewtypeWrapper {
+
+        /// <#Description#>
+        public typealias RawValue = String
+
+        /// <#Description#>
+        public var rawValue: String
+
+        /// <#Description#>
+        ///
+        /// - Parameter value: <#value description#>
+        public init(_ value: String) {
+            self.init(rawValue: value)
+        }
+
+        /// <#Description#>
+        ///
+        /// - Parameter rawValue: <#rawValue description#>
+        public init(rawValue: String) {
+            var value = rawValue
+            if rawValue.contains("_design/") {
+                value = "_design/" + value
+            }
+            self.rawValue = value
+        }
+
+    }
+
+    /// Method used to add
+    ///
+    /// - Parameters:
+    ///   - functions: <#functions description#>
+    ///   - design: <#design description#>
+    ///   - callback: <#callback description#>
+    public func addFunctions(
+        _ functions: [DBDesignView],
+        to design: Design,
+        callback: @escaping (DBObjectChange) -> Void
+        )
+    {
+        self.retrieve(design.rawValue) { (info, error) in
+            var json: JSON
+            var functionsDictionary: [String: [String: String]] = [:]
+
+            for function in functions {
+                var nestedDictionary: [String: String] = [:]
+                for view in function.functions {
+                    switch view {
+                    case .map(let map): nestedDictionary.updateValue(map, forKey: "map")
+                    case .reduce(let reduce): nestedDictionary.updateValue(reduce, forKey: "reduce")
+                    }
+                }
+                functionsDictionary.updateValue(nestedDictionary, forKey: function.name)
+            }
+
+            if let afError = error as? AFError, afError.responseCode == 404 {
+                json = [
+                    "_id" : design.rawValue,
+                    "language" : "javascript",
+                    "views" : functionsDictionary
+                ]
+            } else if let error = error {
+                callback(.error(error)); return
+            } else {
+                json = info!.json
+                json["views"].arrayObject?.append(JSON(functionsDictionary))
+            }
+
+            self.update(design.rawValue, with: json, callback: callback)
+        }
+    }
+
+    func queryByView(
+        _ view: DBDesignView,
+        in design: Design,
+        using parameters: [DBQueryOption] = [],
+        callback: @escaping (JSON?, Error?) -> Void
+        )
+    {
+        self.request.query(
+            by: view.name,
+            in: design.rawValue,
+            with: parameters.toParameters(),
+            callback: callback
+        )
+    }
+
+
+}
+
 extension Database {
 
     // MARK: /{db} Requests

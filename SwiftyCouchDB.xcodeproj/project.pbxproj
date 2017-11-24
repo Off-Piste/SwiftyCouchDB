@@ -87,91 +87,91 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		C88395121FB71BA7009242A9 /* PBXContainerItemProxy */ = {
+		C8926F3B1FC47F1400B3E094 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "LoggerAPI::LoggerAPI";
 			remoteInfo = LoggerAPI;
 		};
-		C88395131FB71BA7009242A9 /* PBXContainerItemProxy */ = {
+		C8926F3C1FC47F1400B3E094 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "CodableCollection::CodableCollection";
 			remoteInfo = CodableCollection;
 		};
-		C88395141FB71BA7009242A9 /* PBXContainerItemProxy */ = {
+		C8926F3D1FC47F1400B3E094 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "SwiftyJSON::SwiftyJSON";
 			remoteInfo = SwiftyJSON;
 		};
-		C88395151FB71BA7009242A9 /* PBXContainerItemProxy */ = {
+		C8926F3E1FC47F1400B3E094 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Alamofire::Alamofire";
 			remoteInfo = Alamofire;
 		};
-		C88395161FB71BA7009242A9 /* PBXContainerItemProxy */ = {
+		C8926F3F1FC47F1400B3E094 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "HeliumLogger::HeliumLogger";
 			remoteInfo = HeliumLogger;
 		};
-		C88395171FB71BA7009242A9 /* PBXContainerItemProxy */ = {
+		C8926F401FC47F1400B3E094 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "LoggerAPI::LoggerAPI";
 			remoteInfo = LoggerAPI;
 		};
-		C88395181FB71BA7009242A9 /* PBXContainerItemProxy */ = {
+		C8926F411FC47F1400B3E094 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "SwiftyCouchDB::SwiftyCouchDB";
 			remoteInfo = SwiftyCouchDB;
 		};
-		C88395191FB71BA7009242A9 /* PBXContainerItemProxy */ = {
+		C8926F421FC47F1400B3E094 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "CodableCollection::CodableCollection";
 			remoteInfo = CodableCollection;
 		};
-		C883951A1FB71BA7009242A9 /* PBXContainerItemProxy */ = {
+		C8926F431FC47F1400B3E094 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "SwiftyJSON::SwiftyJSON";
 			remoteInfo = SwiftyJSON;
 		};
-		C883951B1FB71BA7009242A9 /* PBXContainerItemProxy */ = {
+		C8926F441FC47F1400B3E094 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Alamofire::Alamofire";
 			remoteInfo = Alamofire;
 		};
-		C883951C1FB71BA7009242A9 /* PBXContainerItemProxy */ = {
+		C8926F451FC47F1400B3E094 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "HeliumLogger::HeliumLogger";
 			remoteInfo = HeliumLogger;
 		};
-		C883951D1FB71BA7009242A9 /* PBXContainerItemProxy */ = {
+		C8926F461FC47F1400B3E094 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "LoggerAPI::LoggerAPI";
 			remoteInfo = LoggerAPI;
 		};
-		C883951E1FB71BA8009242A9 /* PBXContainerItemProxy */ = {
+		C8926F471FC47F1400B3E094 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
@@ -417,7 +417,7 @@
 			path = ".build/checkouts/Alamofire.git-6801331143877184500/Source";
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -426,7 +426,6 @@
 				OBJ_30 /* Dependencies */,
 				OBJ_71 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_62 /* HeliumLogger 1.7.1 */ = {
@@ -722,7 +721,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_71 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -894,67 +893,67 @@
 		OBJ_131 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "SwiftyCouchDB::SwiftyCouchDB" /* SwiftyCouchDB */;
-			targetProxy = C88395181FB71BA7009242A9 /* PBXContainerItemProxy */;
+			targetProxy = C8926F411FC47F1400B3E094 /* PBXContainerItemProxy */;
 		};
 		OBJ_133 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "CodableCollection::CodableCollection" /* CodableCollection */;
-			targetProxy = C88395191FB71BA7009242A9 /* PBXContainerItemProxy */;
+			targetProxy = C8926F421FC47F1400B3E094 /* PBXContainerItemProxy */;
 		};
 		OBJ_135 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "SwiftyJSON::SwiftyJSON" /* SwiftyJSON */;
-			targetProxy = C883951A1FB71BA7009242A9 /* PBXContainerItemProxy */;
+			targetProxy = C8926F431FC47F1400B3E094 /* PBXContainerItemProxy */;
 		};
 		OBJ_137 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Alamofire::Alamofire" /* Alamofire */;
-			targetProxy = C883951B1FB71BA7009242A9 /* PBXContainerItemProxy */;
+			targetProxy = C8926F441FC47F1400B3E094 /* PBXContainerItemProxy */;
 		};
 		OBJ_139 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "HeliumLogger::HeliumLogger" /* HeliumLogger */;
-			targetProxy = C883951C1FB71BA7009242A9 /* PBXContainerItemProxy */;
+			targetProxy = C8926F451FC47F1400B3E094 /* PBXContainerItemProxy */;
 		};
 		OBJ_141 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "LoggerAPI::LoggerAPI" /* LoggerAPI */;
-			targetProxy = C883951D1FB71BA7009242A9 /* PBXContainerItemProxy */;
+			targetProxy = C8926F461FC47F1400B3E094 /* PBXContainerItemProxy */;
 		};
 		OBJ_168 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "CodableCollection::CodableCollection" /* CodableCollection */;
-			targetProxy = C88395131FB71BA7009242A9 /* PBXContainerItemProxy */;
+			targetProxy = C8926F3C1FC47F1400B3E094 /* PBXContainerItemProxy */;
 		};
 		OBJ_169 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "SwiftyJSON::SwiftyJSON" /* SwiftyJSON */;
-			targetProxy = C88395141FB71BA7009242A9 /* PBXContainerItemProxy */;
+			targetProxy = C8926F3D1FC47F1400B3E094 /* PBXContainerItemProxy */;
 		};
 		OBJ_170 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Alamofire::Alamofire" /* Alamofire */;
-			targetProxy = C88395151FB71BA7009242A9 /* PBXContainerItemProxy */;
+			targetProxy = C8926F3E1FC47F1400B3E094 /* PBXContainerItemProxy */;
 		};
 		OBJ_171 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "HeliumLogger::HeliumLogger" /* HeliumLogger */;
-			targetProxy = C88395161FB71BA7009242A9 /* PBXContainerItemProxy */;
+			targetProxy = C8926F3F1FC47F1400B3E094 /* PBXContainerItemProxy */;
 		};
 		OBJ_172 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "LoggerAPI::LoggerAPI" /* LoggerAPI */;
-			targetProxy = C88395171FB71BA7009242A9 /* PBXContainerItemProxy */;
+			targetProxy = C8926F401FC47F1400B3E094 /* PBXContainerItemProxy */;
 		};
 		OBJ_219 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "LoggerAPI::LoggerAPI" /* LoggerAPI */;
-			targetProxy = C88395121FB71BA7009242A9 /* PBXContainerItemProxy */;
+			targetProxy = C8926F3B1FC47F1400B3E094 /* PBXContainerItemProxy */;
 		};
 		OBJ_230 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "SwiftyCouchDB::SwiftyCouchDBTests" /* SwiftyCouchDBTests */;
-			targetProxy = C883951E1FB71BA8009242A9 /* PBXContainerItemProxy */;
+			targetProxy = C8926F471FC47F1400B3E094 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

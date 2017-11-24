@@ -37,9 +37,9 @@ class CouchDBRequest: URLRequestConvertible {
         self.config = config
         self.path = path
         self.method = method
-        self.parameters = parameters
+        self.parameters = parameters?.count != 0 ? parameters : nil
         self.encoding = encoding
-        self.headers = headers
+        self.headers = headers?.count != 0 ? headers : nil
     }
 
     func manageURL(_ url: URLConvertible) throws -> URL {

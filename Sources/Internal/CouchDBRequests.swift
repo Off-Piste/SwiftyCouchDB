@@ -246,5 +246,27 @@ extension CouchDBRequests {
 }
 
 extension CouchDBRequests {
+
+    func query(
+        by view: String,
+        in design: String,
+        with parameters: Parameters,
+        callback: @escaping (JSON?, Error?) -> Void
+        )
+    {
+        let request = CouchDBRequest(
+            databaseConfiguration,
+            path: "\(databaseName.escaped)/\(design.escaped)/_view/\(view.escaped)",
+            method: .put,
+            parameters: parameters
+        )
+
+        self.sessionManager.request(request).validate().responseData { (resp) in
+            switch resp.result {
+            case .success(let data): callback(JSON(data: data), nil)
+            case .failure(let error): callback(nil, error)
+            }
+        }
+    }
     
 }
