@@ -257,7 +257,7 @@ extension CouchDBRequests {
         let request = CouchDBRequest(
             databaseConfiguration,
             path: "\(databaseName.escaped)/\(design)/_view/\(view.escaped)",
-            method: .put,
+            method: .get,
             parameters: parameters
         )
 
