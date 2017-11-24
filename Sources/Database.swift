@@ -313,7 +313,7 @@ extension Database {
         ///
         /// - Parameter rawValue: <#rawValue description#>
         public init(rawValue: String) {
-            var value = rawValue
+            var value = rawValue.escaped
             if !rawValue.contains("_design/") {
                 value = "_design/" + value
             }
@@ -378,7 +378,7 @@ extension Database {
         }
     }
 
-    func queryByView(
+    public func queryByView(
         _ view: DBDesignView,
         in design: Design,
         using parameters: [DBQueryOption] = [],

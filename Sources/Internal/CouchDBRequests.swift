@@ -28,7 +28,7 @@ extension String {
         return CharacterSet(charactersIn:"\"#%/<>?@\\^`{|} ").inverted
     }
 
-    fileprivate var escaped: String {
+    internal var escaped: String {
         if let escaped = self.addingPercentEncoding(withAllowedCharacters: allowedCharacterSet) {
             return escaped
         }
@@ -256,7 +256,7 @@ extension CouchDBRequests {
     {
         let request = CouchDBRequest(
             databaseConfiguration,
-            path: "\(databaseName.escaped)/\(design.escaped)/_view/\(view.escaped)",
+            path: "\(databaseName.escaped)/\(design)/_view/\(view.escaped)",
             method: .put,
             parameters: parameters
         )
