@@ -314,7 +314,7 @@ extension Database {
         /// - Parameter rawValue: <#rawValue description#>
         public init(rawValue: String) {
             var value = rawValue
-            if rawValue.contains("_design/") {
+            if !rawValue.contains("_design/") {
                 value = "_design/" + value
             }
             self.rawValue = value
