@@ -29,24 +29,33 @@ class DocumentTest: BaseTestCase {
 //            })
 
 
-            let allConnections = DBDesignView(
-                name: "iOS_Device",
-                function: .map("function(doc) { if (doc.device.os.name === 'iOS') { emit(doc) } }")
+            let allConnections = DBDesignView(/*
+                name: */"all"/*,
+                function: .map("function(doc) { if (doc.device.os.name === 'iOS') { emit(doc) } }")*/
             )
 
-            try! Database("analytics").addFunctions(
-                [allConnections],
-                to: .connections,
-                callback: { (change) in
+            try! Database("analytics").queryByView(allConnections, in: .connections, callback: { (json, error) in
+                dump(error)
+                dump(json)
 
-                    switch change {
-                    case .error(let error): XCTFail(error.localizedDescription)
-                    default: break
-                    }
+                exp.fulfill()
 
-                    exp.fulfill()
-                }
-            )
+//                PlaygroundPage.current.finishExecution()
+            })
+
+//            try! Database("analytics").addFunctions(
+//                [allConnections],
+//                to: .connections,
+//                callback: { (change) in
+//
+//                    switch change {
+//                    case .error(let error): XCTFail(error.localizedDescription)
+//                    default: break
+//                    }
+//
+//                    exp.fulfill()
+//                }
+//            )
         }
     }
     

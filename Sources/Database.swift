@@ -24,6 +24,7 @@ public enum DBQueryOption {
     case rev(String)
     case revs(Bool)
     case revs_info(Bool)
+    case key(JSON)
 }
 
 extension Array where Element == DBQueryOption {
@@ -56,6 +57,16 @@ extension Array where Element == DBQueryOption {
                 parameters.updateValue(revisions, forKey: "revs")
             case .revs_info(let rev_info):
                 parameters.updateValue(rev_info, forKey: "rev_info")
+            case .key(let json):
+                switch json.type {
+                case .string:
+                    parameters.updateValue("\"\(json.stringValue)\"", forKey: "key")
+                case .number,
+                     .bool:
+                    parameters.updateValue(json.object, forKey: "key")
+                default:
+                    continue
+                }
             }
         }
 
@@ -266,6 +277,9 @@ public struct DBDesignView {
     /// <#Description#>
     public var functions: [DBDesignViewFunction]
 
+    /// <#Description#>
+    ///
+    /// - Parameter name: <#name description#>
     public init(_ name: String) {
         self.init(name: name, functions: [])
     }
@@ -313,9 +327,9 @@ extension Database {
         ///
         /// - Parameter rawValue: <#rawValue description#>
         public init(rawValue: String) {
-            var value = rawValue.escaped
+            var value = rawValue
             if !rawValue.contains("_design/") {
-                value = "_design/" + value
+                value = "_design/" + value.escaped
             }
             self.rawValue = value
         }

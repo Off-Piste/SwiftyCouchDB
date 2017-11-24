@@ -75,6 +75,42 @@ extension DBDocument {
             }
         }
     }
+
+    /// <#Description#>
+    ///
+    /// - Note: This assumes value is the JSON for the object
+    /// - Parameters:
+    ///   - view: <#view description#>
+    ///   - design: <#design description#>
+    ///   - options: <#options description#>
+    ///   - callback: <#callback description#>
+    public static func query(
+        by view: DBDesignView,
+        in design: Database.Design,
+        using options: [DBQueryOption] = [],
+        callback: @escaping ([Self]?, Error?) -> Void
+        )
+    {
+        guard let database = self.database else {
+            callback(nil, createDBError(.invalidDatabase, reason: "Database is nil"))
+            return
+        }
+
+        database.queryByView(view, in: design, using: options) { (json, error) in
+            if let error = error { callback(nil, error); return }
+
+            let rows = json!["rows"].arrayValue
+            if rows.isEmpty { callback(nil, createDBError(.invalidJSON)); return }
+
+            do {
+                let data = try rows.map { try $0["value"].rawData() }
+                let document = try data.map { try CodableUtils.decoder.decode(self, from: $0) }
+                callback(document, nil)
+            } catch {
+                callback(nil, error)
+            }
+        }
+    }
     
     /// <#Description#>
     ///

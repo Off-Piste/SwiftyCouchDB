@@ -21,7 +21,7 @@ class CouchDBRequest: URLRequestConvertible {
 
     var headers: HTTPHeaders?
 
-    var method: HTTPMethod = .get
+    var method: HTTPMethod
 
     var json: JSON? = .null
 
