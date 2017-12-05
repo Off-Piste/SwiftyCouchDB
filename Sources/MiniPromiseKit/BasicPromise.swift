@@ -23,7 +23,7 @@ public class BasicPromise<Outcome> {
 
     private typealias Consumer = (Outcome) -> Void
 
-    private var outcomeIfKnown: Outcome?
+    internal var outcomeIfKnown: Outcome?
 
     private var consumerAndQueueIfKnown: (consumer: Consumer, q: DispatchQueue)?
     

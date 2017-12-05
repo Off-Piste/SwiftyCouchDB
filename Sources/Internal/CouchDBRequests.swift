@@ -261,7 +261,7 @@ extension CouchDBRequests {
             parameters: parameters
         )
 
-        self.sessionManager.request(request).validate().responseData { (resp) in
+        self.sessionManager.request(request).validate(statusCode: Array<Int>(200..<400)).responseData(queue: queue) { (resp) in
             switch resp.result {
             case .success(let data): callback(JSON(data: data), nil)
             case .failure(let error): callback(nil, error)

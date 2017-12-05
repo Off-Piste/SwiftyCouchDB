@@ -25,6 +25,8 @@ public enum DBQueryOption {
     case revs(Bool)
     case revs_info(Bool)
     case key(JSON)
+    case start_key(JSON)
+    case end_key(JSON)
 }
 
 extension Array where Element == DBQueryOption {
@@ -61,11 +63,22 @@ extension Array where Element == DBQueryOption {
                 switch json.type {
                 case .string:
                     parameters.updateValue("\"\(json.stringValue)\"", forKey: "key")
-                case .number,
-                     .bool:
-                    parameters.updateValue(json.object, forKey: "key")
                 default:
-                    continue
+                    parameters.updateValue(json.object, forKey: "key")
+                }
+            case .start_key(let json):
+                switch json.type {
+                case .string:
+                    parameters.updateValue("\"\(json.stringValue)\"", forKey: "key")
+                default:
+                    parameters.updateValue(json.object, forKey: "key")
+                }
+            case .end_key(let json):
+                switch json.type {
+                case .string:
+                    parameters.updateValue("\"\(json.stringValue)\"", forKey: "key")
+                default:
+                    parameters.updateValue(json.object, forKey: "key")
                 }
             }
         }

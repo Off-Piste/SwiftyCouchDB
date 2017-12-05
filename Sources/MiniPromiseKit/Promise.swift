@@ -45,7 +45,22 @@ public struct Promise<FulfilledValue> {
         reject: (Error) -> Void
     )
 
-    fileprivate let basicPromise: BasicPromise< Result< FulfilledValue > >
+    internal let basicPromise: BasicPromise<Result<FulfilledValue>>
+
+    public var value: FulfilledValue? {
+        guard let outcome =  basicPromise.outcomeIfKnown else {
+            return nil
+        }
+        return try? outcome.getOrThrow()
+    }
+
+    public var error: Error? {
+        guard let outcome =  basicPromise.outcomeIfKnown else {
+            return nil
+        }
+
+        return outcome.errorOrNil
+    }
 }
 
 public extension Promise {
