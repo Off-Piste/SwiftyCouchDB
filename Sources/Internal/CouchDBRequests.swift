@@ -59,6 +59,22 @@ class CouchDBRequests {
 
 extension CouchDBRequests {
 
+    func database_all_docs(callback: @escaping (Data?, Swift.Error?) -> Void) {
+        let request = CouchDBRequest(
+            databaseConfiguration,
+            path: "\(self.databaseName.escaped)/_all_docs",
+            method: .get,
+            parameters: ["include_docs" : true]
+        )
+
+        self.sessionManager
+            .request(request)
+            .validate()
+            .responseData(queue: queue) { (resp) in
+                callback(resp.data, resp.error)
+        }
+    }
+
     func database_info(callback: @escaping (Data?, Swift.Error?) -> Void) {
         let request = CouchDBRequest(
             databaseConfiguration,

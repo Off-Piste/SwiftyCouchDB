@@ -577,7 +577,24 @@ extension Database {
 
 extension Database {
 
+    func allDocuments(callback: @escaping ([DBDocumentInfo]?, Error?) -> Void) {
+        self.request.database_all_docs { (data, error) in
+            if let error = error { callback(nil, error); return }
+
+            // { "total_rows":4,"offset":0,"rows": [ ... ] }
+            let json = JSON(data: data!)
+
+            // {"id":"...","key":"...","value":{"rev":"..."},"doc : { } }"
+            callback(json["rows"].arrayValue.map { json -> DBDocumentInfo in
+                let _id = json["id"].stringValue
+                let rev = json["value", "rev"].stringValue
+                return DBDocumentInfo(_id: _id, _rev: rev, json: json["doc"])
+            }, nil)
+        }
+    }
+
     // MARK: /{db}/{docid}
+
     // These will be for people using JSON and not DBObject subclasses.
 
     /// Method to get a document by the specified `docid` from the specified db.

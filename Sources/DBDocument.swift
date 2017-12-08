@@ -76,6 +76,30 @@ extension DBDocument {
         }
     }
 
+    public static func all(
+        decoder: JSONDecoder = CodableUtils.decoder,
+        callback: @escaping ([Self]?, Error?) -> Void
+        )
+    {
+        guard let database = self.database else {
+            callback(nil, createDBError(.invalidDatabase, reason: "Database is nil"))
+            return
+        }
+
+        database.allDocuments { (documents, error) in
+            if let error = error {
+                callback(nil, error)
+            } else {
+                // Map -> Self?, flatMap -> Self, callback
+
+                callback(documents!.map({ (info) -> Self? in
+                    guard let data = try? info.json.rawData() else { return nil }
+                    return try? decoder.decode(self, from: data)
+                }).flatMap { $0 }, nil)
+            }
+        }
+    }
+
     /// <#Description#>
     ///
     /// - Note: This assumes value is the JSON for the object
