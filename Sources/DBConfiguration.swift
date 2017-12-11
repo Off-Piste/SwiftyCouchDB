@@ -77,7 +77,7 @@ public final class DBConfiguration: CustomStringConvertible {
     }
 
     /// CouchDB URL
-    internal var URL: URLConvertible {
+    internal var url: URLConvertible {
         var base: String
         if let username = username, let password = password {
             base = "\(HTTPProtocol)://\(username):\(password)@\(host)"

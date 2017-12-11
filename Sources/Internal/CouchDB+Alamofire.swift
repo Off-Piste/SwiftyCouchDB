@@ -53,7 +53,7 @@ class CouchDBRequest: URLRequestConvertible {
     }
 
     func asURLRequest() throws -> URLRequest {
-        let url = try self.manageURL(self.config.URL)
+        let url = try self.manageURL(self.config.url)
         var request = try URLRequest(url: url, method: method, headers: headers)
 
         if let json = self.json, let data = try? json.rawData() {
